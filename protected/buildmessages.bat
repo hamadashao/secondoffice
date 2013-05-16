@@ -1,0 +1,1 @@
+yiic emessage message --config=./messages/config.php
