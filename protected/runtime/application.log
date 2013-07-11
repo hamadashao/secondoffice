@@ -1,0 +1,380 @@
+2013/06/04 17:31:40 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\views\site\pages\about.php(12): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): SiteController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): SiteController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\framework\web\actions\CViewAction.php(141): SiteController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CAction.php(75): CViewAction->run()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CViewAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): SiteController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): SiteController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=site/page&view=about
+in E:\ram\website\application\secondoffice\protected\views\site\pages\about.php (12)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/04 17:35:29 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\views\site\pages\about.php(12): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): SiteController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): SiteController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\framework\web\actions\CViewAction.php(141): SiteController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CAction.php(75): CViewAction->run()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CViewAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): SiteController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): SiteController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=site/page&view=about
+in E:\ram\website\application\secondoffice\protected\views\site\pages\about.php (12)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 15:56:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 15:59:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 15:59:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "gii"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('gii')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=gii
+---
+2013/06/06 15:59:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:00:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:01:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:01:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:01:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:01:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "gii"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('gii')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=gii
+---
+2013/06/06 16:02:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test/test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test/test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test/test
+---
+2013/06/06 16:03:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test/index"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test/index')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test/index
+---
+2013/06/06 16:03:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test\"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test\')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test\
+---
+2013/06/06 16:05:43 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:09:36 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:09:38 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:09:39 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:09:39 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:09:39 [error] [php] include(test.php): failed to open stream: No such file or directory (E:\ram\website\application\secondoffice\protected\framework\YiiBase.php:418)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(97): ReflectionClass->__construct()
+#2 E:\ram\website\application\secondoffice\protected\framework\i18n\CPhpMessageSource.php(114): CPhpMessageSource->getMessageFile()
+#3 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(104): CPhpMessageSource->loadMessages()
+#4 E:\ram\website\application\secondoffice\protected\framework\i18n\CMessageSource.php(86): CPhpMessageSource->translateMessage()
+#5 E:\ram\website\application\secondoffice\protected\framework\YiiBase.php(574): CPhpMessageSource->translate()
+#6 E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php(18): t()
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(127): require()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\CBaseController.php(96): DefaultController->renderInternal()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(870): DefaultController->renderFile()
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(783): DefaultController->renderPartial()
+#11 E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php(7): DefaultController->render()
+#12 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams()
+#14 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): DefaultController->runAction()
+#15 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#16 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): DefaultController->run()
+#17 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 E:\ram\website\application\secondoffice\index.php(13): CWebApplication->run()
+REQUEST_URI=/application/secondoffice/index.php?r=test
+in E:\ram\website\application\secondoffice\protected\modules\test\views\default\index.php (18)
+in E:\ram\website\application\secondoffice\protected\modules\test\controllers\DefaultController.php (7)
+in E:\ram\website\application\secondoffice\index.php (13)
+2013/06/06 16:16:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "test"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('test')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=test
+---
+2013/06/06 16:16:50 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection 无法开启数据库连线: could not find driver' in E:\ram\website\application\secondoffice\protected\framework\db\CDbConnection.php:382
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\db\CDbConnection.php(331): CDbConnection->open()
+#1 E:\ram\website\application\secondoffice\protected\framework\db\CDbConnection.php(309): CDbConnection->setActive(true)
+#2 E:\ram\website\application\secondoffice\protected\framework\base\CModule.php(388): CDbConnection->init()
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CModule.php(104): CModule->getComponent('db')
+#4 E:\ram\website\application\secondoffice\protected\framework\gii\generators\model\ModelCode.php(54): CModule->__get('db')
+#5 E:\ram\website\application\secondoffice\protected\framework\web\CFormModel.php(40): ModelCode->init()
+#6 E:\ram\website\application\secondoffice\protected\framework\gii\CCodeGenerator.php(152): CFormModel->__construct()
+#7 E:\ram\website\application\secondoffice\protected\framework\gii\CCodeGenerator.php(64): CCodeGenerator->prepare()
+#8 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): CCodeGenerator->actionIndex()
+#9 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#10 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#11 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('')
+#13 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('gii/model')
+#14 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=gii/model
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/index.php?r=gii
+---
