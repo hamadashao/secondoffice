@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Second Office - OA System',
 	'language'=>'zh_cn',
 
 	// preloading 'log' component
@@ -19,7 +19,7 @@ return array(
 		'application.components.*',
 	),
 
-
+	/*
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
@@ -30,8 +30,9 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 	),
+	*/
 	
-	//'modules'=>require(dirname(__FILE__).'/modules.php'),
+	'modules'=>require(dirname(__FILE__).'/modules.php'),
 
 	// application components
 	'components'=>array(
@@ -93,6 +94,8 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		//'adminEmail'=>'ram@welon-cn.com',
+		'phpexcelPath'=>'./protected/extensions/phpexcel/Classes',
+		'version'=>'0.01',
 	),
 );

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="author">
+	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/login.css" rel="stylesheet" media="screen">
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-2.0.3.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+	<?php $this->beginContent('//layouts/main'); ?>
+		<?php echo $content; ?>
+	<?php $this->endContent(); ?>
+    </div>
+</body>
+</html>

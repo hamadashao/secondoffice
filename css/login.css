@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+background-color: #eee;
+}
+
+.div-singin {
+max-width: 330px;
+padding: 15px;
+margin: 0 auto;
+margin-top:100px;
+}
+
+.spacing-b-m {
+margin-bottom: 10px;
+}
+
+.spinner-signingin {
+display: inline-block;
+opacity: 0;
+width: 0;
+transition: opacity 1s, width 1s;  
+}
+
+.spinner-signin {
+opacity: 1;
+height:14px;
+}
+
+.glyphicon-refresh {
+margin-right:10px;
+height:13pt;
+width:13pt;
+font-size:11pt;
+}
+
+.roll {
+animation:mymove 0.7s linear infinite;
+-webkit-animation:mymove 0.7s linear infinite;
+}
+
+@keyframes mymove
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(180deg);}
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(180deg);}
+}
+
+.has-spinner.active {
+  cursor:default;
+}
+
+.has-spinner.active .spinner-signingin {
+  opacity: 1;
+  width: auto; 
+}
+
+.has-spinner.btn-large.active .spinner-signingin {
+  width: 19px;
+}
+
+.has-spinner.active .spinner-signin {
+  opacity: 0;
+  display:none;
+}
+
+.result-text {
+text-align:center;
+width:100%;
+height:14px;
+margin-bottom:5px;
+opacity: 0.2;
+}
+
+

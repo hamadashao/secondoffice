@@ -2,9 +2,11 @@
 
 class SiteController extends Controller
 {
+	public $layout='//layouts/column_main';
 	/**
 	 * Declares class-based actions.
 	 */
+	 /*
 	public function actions()
 	{
 		return array(
@@ -20,6 +22,7 @@ class SiteController extends Controller
 			),
 		);
 	}
+	*/
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -29,6 +32,7 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$this->layout='//layouts/column_login';
 		$this->render('index');
 	}
 
@@ -37,6 +41,8 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
+		$this->layout='//layouts/column_error';
+		
 	    if($error=Yii::app()->errorHandler->error)
 	    {
 	    	if(Yii::app()->request->isAjaxRequest)
