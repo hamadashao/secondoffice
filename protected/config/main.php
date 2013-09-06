@@ -80,6 +80,11 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
+				array(
+                    'class'=>'DbEventLogRoute',
+					'connectionID'=>'db',  
+                    'categories'=>'event.*',
+                ),
 				// uncomment the following to show log messages on web pages
 				/*
 				array(

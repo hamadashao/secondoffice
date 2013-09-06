@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 30 日 19:09
+-- 生成日期: 2013 年 09 月 06 日 18:19
 -- 服务器版本: 5.5.29
 -- PHP 版本: 5.4.11
 
@@ -36,6 +36,29 @@ CREATE TABLE IF NOT EXISTS `tbl_department` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `tbl_log`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_log` (
+  `uid` varchar(32) NOT NULL,
+  `category` varchar(128) DEFAULT NULL,
+  `ip` varchar(32) DEFAULT NULL,
+  `user` varchar(32) DEFAULT NULL,
+  `logtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `message` text,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_log`
+--
+
+INSERT INTO `tbl_log` (`uid`, `category`, `ip`, `user`, `logtime`, `message`) VALUES
+('5229a28d007964.24228226', 'event.signin', '127.0.0.1', 'admin', '2013-09-06 09:38:21', 'user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `tbl_person_experience`
 --
 
@@ -47,6 +70,13 @@ CREATE TABLE IF NOT EXISTS `tbl_person_experience` (
   `organization` varchar(32) NOT NULL,
   `remark` varchar(128) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_person_experience`
+--
+
+INSERT INTO `tbl_person_experience` (`profile_uid`, `type`, `date_from`, `date_to`, `organization`, `remark`) VALUES
+('ewrtert', '1', '2013-09-03', '2013-09-06', 'sdfs', 'sdsdag');
 
 -- --------------------------------------------------------
 
@@ -111,6 +141,13 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`uid`, `name`, `user_name`, `password`, `password_salt`, `email`, `work_phone`, `mobie_phone`, `valid`) VALUES
+('324jasdf834', 'Ram', 'admin', 'e56419914765c6d22dc5018114d73a28', '123456', 'ram@welon-cn.com', '28350192', '13642713467', 1);
 
 -- --------------------------------------------------------
 

@@ -27,7 +27,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'login'),
+				'actions'=>array('index','view', 'signin'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -174,14 +174,22 @@ class UserController extends Controller
 		}
 	}
 	
-	public function actionLogin()
+	public function actionSignin()
 	{
-		$identity = new UserIdentity('ram',"123456");
+		if(!(isset($_POST['name'])) || !(isset($_POST['password'])) )
+		{
+			echo '{"result":"fail"}';
+			Yii::app()->end();
+		}
+		
+		$identity = new UserIdentity($_POST['name'],$_POST['password']);
 		$identity->authenticate();
+		
 		
 		if($identity->errorCode===UserIdentity::ERROR_NONE)
 		{			
 			Yii::app()->user->login($identity);
+			Yii::log('user signin', CLogger::LEVEL_INFO, 'event.signin');
 			echo '{"result":"ok"}';
 		}
 		else

@@ -8,9 +8,11 @@
 	<meta content="" name="author">
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/login.css" rel="stylesheet" media="screen">
+    <link id="signin-css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/signin.css" rel="stylesheet" media="screen">
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-2.0.3.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/md5.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/miscellaneous.js"></script>
 </head>
 <body>
 	<div class="container">
