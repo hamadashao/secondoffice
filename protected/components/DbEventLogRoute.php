@@ -39,8 +39,8 @@ INSERT INTO {$this->logTableName}
 ";
 		$command=$this->getDbConnection()->createCommand($sql);
 		foreach($logs as $log)
-		{
-			$command->bindValue(':uid', uniqid('',true));
+		{			
+			$command->bindValue(':uid', Yii::app()->user->getState('log_uid'));
 			$command->bindValue(':ip', CHttpRequest::getUserHostAddress());
 			$command->bindValue(':user', Yii::app()->user->name);
 			$command->bindValue(':category',$log[2]);

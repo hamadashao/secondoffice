@@ -10,6 +10,8 @@ function searchForModules(){
 	
 	$arr = array(
 		// uncomment the following to enable the Gii tool
+		'test'=>array(
+		),
 		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',

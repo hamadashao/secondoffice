@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller
+class DepartmentController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,7 +27,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'signin'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -61,14 +61,14 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model=new Department;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Department']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Department'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->uid));
 		}
@@ -90,9 +90,9 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Department']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Department'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->uid));
 		}
@@ -127,7 +127,7 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$dataProvider=new CActiveDataProvider('Department');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +138,10 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+		$model=new Department('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		if(isset($_GET['Department']))
+			$model->attributes=$_GET['Department'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +155,7 @@ class UserController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		$model=Department::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,37 +167,10 @@ class UserController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='department-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-	}
-	
-	public function actionSignin()
-	{
-		if(!(isset($_POST['name'])) || !(isset($_POST['password'])) )
-		{
-			echo '{"result":"fail"}';
-			Yii::app()->end();
-		}
-		
-		$identity = new UserIdentity($_POST['name'],$_POST['password']);
-		$identity->authenticate();
-		
-		
-		if($identity->errorCode===UserIdentity::ERROR_NONE)
-		{			
-			Yii::app()->user->login($identity);
-			Yii::log('user signin', CLogger::LEVEL_INFO, 'event.signin');
-			
-			echo '{"result":"ok"}';
-		}
-		else
-		{
-			echo '{"result":"fail"}';
-		}
-		
-		Yii::app()->end();
 	}
 }
