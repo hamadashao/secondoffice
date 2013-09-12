@@ -69,6 +69,11 @@ return array(
 			'charset' => 'utf8',
 		),
 		
+		'authManager'=>array(
+            'class'=>'DbAuthManager',
+            'connectionID'=>'db',
+        ),
+		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
             'errorAction'=>'site/error',

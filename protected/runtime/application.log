@@ -1758,3 +1758,18 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/application/secondoffice/index.php?r=department/amdin
 ---
+2013/09/12 17:26:03 [error] [exception.CException] exception 'CException' with message 'CWebUser and its behaviors do not have a method or closure named "isGuest".' in E:\ram\website\application\secondoffice\protected\framework\base\CComponent.php:266
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\controllers\SiteController.php(20): CComponent->__call('isGuest', Array)
+#1 E:\ram\website\application\secondoffice\protected\controllers\SiteController.php(20): CWebUser->isGuest()
+#2 E:\ram\website\application\secondoffice\protected\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#3 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#5 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('')
+#7 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('')
+#8 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/application/secondoffice/
+---
