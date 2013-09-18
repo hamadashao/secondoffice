@@ -1,16 +1,14 @@
-.navbar {	
-	margin-bottom: 0px;
-    min-height: 30px;
-}
-
-.navbar-inner {
-    background-color: #252525;
-    background-image: -moz-linear-gradient(center top , #333333, #222222);
+.navbar {
+    background: #252525;
     background-repeat: repeat-x;
-    border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
     padding-left: 20px;
     padding-right: 20px;
 	margin-bottom: 0px;
     min-height: 30px;
+	opacity: 0.9;
+}
+
+.container {
+	text-align:center;
 }

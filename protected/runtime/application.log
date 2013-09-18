@@ -1773,3 +1773,109 @@ Stack trace:
 #10 {main}
 REQUEST_URI=/application/secondoffice/
 ---
+2013/09/18 17:00:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getusermanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getusermanageme...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getusermanageme...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getuserman...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getusermanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:01:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getusermanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getusermanageme...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getusermanageme...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getuserman...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getusermanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:06:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getchangepasswordui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getchangepasswo...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getchangepasswo...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getchangep...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getchangepasswordui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:06:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getusermanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getusermanageme...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getusermanageme...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getuserman...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getusermanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:06:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "module/getmodulemanagementui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('module/getmodul...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:08:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getchangepasswordui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getchangepasswo...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getchangepasswo...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getchangep...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getchangepasswordui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:17:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getchangepasswordui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getchangepasswo...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getchangepasswo...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getchangep...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getchangepasswordui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:17:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getusermanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getusermanageme...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getusermanageme...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getuserman...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getusermanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:17:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "module/getmodulemanagementui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('module/getmodul...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/18 17:17:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getchangepasswordui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getchangepasswo...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getchangepasswo...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('user/getchangep...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=user/getchangepasswordui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
