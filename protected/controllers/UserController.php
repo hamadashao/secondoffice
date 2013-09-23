@@ -27,15 +27,15 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'signin'),
+				'actions'=>array('signin'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('logout','changepassword','getusermanagementui'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','create','update'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -199,5 +199,41 @@ class UserController extends Controller
 		}
 		
 		Yii::app()->end();
+	}
+	
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();	
+		
+		echo '{"result":"ok"}';		
+		Yii::app()->end();
+	}
+	
+	public function actionChangePassword()
+	{
+		if(!(isset($_POST['old_password'])) || !(isset($_POST['new_password'])) )
+		{
+			echo '{"result":"fail"}';
+			Yii::app()->end();
+		}
+
+		$user = User::model()->findByPk(Yii::app()->user->id);
+		
+		if($user->password != md5($_POST['old_password'].$user->password_salt))
+		{
+			echo '{"result":"fail"}';
+			Yii::app()->end();
+		}
+		
+		$user->password = md5($_POST['new_password'].$user->password_salt);
+		$user->save();
+		
+		echo '{"result":"ok"}';		
+		Yii::app()->end();
+	}
+	
+	public function actionGetUserManagementUI() 
+	{
+		$this->render('management_ui');
 	}
 }
