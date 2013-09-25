@@ -1,82 +1,55 @@
-<div class="panel panel-default" style="margin-top:40px;">
-    	<div class="panel-heading">Panel heading</div>
-  		<div class="panel-body">
-        	<div class="col-sm-2">
-        		<ul class="nav nav-pills nav-stacked">
-  					<li class="active"><a href="#">Users</a></li>
-  					<li><a href="#">Departments</a></li>
-  					<li><a href="#">Positions</a></li>
-                	<li><a href="#">Roles</a></li>
-				</ul>
-            </div>
-            <div class="col-sm-10">                	
-				<div class="navbar-right">
-  					<button type="button" class="btn btn-default">Add User</button>
-                </div>
-                <div class="navbar-right" style="margin-right:20px;">
-            		<input type="text" class="form-control" placeholder="Search">
-                </div>
-            	<table class="table">
-					<thead>
-            			<tr>
-                        	<th><input type="checkbox"></th>
-                            <th></th>
-                    		<th>User<span class="glyphicon glyphicon-chevron-down" style="margin-left:5px;"></span></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Work Phone</th>
-                            <th>Mobie Phone</th>
-                            <th>Department</th>
-                            <th>Position</th>
-                            <th>Role</th>
-						</tr>
-                    </thead>
-            		<tbody>
-						<tr>
-                        	<td><input type="checkbox"></td>
-							<td><span class="glyphicon glyphicon-remove"></span></td>
-							<td>Ram</td>
-							<td>Fengyihao</td>
-							<td>ram@welon-cn.com</td>
-                            <td>28350192</td>
-                            <td>13642713467</td>
-                            <td>Network Manager</td>
-                            <td>IT Dep</td>
-                            <td>Administrator</td>
-                        </tr>
-                        <tr>
-                        	<td><input type="checkbox"></td>
-							<td><span class="glyphicon glyphicon-remove"></span></td>
-							<td>Ram</td>
-							<td>Fengyihao</td>
-							<td>ram@welon-cn.com</td>
-                            <td>28350192</td>
-                            <td>13642713467</td>
-                            <td>Network Manager Network Manager</td>
-                            <td>IT Dep</td>
-                            <td>Administrator</td>
-                        </tr>
-                        <tr>
-                        	<td><input type="checkbox"></td>
-							<td><span class="glyphicon glyphicon-remove"></span></td>
-							<td>Ram</td>
-							<td>Fengyihao</td>
-							<td>ram@welon-cn.com</td>
-                            <td>28350192</td>
-                            <td>13642713467</td>
-                            <td>Network Manager</td>
-                            <td>IT Dep</td>
-                            <td>Administrator</td>
-                        </tr>
-					</tbody>
-				</table>
-            	</div>
-                <ul class="pagination pagination-sm">
-                	<li><a href="#"><<</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">>></a></li>
-                </ul>
-            </div>
-        </div>       
+<div class="panel panel-default panel-container panel-user">
+	<div class="panel-heading"><?php echo Yii::t('Base', 'User Management'); ?></div>
+	<div class="panel-body usermanagementui-list">
+		<div class="col-sm-2">
+			<ul class="nav nav-pills nav-stacked">
+  				<li class="usermanagementmenu-item" data-target="user-ui" data-link="<?php echo Yii::app()->createUrl('user/getuserui'); ?>"><a><?php echo Yii::t('Base', 'Users'); ?></a></li>
+  				<li class="usermanagementmenu-item" data-target="department-ui" data-link="<?php echo Yii::app()->createUrl('department/getdepartmentui'); ?>"><a><?php echo Yii::t('Base', 'Departments'); ?></a></li>
+  				<li class="usermanagementmenu-item" data-target="position-ui" data-link="<?php echo Yii::app()->createUrl('position/getpositionui'); ?>"><a><?php echo Yii::t('Base', 'Positions'); ?></a></li>
+                <li class="usermanagementmenu-item" data-target="group-ui" data-link="<?php echo Yii::app()->createUrl('group/getgroupui'); ?>"><a><?php echo Yii::t('Base', 'Groups'); ?></a></li>
+			</ul>
+		</div>         
+    </div>     
 </div>
+
+<script>
+function getusermanagementUI(ui_url) {
+	$.ajax({
+		type: "get",
+   		url: ui_url,
+		dataType: "html",
+		error: function() {
+			alert("error");
+		},
+		success: function(data){
+			$('.usermanagementui-item').hide();
+			$('.usermanagementmenu-item').removeClass('active');
+		
+			$('.usermanagementui-list').append(data);
+			$('.usermanagementmenu-item[data-target="' + $(data).attr("id") + '"]').addClass('active');
+		}
+	});
+}
+
+$('.usermanagementmenu-item').each(function(index, domEle){
+	if($(domEle).attr('data-link'))
+	{		
+		$(this).bind('click', {msg: $(domEle).attr('data-link')}, function(event) {
+			if($('#' + $(domEle).attr('data-target')).html())
+			{
+				$('.usermanagementui-item').hide();
+				$('.usermanagementmenu-item').removeClass('active');
+				
+				$('#' + $(domEle).attr('data-target')).show();
+				$(domEle).addClass('active');
+			}
+			else
+			{
+				getusermanagementUI(event.data.msg);
+			}
+		});
+	}
+}); 
+
+getusermanagementUI("<?php echo Yii::app()->createUrl('user/getuserui'); ?>");
+</script>

@@ -1,8 +1,8 @@
 <?php
 
-
-class ModuleController extends Controller
+class GroupController extends Controller
 {
+
 	/**
 	 * @return array action filters
 	 */
@@ -22,23 +22,21 @@ class ModuleController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getlist','getmodulemanagementui'),
+				'actions'=>array('getgroupui'),
 				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete','create','update'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
-	}
-		
-	public function actionGetList()
-	{		
-		echo '{"result":"test"}';		
-		Yii::app()->end();
-	}
+	}	
 	
-	public function actionGetModuleManagementUI()
+	public function actionGetGroupUI() 
 	{
-		$this->render('management_ui');
+		$this->render('group_ui');
 	}
 }

@@ -2471,3 +2471,300 @@ Stack trace:
 REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
 HTTP_REFERER=http://127.0.0.1/application/secondoffice/
 ---
+2013/09/24 11:43:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getmodulemanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getmodulemanage...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getmodulemanage...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('module/getmodul...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/24 11:44:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getmodulemanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getmodulemanage...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getmodulemanage...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('module/getmodul...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/24 11:46:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getmodulemanagementui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getmodulemanage...')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getmodulemanage...')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('module/getmodul...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=module/getmodulemanagementui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:03:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:03:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "group/getgroupui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('group/getgroupu...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=group/getgroupui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:03:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:10:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:10:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "group/getgroupui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('group/getgroupu...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=group/getgroupui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:18:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:18:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:18:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "group/getgroupui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('group/getgroupu...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=group/getgroupui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:18:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:19:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:19:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:20:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:22:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "group/getgroupui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('group/getgroupu...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=group/getgroupui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:23:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:44:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:44:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:44:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "group/getgroupui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('group/getgroupu...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=group/getgroupui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:45:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:47:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getdepartmentui" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getdepartmentui')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getdepartmentui')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getdepartmentui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:48:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---
+2013/09/25 16:55:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "position/getpositionui"。' in E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php:280
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('position/getpos...')
+#1 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=position/getpositionui
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---

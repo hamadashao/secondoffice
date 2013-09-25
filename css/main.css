@@ -11,6 +11,7 @@ body {
 	margin-bottom: 0px;
     min-height: 30px;
 	opacity: 0.9;
+	line-height:30px;
 }
 
 .container {
@@ -27,6 +28,42 @@ body.modal-open,
     overflow-y: auto;
 }
 
-th {
-    text-align: center;
+.nav-item {
+	cursor:pointer;
+	color:#bbbbbb;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.nav-item:hover {
+	background-color: #575757;
+}
+
+.panel-container {
+	margin-top:40px;
+}
+
+.reversal-caret {
+	display: inline-block;
+  	width: 0;
+  	height: 0;
+  	margin-left: 2px;
+ 	vertical-align: middle;
+  	border-top: 0 dotted;
+  	border-right: 4px solid transparent;
+  	border-bottom: 4px solid #000000;
+  	border-left: 4px solid transparent;
+  	content: "";
+}
+
+.tablehead-list th {
+	text-align: center;
+}
+
+a {
+	cursor:pointer;	
+}
+
+a:hover {
+	text-decoration:none;
 }
