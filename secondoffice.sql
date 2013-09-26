@@ -115,8 +115,32 @@ CREATE TABLE `tbl_department` (
 
 LOCK TABLES `tbl_department` WRITE;
 /*!40000 ALTER TABLE `tbl_department` DISABLE KEYS */;
-INSERT INTO `tbl_department` VALUES ('001-9','001-9','001-9',1);
+INSERT INTO `tbl_department` VALUES ('524400ac0b71c6.60975257','','信息部',1);
 /*!40000 ALTER TABLE `tbl_department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_group`
+--
+
+DROP TABLE IF EXISTS `tbl_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_group` (
+  `uid` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `valid` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_group`
+--
+
+LOCK TABLES `tbl_group` WRITE;
+/*!40000 ALTER TABLE `tbl_group` DISABLE KEYS */;
+INSERT INTO `tbl_group` VALUES ('524400ac0b7276.95094144','系统管理员',1);
+/*!40000 ALTER TABLE `tbl_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -143,7 +167,7 @@ CREATE TABLE `tbl_log` (
 
 LOCK TABLES `tbl_log` WRITE;
 /*!40000 ALTER TABLE `tbl_log` DISABLE KEYS */;
-INSERT INTO `tbl_log` VALUES ('523e5b144520a9.44265106','event.signin','127.0.0.1','admin','2013-09-22 02:51:00','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea7bd672c01.69783261','event.signin','127.0.0.1','admin','2013-09-22 08:18:05','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea7eb0ee176.23252745','event.signin','127.0.0.1','admin','2013-09-22 08:18:51','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea80f29fbe6.37059908','event.signin','127.0.0.1','admin','2013-09-22 08:19:27','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea82fd60214.35915741','event.signin','127.0.0.1','admin','2013-09-22 08:19:59','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea842591ef9.23279454','event.signin','127.0.0.1','admin','2013-09-22 08:20:18','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea8c6859766.71271264','event.signin','127.0.0.1','admin','2013-09-22 08:22:30','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523eb94dd6e0a1.34006602','event.signin','127.0.0.1','admin','2013-09-22 09:33:01','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebb87f00402.00773865','event.signin','127.0.0.1','admin','2013-09-22 09:42:32','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebc1554bb02.60703288','event.signin','127.0.0.1','admin','2013-09-22 09:44:53','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebd936e7fe6.13676950','event.signin','127.0.0.1','admin','2013-09-22 09:51:15','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebec9da3174.71765939','event.signin','127.0.0.1','admin','2013-09-22 09:56:25','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523f9b9a3dec35.48010779','event.signin','127.0.0.1','admin','2013-09-23 01:38:34','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523fe457cde6c9.61146709','event.signin','127.0.0.1','admin','2013-09-23 06:48:56','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ffdafa0a8e2.37149598','event.signin','127.0.0.1','admin','2013-09-23 08:37:03','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52410a6cb30392.60782426','event.signin','127.0.0.1','admin','2013-09-24 03:43:41','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52410da7d68511.07745447','event.signin','127.0.0.1','admin','2013-09-24 03:57:27','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52415642edf3f0.25457031','event.signin','127.0.0.1','admin','2013-09-24 09:07:15','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524164873798b7.00406065','event.signin','127.0.0.1','admin','2013-09-24 10:08:07','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524241cf694600.82973613','event.signin','127.0.0.1','admin','2013-09-25 01:52:16','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52424d6228e0f2.95652038','event.signin','127.0.0.1','admin','2013-09-25 02:41:38','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)');
+INSERT INTO `tbl_log` VALUES ('523e5b144520a9.44265106','event.signin','127.0.0.1','admin','2013-09-22 02:51:00','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea7bd672c01.69783261','event.signin','127.0.0.1','admin','2013-09-22 08:18:05','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea7eb0ee176.23252745','event.signin','127.0.0.1','admin','2013-09-22 08:18:51','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea80f29fbe6.37059908','event.signin','127.0.0.1','admin','2013-09-22 08:19:27','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea82fd60214.35915741','event.signin','127.0.0.1','admin','2013-09-22 08:19:59','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea842591ef9.23279454','event.signin','127.0.0.1','admin','2013-09-22 08:20:18','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ea8c6859766.71271264','event.signin','127.0.0.1','admin','2013-09-22 08:22:30','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523eb94dd6e0a1.34006602','event.signin','127.0.0.1','admin','2013-09-22 09:33:01','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebb87f00402.00773865','event.signin','127.0.0.1','admin','2013-09-22 09:42:32','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebc1554bb02.60703288','event.signin','127.0.0.1','admin','2013-09-22 09:44:53','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebd936e7fe6.13676950','event.signin','127.0.0.1','admin','2013-09-22 09:51:15','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ebec9da3174.71765939','event.signin','127.0.0.1','admin','2013-09-22 09:56:25','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523f9b9a3dec35.48010779','event.signin','127.0.0.1','admin','2013-09-23 01:38:34','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523fe457cde6c9.61146709','event.signin','127.0.0.1','admin','2013-09-23 06:48:56','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('523ffdafa0a8e2.37149598','event.signin','127.0.0.1','admin','2013-09-23 08:37:03','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52410a6cb30392.60782426','event.signin','127.0.0.1','admin','2013-09-24 03:43:41','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52410da7d68511.07745447','event.signin','127.0.0.1','admin','2013-09-24 03:57:27','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52415642edf3f0.25457031','event.signin','127.0.0.1','admin','2013-09-24 09:07:15','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524164873798b7.00406065','event.signin','127.0.0.1','admin','2013-09-24 10:08:07','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524241cf694600.82973613','event.signin','127.0.0.1','admin','2013-09-25 01:52:16','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52424d6228e0f2.95652038','event.signin','127.0.0.1','admin','2013-09-25 02:41:38','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (192)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('52438b88449c58.77838483','event.signin','127.0.0.1','admin','2013-09-26 01:19:04','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('5243a5d3e523e0.19937674','event.signin','127.0.0.1','admin','2013-09-26 03:11:15','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524409068e95e8.87824016','event.signin','127.0.0.1','ram','2013-09-26 10:14:30','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('5244097f9a2103.26099205','event.signin','127.0.0.1','ram','2013-09-26 10:16:31','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('5244099521eb29.27190159','event.signin','127.0.0.1','ram','2013-09-26 10:16:53','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)'),('524413308a0aa1.09422417','event.signin','127.0.0.1','ram','2013-09-26 10:57:52','user signin\nin E:\\ram\\website\\application\\secondoffice\\protected\\controllers\\UserController.php (183)\nin E:\\ram\\website\\application\\secondoffice\\index.php (13)');
 /*!40000 ALTER TABLE `tbl_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,13 +202,13 @@ LOCK TABLES `tbl_log_detail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbl_modules`
+-- Table structure for table `tbl_module`
 --
 
-DROP TABLE IF EXISTS `tbl_modules`;
+DROP TABLE IF EXISTS `tbl_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_modules` (
+CREATE TABLE `tbl_module` (
   `uid` varchar(32) NOT NULL,
   `name` varchar(64) NOT NULL,
   `params` text NOT NULL,
@@ -193,95 +217,12 @@ CREATE TABLE `tbl_modules` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_modules`
+-- Dumping data for table `tbl_module`
 --
 
-LOCK TABLES `tbl_modules` WRITE;
-/*!40000 ALTER TABLE `tbl_modules` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_modules` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tbl_person_experience`
---
-
-DROP TABLE IF EXISTS `tbl_person_experience`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_person_experience` (
-  `profile_uid` varchar(32) NOT NULL,
-  `type` varchar(1) NOT NULL,
-  `date_from` date NOT NULL,
-  `date_to` date NOT NULL,
-  `organization` varchar(32) NOT NULL,
-  `remark` varchar(128) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_person_experience`
---
-
-LOCK TABLES `tbl_person_experience` WRITE;
-/*!40000 ALTER TABLE `tbl_person_experience` DISABLE KEYS */;
-INSERT INTO `tbl_person_experience` VALUES ('ewrtert','1','2013-09-03','2013-09-06','sdfs','sdsdag');
-/*!40000 ALTER TABLE `tbl_person_experience` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tbl_person_profiles`
---
-
-DROP TABLE IF EXISTS `tbl_person_profiles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_person_profiles` (
-  `uid` varchar(32) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `photo` varchar(32) NOT NULL DEFAULT '',
-  `sex` varchar(1) NOT NULL DEFAULT 'M',
-  `birthday` date NOT NULL,
-  `hometown` varchar(16) NOT NULL DEFAULT '',
-  `height` int(11) NOT NULL DEFAULT '0',
-  `phone` varchar(32) NOT NULL DEFAULT '',
-  `email` varchar(32) NOT NULL DEFAULT '',
-  `remark` varchar(256) NOT NULL DEFAULT '',
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_person_profiles`
---
-
-LOCK TABLES `tbl_person_profiles` WRITE;
-/*!40000 ALTER TABLE `tbl_person_profiles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_person_profiles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tbl_person_workhistory`
---
-
-DROP TABLE IF EXISTS `tbl_person_workhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_person_workhistory` (
-  `profile_uid` varchar(32) NOT NULL,
-  `department_uid` varchar(32) NOT NULL,
-  `position_uid` varchar(32) NOT NULL,
-  `event_type` varchar(1) NOT NULL,
-  `event_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_person_workhistory`
---
-
-LOCK TABLES `tbl_person_workhistory` WRITE;
-/*!40000 ALTER TABLE `tbl_person_workhistory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_person_workhistory` ENABLE KEYS */;
+LOCK TABLES `tbl_module` WRITE;
+/*!40000 ALTER TABLE `tbl_module` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -305,7 +246,93 @@ CREATE TABLE `tbl_position` (
 
 LOCK TABLES `tbl_position` WRITE;
 /*!40000 ALTER TABLE `tbl_position` DISABLE KEYS */;
+INSERT INTO `tbl_position` VALUES ('524400ac0b7251.61057412','网络管理员',1);
 /*!40000 ALTER TABLE `tbl_position` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_profile`
+--
+
+DROP TABLE IF EXISTS `tbl_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_profile` (
+  `uid` varchar(32) NOT NULL,
+  `user_uid` varchar(32) DEFAULT NULL,
+  `name` varchar(32) NOT NULL,
+  `photo` varchar(32) NOT NULL DEFAULT '',
+  `sex` varchar(1) NOT NULL DEFAULT 'M',
+  `birthday` date NOT NULL,
+  `hometown` varchar(16) NOT NULL DEFAULT '',
+  `height` int(11) NOT NULL DEFAULT '0',
+  `work_phone` varchar(32) DEFAULT NULL,
+  `mobie_phone` varchar(32) DEFAULT NULL,
+  `email` varchar(32) NOT NULL DEFAULT '',
+  `remark` varchar(256) NOT NULL DEFAULT '',
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_profile`
+--
+
+LOCK TABLES `tbl_profile` WRITE;
+/*!40000 ALTER TABLE `tbl_profile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_profile_experience`
+--
+
+DROP TABLE IF EXISTS `tbl_profile_experience`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_profile_experience` (
+  `profile_uid` varchar(32) NOT NULL,
+  `type` varchar(1) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `organization` varchar(32) NOT NULL,
+  `remark` varchar(128) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_profile_experience`
+--
+
+LOCK TABLES `tbl_profile_experience` WRITE;
+/*!40000 ALTER TABLE `tbl_profile_experience` DISABLE KEYS */;
+INSERT INTO `tbl_profile_experience` VALUES ('ewrtert','1','2013-09-03','2013-09-06','sdfs','sdsdag');
+/*!40000 ALTER TABLE `tbl_profile_experience` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_profile_workhistory`
+--
+
+DROP TABLE IF EXISTS `tbl_profile_workhistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_profile_workhistory` (
+  `profile_uid` varchar(32) NOT NULL,
+  `department_uid` varchar(32) NOT NULL,
+  `position_uid` varchar(32) NOT NULL,
+  `event_type` varchar(1) NOT NULL,
+  `event_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_profile_workhistory`
+--
+
+LOCK TABLES `tbl_profile_workhistory` WRITE;
+/*!40000 ALTER TABLE `tbl_profile_workhistory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_profile_workhistory` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -321,9 +348,6 @@ CREATE TABLE `tbl_user` (
   `user_name` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `password_salt` varchar(8) NOT NULL,
-  `email` varchar(32) NOT NULL DEFAULT '',
-  `work_phone` varchar(32) NOT NULL DEFAULT '',
-  `mobie_phone` varchar(32) NOT NULL DEFAULT '',
   `valid` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`)
@@ -336,7 +360,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` VALUES ('324jasdf834','冯毅豪','admin','e56419914765c6d22dc5018114d73a28','123456','ram@welon-cn.com','28350192','13642713467',1);
+INSERT INTO `tbl_user` VALUES ('524400ac0b72a5.33689761','冯毅豪','Ram','5f1d7a84db00d2fce00b31a7fc73224f','123456',1);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,29 +384,31 @@ CREATE TABLE `tbl_user_department_position` (
 
 LOCK TABLES `tbl_user_department_position` WRITE;
 /*!40000 ALTER TABLE `tbl_user_department_position` DISABLE KEYS */;
+INSERT INTO `tbl_user_department_position` VALUES ('524400ac0b72a5.33689761','524400ac0b71c6.60975257','524400ac0b7251.61057412');
 /*!40000 ALTER TABLE `tbl_user_department_position` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbl_user_profile`
+-- Table structure for table `tbl_user_group`
 --
 
-DROP TABLE IF EXISTS `tbl_user_profile`;
+DROP TABLE IF EXISTS `tbl_user_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_user_profile` (
+CREATE TABLE `tbl_user_group` (
   `user_uid` varchar(32) NOT NULL,
-  `profile_uid` varchar(32) NOT NULL
+  `group_uid` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_user_profile`
+-- Dumping data for table `tbl_user_group`
 --
 
-LOCK TABLES `tbl_user_profile` WRITE;
-/*!40000 ALTER TABLE `tbl_user_profile` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_user_profile` ENABLE KEYS */;
+LOCK TABLES `tbl_user_group` WRITE;
+/*!40000 ALTER TABLE `tbl_user_group` DISABLE KEYS */;
+INSERT INTO `tbl_user_group` VALUES ('524400ac0b72a5.33689761','524400ac0b7276.95094144');
+/*!40000 ALTER TABLE `tbl_user_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -530,4 +556,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-25 18:41:00
+-- Dump completed on 2013-09-26 19:02:09

@@ -9,9 +9,6 @@
  * @property string $user_name
  * @property string $password
  * @property string $password_salt
- * @property string $email
- * @property string $work_phone
- * @property string $mobie_phone
  * @property integer $valid
  */
 class User extends CActiveRecord
@@ -44,11 +41,11 @@ class User extends CActiveRecord
 		return array(
 			array('uid, name, user_name, password, password_salt', 'required'),
 			array('valid', 'numerical', 'integerOnly'=>true),
-			array('uid, name, user_name, password, email, work_phone, mobie_phone', 'length', 'max'=>32),
+			array('uid, name, user_name, password', 'length', 'max'=>32),
 			array('password_salt', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('uid, name, user_name, password, password_salt, email, work_phone, mobie_phone, valid', 'safe', 'on'=>'search'),
+			array('uid, name, user_name, password, password_salt, valid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,9 +71,6 @@ class User extends CActiveRecord
 			'user_name' => 'User Name',
 			'password' => 'Password',
 			'password_salt' => 'Password Salt',
-			'email' => 'Email',
-			'work_phone' => 'Work Phone',
-			'mobie_phone' => 'Mobie Phone',
 			'valid' => 'Valid',
 		);
 	}
@@ -97,9 +91,6 @@ class User extends CActiveRecord
 		$criteria->compare('user_name',$this->user_name,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('password_salt',$this->password_salt,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('work_phone',$this->work_phone,true);
-		$criteria->compare('mobie_phone',$this->mobie_phone,true);
 		$criteria->compare('valid',$this->valid);
 
 		return new CActiveDataProvider($this, array(

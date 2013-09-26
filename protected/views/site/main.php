@@ -11,7 +11,7 @@
         </div>
         <div class="pull-right">
         	<div class="dropdown pull-right nav-item">            	
-                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/personal.png" />Ram</span>
+                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/personal.png" /><?php echo Yii::app()->user->name; ?></span>
        			<ul class="dropdown-menu">
                 	<li>User Group: Admin</li>
                 	<li class="divider"></li>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="container container-main">  
-	<div class="panel-container panel-main">fhjfgj</div>	
+	<div class="panel-container panel-main">dgfd</div>	
 </div>
 
 
@@ -36,10 +36,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
         	<div class="modal-header">
-          		<h4 class="modal-title">Comfirm</h4>
+          		<h4 class="modal-title"><?php echo Yii::t('Base', 'Comfirm'); ?></h4>
         	</div>
         	<div class="modal-body">
-          		Are you sure want to logout?
+          		<?php echo Yii::t('Base', 'Are you sure want to logout?'); ?>
         	</div>
         	<div class="modal-footer">
             	<button type="button" class="btn btn-primary" id="logout-comfirm"><?php echo Yii::t('Base', 'Comfirm'); ?></button>
