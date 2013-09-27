@@ -22,7 +22,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getusermanagementui','getuserui'),
+				'actions'=>array('logout','changepassword','getusermanagementui','getuserui','getuserdata'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -231,5 +231,22 @@ class UserController extends Controller
 	public function actionGetUserUI() 
 	{
 		$this->render('user_ui');
+	}
+	
+	public function actionGetUserData()
+	{
+		if(isset($_POST['id']))
+		{
+			if(!$_POST['id'])
+			{
+				echo '{"result":"fail"}';		
+				Yii::app()->end();
+			}
+			else
+			{
+				echo '{"result":"'.$_POST['id'].'"}';		
+				Yii::app()->end();
+			}
+		}
 	}
 }

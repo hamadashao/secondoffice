@@ -24,6 +24,14 @@ body.modal-open,
   	margin-right: 0px;
 }
 
+.btn .caret {
+    margin-left:5px;
+}
+
+.btn-group-fullwidth {
+	width:100%;
+}
+
 .modal {
     overflow-y: auto;
 }

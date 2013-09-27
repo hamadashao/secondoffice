@@ -1,10 +1,10 @@
 <div id="user-ui" class="col-sm-10 usermanagementui-item">
 	<div class="navbar-right">
-		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#EditModal"><?php echo Yii::t('Base', 'Add User'); ?></button>
+		<button type="button" class="btn btn-default" data-id="" data-toggle="modal" data-target="#EditModal"><?php echo Yii::t('Base', 'Add User'); ?></button>
        	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#DeleteModal"><?php echo Yii::t('Base', 'Delete User'); ?></button>
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 		<div class="btn-group resultnum-list">
-			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="result_num">10</span> <?php echo Yii::t('Base', 'Results / Page'); ?><span class="caret" style="margin-left:5px;"></span></button>
+			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="result_num">10</span> <?php echo Yii::t('Base', 'Results / Page'); ?><span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
 				<li data-results="10"><a>10</a></li>
 				<li data-results="20"><a>20</a></li>
@@ -31,7 +31,7 @@
 		<tbody>
 			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal" data-id="ISBN564541" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -40,7 +40,7 @@
    			</tr>
    			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal"  data-id="ISBN123456" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -49,7 +49,7 @@
    			</tr>
    			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal"  data-id="ISBN565766" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -66,7 +66,7 @@
 	</ul>   
 </div>
 
-<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true" style="text-align:left;">
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
 	<div class="modal-dialog">
 		<div class="modal-content">
         	<div class="modal-header">
@@ -79,46 +79,70 @@
             	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Comfirm'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
         	</div>
-      	</div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      	</div>
+    </div>
+</div>
 
-
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true" style="text-align:left;">
+<div class="modal fade" id="EditModal" data-link="<?php echo Yii::app()->createUrl('user/getuserdata'); ?>" data-url="getuserdata" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
 	<div class="modal-dialog">
 		<div class="modal-content">
         	<div class="modal-header">
-          		<h4 class="modal-title"><?php echo Yii::t('Base', 'Edit'); ?></h4>
+          		<h4 class="modal-title"><?php echo Yii::t('Base', 'User Edit'); ?></h4>
         	</div>
         	<div class="modal-body">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Example block-level help text here.</p>
-  </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-
+  				<div class="form-group">
+    				<label><?php echo Yii::t('Base', 'User Name'); ?></label>
+    				<input type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'User Name'); ?>">
+  				</div>
+  				<div class="form-group">
+    				<label><?php echo Yii::t('Base', 'Password'); ?></label>
+    				<input type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
+  				</div>
+                <div class="form-group">
+    				<label><?php echo Yii::t('Base', 'Name'); ?></label>
+    				<input type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
+  				</div>
+  				<div class="form-group">
+    				<label><?php echo Yii::t('Base', 'Department'); ?></label>
+    				<div class="btn-group btn-group-fullwidth">
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">Dropdown 3<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a tabindex="-1" role="menuitem">Action</a></li>
+							<li><a tabindex="-1" role="menuitem">Another action</a></li>
+							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
+						</ul>
+					</div>
+  				</div>
+                <div class="form-group">
+    				<label><?php echo Yii::t('Base', 'Position'); ?></label>
+    				<div class="btn-group btn-group-fullwidth">
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">Dropdown 3<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a tabindex="-1" role="menuitem">Action</a></li>
+							<li><a tabindex="-1" role="menuitem">Another action</a></li>
+							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
+						</ul>
+					</div>
+  				</div>
+                <div class="form-group">
+    				<label><?php echo Yii::t('Base', 'Group'); ?></label>
+    				<div class="btn-group btn-group-fullwidth">
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">Dropdown 3<span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a tabindex="-1" role="menuitem">Action</a></li>
+							<li><a tabindex="-1" role="menuitem">Another action</a></li>
+							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
+						</ul>
+					</div>
+  				</div>
         	</div>
         	<div class="modal-footer">
             	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
         	</div>
-      	</div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      	</div>
+    </div>
+</div>
 
 <script>
 $('#user-ui th').each(function(index, domEle){
@@ -170,5 +194,30 @@ $(".table-list tbody").find("input[type='checkbox']").each(function(index, domEl
 	$(this).bind('click', function(event) {
 		if($(".global-checkbox").prop("checked")) $(".global-checkbox").prop('checked', false);
 	});
+})
+
+$("[data-toggle='modal']").bind('click', function(event) {
+	$($(this).data('target')).attr('data-id', $(this).attr('data-id'));
+});
+
+
+$('.modal').on('shown.bs.modal', function () {
+	if($(this).attr('data-link'))
+	{
+		$.ajax({
+			type: "post",
+   			url: $(this).attr('data-link'),
+			data: "id=" + $(this).attr('data-id'),
+			dataType: "json",
+			error: function() {
+				alert("error");
+				alert($(this).html());
+			},
+			success: function(data){
+				alert("success");
+				alert($(this).html());
+			}
+		});
+	}
 })
 </script>
