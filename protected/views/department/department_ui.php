@@ -1,15 +1,15 @@
-<div id="department-ui" class="col-sm-10 usermanagementui-item">
+<div id="department-ui" class="col-sm-10 usermanagement-ui ui-item">
 	<div class="navbar-right">
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Add Department'); ?></button>
        	<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Delete Department'); ?></button>
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
-		<div class="btn-group">
-			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><?php echo Yii::t('Base', 'Results / Page'); ?><span class="caret" style="margin-left:5px;"></span></button>
+		<div class="btn-group resultnum-list">
+			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="result_num">10</span> <?php echo Yii::t('Base', 'Results / Page'); ?><span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a>10</a></li>
-				<li><a>20</a></li>
-				<li><a>50</a></li>
-				<li><a><?php echo Yii::t('Base', 'All'); ?></a></li>
+				<li data-results="10"><a>10</a></li>
+				<li data-results="20"><a>20</a></li>
+				<li data-results="50"><a>50</a></li>
+				<li data-results="0"><a><?php echo Yii::t('Base', 'All'); ?></a></li>
 			</ul>
 		</div>
 	</div>
@@ -19,10 +19,10 @@
    	<table class="table table-list">
 		<thead class="tablehead-list">
    			<tr>
-      			<th><input type="checkbox"></th>
+      			<th><input type="checkbox" class="global-checkbox"></th>
       			<th></th>
-  	  			<th><a><?php echo Yii::t('Base', 'Department Name'); ?><span class="reversal-caret"></span></a></th>
-      			<th><a><?php echo Yii::t('Base', 'Parent Department'); ?></a></th>
+  	  			<th data-sort="department"><a><?php echo Yii::t('Base', 'Department Name'); ?><span></span></a></th>
+      			<th data-sort="parent"><a><?php echo Yii::t('Base', 'Parent Department'); ?><span></span></a></th>
 			</tr>
        	</thead>
 		<tbody>

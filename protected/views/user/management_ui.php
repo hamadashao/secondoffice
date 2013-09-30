@@ -22,7 +22,7 @@ function getusermanagementUI(ui_url) {
 			alert("error");
 		},
 		success: function(data){
-			$('.usermanagementui-item').hide();
+			$('.usermanagement-ui').hide();
 			$('.usermanagementmenu-item').removeClass('active');
 		
 			$('.usermanagementui-list').append(data);
@@ -37,7 +37,7 @@ $('.usermanagementmenu-item').each(function(index, domEle){
 		$(this).bind('click', {msg: $(domEle).attr('data-link')}, function(event) {
 			if($('#' + $(domEle).attr('data-target')).html())
 			{
-				$('.usermanagementui-item').hide();
+				$('.usermanagement-ui').hide();
 				$('.usermanagementmenu-item').removeClass('active');
 				
 				$('#' + $(domEle).attr('data-target')).show();
