@@ -104,18 +104,18 @@
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Department'); ?></label>
-    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 >
+    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" >
         				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string">Dropdown 3 Dropdown 3 Dropdown 3</span><span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">                        	
+						<ul class="dropdown-menu" role="menu">
 							<li data-results="10"><a tabindex="-1" role="menuitem">Action 1</a></li>
 							<li data-results="20"><a tabindex="-1" role="menuitem">Another action 2</a></li>
 							<li data-results="30"><a tabindex="-1" role="menuitem">Something else here Something else here Something else here</a></li>
                             <li data-results="11"><a tabindex="-1" role="menuitem">Action 2</a></li>
-                            <li data-results="12"><a tabindex="-1" role="menuitem">Action 3</a></li>
+                            <li data-results="12"><a tabindex="-1" role="menuitem">Action 23</a></li>
                             <li data-results="13"><a tabindex="-1" role="menuitem">Action 4</a></li>
-                            <li data-results="14"><a tabindex="-1" role="menuitem">Action 5</a></li>
+                            <li data-results="14"><a tabindex="-1" role="menuitem">Action 25</a></li>
                             <li data-results="15"><a tabindex="-1" role="menuitem">Action 6</a></li>
-                            <li data-results="16"><a tabindex="-1" role="menuitem">Action 7</a></li>
+                            <li data-results="16"><a tabindex="-1" role="menuitem">Action 27</a></li>
                             <li data-results="17"><a tabindex="-1" role="menuitem">Action 8</a></li>
                             <li data-results="18"><a tabindex="-1" role="menuitem">Action 9</a></li>
                             <li data-results="19"><a tabindex="-1" role="menuitem">Action 10</a></li>
@@ -245,61 +245,85 @@ $("body").delegate(".dropdown-menu li", 'click.bs.dropdown.data-api', function()
 	if(($(this).attr('data-type') == 'filter') || ($(this).attr('data-type') == 'more')) return false;
 });
 
-$("body").delegate(".dropdown-list", 'show.bs.dropdown', function(){
-	//alert("dropdown");
-	//return false;
-	//alert($(this).attr('data-maxnum'));
-	//alert($(this).find("li[data-results]").length);
-	if( $(this).attr('data-maxnum') < $(this).find("li[data-results]").length )
+$("body").delegate(".dropdown-list", 'refresh.bs.dropdown', function(){
+	if($(this).attr('data-type') == 'preload')
 	{
-		if($(this).find(".dropdown-menu li[data-type='filter']").length == 0) $(this).find(".dropdown-menu").prepend('<li data-type="filter"><a><input type="text"class="form-control" placeholder="<?php echo Yii::t('Base', 'Filter'); ?>"></a></li>');
-		if($(this).find(".dropdown-menu li[data-type='more']").length == 0) $(this).find(".dropdown-menu").append('<li data-type="more" style="text-align:center;"><?php echo Yii::t('Base', 'More'); ?></li>');
+		$(this).find("li[data-results]").show();
+		$(this).find("li[data-type='filter']").hide();
+		$(this).find("li[data-type='more']").hide();
 		
-		$(this).find(".dropdown-menu li[data-results]").hide();
+		if($(this).attr('data-filter').length > 0)
+		{			
+			for(idx = 0; idx < $(this).find("li[data-results]").length; idx++)
+			{
+				if($(this).find("li[data-results] a").eq(idx).html().toLowerCase().indexOf($(this).attr('data-filter').toLowerCase()) == -1)
+				{
+					$(this).find("li[data-results]").eq(idx).hide();
+				}
+			} 
+		}	
 		
-		for(idx = 0; idx < $(this).attr('data-maxnum'); idx++)
+		if($(this).attr('data-more') == "false")
 		{
-			$(this).find(".dropdown-menu li[data-results]").eq(idx).show();
+			if( $(this).attr('data-maxnum') < $(this).find("li[data-results]:visible").length )
+			{
+				if($(this).find("li[data-type='filter']").length == 0) $(this).find(".dropdown-menu").prepend('<li data-type="filter"><a><input type="text"class="form-control" placeholder="<?php echo Yii::t('Base', 'Filter'); ?>"></a></li>');
+				
+				if($(this).find("li[data-type='more']").length == 0) $(this).find(".dropdown-menu").append('<li data-type="more" style="text-align:center;"><?php echo Yii::t('Base', 'More'); ?></li>');
+				
+				show_num = 0;
+				
+				for(idx = 0; idx < $(this).find("li[data-results]").length; idx++)
+				{
+					if( $(this).find("li[data-results]").eq(idx).is(":visible") )
+					{
+						if(	show_num >= $(this).attr('data-maxnum'))
+						{
+							$(this).find("li[data-results]").eq(idx).hide();
+						}
+						else
+						{
+							show_num++;
+						}						
+					}
+				}
+				
+				$(this).find("li[data-type='filter']").show();
+				$(this).find("li[data-type='more']").show();
+			}
+			else
+			{
+				$(this).find("li[data-type='filter']").show();
+			}
 		}
+	}
+	else
+	{
+		console.log("================= realtime part =================");	
 	}
 });
 
+$("body").delegate(".dropdown-list", 'shown.bs.dropdown', function(){
+	$(this).attr('data-more', 'false');
+	$(this).attr('data-filter', '');
+	$(this).find("li[data-type='filter'] input").val("");
+	
+	$(this).trigger('refresh.bs.dropdown');
+});
 
-/////////////////////////////////////////////////////
 $("body").delegate(".dropdown-list li[data-results]", 'click', function(event) {
 	$(this).closest(".dropdown-list").attr('data-results', $(this).attr('data-results'));	
 	$(this).closest(".dropdown-list").find(".dropdown-string").html($(this).find("a").html());	
 });
-/////////////////////////////////////////////////////
-
-
 
 $("body").delegate(".dropdown-list li[data-type='more']", 'click', function(event) {
-	$(this).closest(".dropdown-list").find("li[data-results]").show();
-	
-	if(!($(this).closest(".dropdown-list").find("li[data-type='filter'] input").val())) $(this).closest(".dropdown-list").find("li[data-type='filter']").remove();
-	$(this).closest(".dropdown-list").find("li[data-type='more']").remove();
+	$(this).closest(".dropdown-list").attr('data-more', 'true');
+	$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
 });
 
-$("body").delegate(".dropdown-list li[data-type='filter']", 'keyup', function(event) {
-	//console.log($(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
-	filter = $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val();	
-	console.log(filter);
-	$(this).closest(".dropdown-list").find("li[data-results]").hide();
-	
-	for(idx = 0; idx < $(this).closest(".dropdown-list").find("li[data-results]").length; idx++)
-	{
-		if($(this).closest(".dropdown-list").find("li[data-results] a").eq(idx).html().toLowerCase().indexOf(filter.toLowerCase()) != -1)
-			$(this).closest(".dropdown-list").find("li[data-results]").eq(idx).show();
-	} 
-	
-	if($(this).find(".dropdown-menu li[data-type='more']").length != 0)
-	{
-		for(idx = 0; idx < $(this).attr('data-maxnum'); idx++)
-		{
-			$(this).find(".dropdown-menu li[data-results]").eq(idx).show();
-		}
-	}
+$("body").delegate(".dropdown-list li[data-type='filter']", 'keyup', function(event) {	
+	$(this).closest(".dropdown-list").attr('data-filter', $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
+	$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
 });
 
 </script>
