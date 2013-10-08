@@ -75,3 +75,14 @@ a {
 a:hover {
 	text-decoration:none;
 }
+
+.dropdownlist-more {
+	text-align:center;
+	cursor:pointer;
+	color:#428bca;
+	font-size:12px;
+}
+
+.dropdownlist-more:hover {
+	color:#2a6496;
+}

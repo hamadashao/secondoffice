@@ -2810,3 +2810,14 @@ Stack trace:
 REQUEST_URI=/application/secondoffice/index.php?r=user/getuserdata
 HTTP_REFERER=http://127.0.0.1/application/secondoffice/
 ---
+2013/10/08 18:09:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getlist" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getlist')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getlist')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('department/getl...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=department/getlist
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---

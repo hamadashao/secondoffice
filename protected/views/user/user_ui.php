@@ -104,7 +104,7 @@
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Department'); ?></label>
-    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" >
+    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('department/getlist'); ?>" >
         				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string">Dropdown 3 Dropdown 3 Dropdown 3</span><span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
 							<li data-results="10"><a tabindex="-1" role="menuitem">Action 1</a></li>
@@ -121,7 +121,6 @@
                             <li data-results="19"><a tabindex="-1" role="menuitem">Action 10</a></li>
                             <li data-results="21"><a tabindex="-1" role="menuitem">Action 11</a></li>
                             <li data-results="40"><a tabindex="-1" role="menuitem">Action 12</a></li>
-							<!-------------  <li data-type="more" style="text-align:center;">more</li> --->
 						</ul>
 					</div>
   				</div>
@@ -241,6 +240,8 @@ $("body").delegate(".modal", "shown.bs.modal", function() {
 });
 ///////////     end of modal setting     ///////////
 
+
+///////////     dropdown list setting     ///////////
 $("body").delegate(".dropdown-menu li", 'click.bs.dropdown.data-api', function(){
 	if(($(this).attr('data-type') == 'filter') || ($(this).attr('data-type') == 'more')) return false;
 });
@@ -269,7 +270,7 @@ $("body").delegate(".dropdown-list", 'refresh.bs.dropdown', function(){
 			{
 				if($(this).find("li[data-type='filter']").length == 0) $(this).find(".dropdown-menu").prepend('<li data-type="filter"><a><input type="text"class="form-control" placeholder="<?php echo Yii::t('Base', 'Filter'); ?>"></a></li>');
 				
-				if($(this).find("li[data-type='more']").length == 0) $(this).find(".dropdown-menu").append('<li data-type="more" style="text-align:center;"><?php echo Yii::t('Base', 'More'); ?></li>');
+				if($(this).find("li[data-type='more']").length == 0) $(this).find(".dropdown-menu").append('<li data-type="more" class="dropdownlist-more"><?php echo Yii::t('Base', 'Show All'); ?></li>');
 				
 				show_num = 0;
 				
@@ -322,8 +323,33 @@ $("body").delegate(".dropdown-list li[data-type='more']", 'click', function(even
 });
 
 $("body").delegate(".dropdown-list li[data-type='filter']", 'keyup', function(event) {	
-	$(this).closest(".dropdown-list").attr('data-filter', $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
-	$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
+	if (event.keyCode == "13")
+	{
+		$(this).closest(".dropdown-list").attr('data-filter', $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
+		$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
+	}
 });
+
+$("body").delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
+	console.log("ready");
+	$.ajax({
+		type: "get",
+   		url: $(this).attr('data-link'),
+		dataType: "json",
+		error: function() {
+			console.log("error");
+		},
+		success: function(data){
+			console.log("success");
+		}
+	});	
+});
+
+
+$(".dropdown-list").trigger('loadlist.bs.dropdown');
+
+///////////     end of dropdown list setting     ///////////
+
+
 
 </script>
