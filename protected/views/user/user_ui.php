@@ -1,6 +1,6 @@
 <div id="user-ui" class="col-sm-10 usermanagement-ui ui-item">
 	<div class="navbar-right">
-		<button type="button" class="btn btn-default" data-id="" data-toggle="modal" data-target="#EditModal"><?php echo Yii::t('Base', 'Add User'); ?></button>
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#EditModal"><?php echo Yii::t('Base', 'Add User'); ?></button>
        	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#DeleteModal"><?php echo Yii::t('Base', 'Delete User'); ?></button>
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 		<div class="btn-group dropdown-list">
@@ -31,7 +31,7 @@
 		<tbody>
 			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal" data-id="ISBN564541" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal" data-id="524400ac0b72a5.33689761" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="EditModal" data-link="<?php echo Yii::app()->createUrl('user/getuserdata'); ?>" data-url="getuserdata" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
+<div class="modal fade" id="EditModal" data-link="<?php echo Yii::app()->createUrl('user/getuserdata'); ?>" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
 	<div class="modal-dialog">
 		<div class="modal-content">
         	<div class="modal-header">
@@ -92,71 +92,37 @@
         	<div class="modal-body">
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'User Name'); ?></label>
-    				<input type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'User Name'); ?>">
+    				<input data-name="user_name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'User Name'); ?>">
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Password'); ?></label>
-    				<input type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
+    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
   				</div>
                 <div class="form-group">
     				<label><?php echo Yii::t('Base', 'Name'); ?></label>
-    				<input type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
+    				<input data-name="name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Department'); ?></label>
     				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('department/getlist'); ?>" >
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string">Dropdown 3 Dropdown 3 Dropdown 3</span><span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-							<li data-results="10"><a tabindex="-1" role="menuitem">Action 1</a></li>
-							<li data-results="20"><a tabindex="-1" role="menuitem">Another action 2</a></li>
-							<li data-results="30"><a tabindex="-1" role="menuitem">Something else here Something else here Something else here</a></li>
-                            <li data-results="11"><a tabindex="-1" role="menuitem">Action 2</a></li>
-                            <li data-results="12"><a tabindex="-1" role="menuitem">Action 23</a></li>
-                            <li data-results="13"><a tabindex="-1" role="menuitem">Action 4</a></li>
-                            <li data-results="14"><a tabindex="-1" role="menuitem">Action 25</a></li>
-                            <li data-results="15"><a tabindex="-1" role="menuitem">Action 6</a></li>
-                            <li data-results="16"><a tabindex="-1" role="menuitem">Action 27</a></li>
-                            <li data-results="17"><a tabindex="-1" role="menuitem">Action 8</a></li>
-                            <li data-results="18"><a tabindex="-1" role="menuitem">Action 9</a></li>
-                            <li data-results="19"><a tabindex="-1" role="menuitem">Action 10</a></li>
-                            <li data-results="21"><a tabindex="-1" role="menuitem">Action 11</a></li>
-                            <li data-results="40"><a tabindex="-1" role="menuitem">Action 12</a></li>
-						</ul>
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu"></ul>
 					</div>
   				</div>
                 <div class="form-group">
     				<label><?php echo Yii::t('Base', 'Position'); ?></label>
-    				<div class="btn-group btn-group-fullwidth">
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">Dropdown 3<span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-                        	<!------------- <li data-type="filter"><a><input type="text"class="form-control" placeholder="<?php echo Yii::t('Base', 'Filter'); ?>"></a></li> -->
-							<li><a tabindex="-1" role="menuitem">Action</a></li>
-							<li><a tabindex="-1" role="menuitem">Another action</a></li>
-							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
-						</ul>
+    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('position/getlist'); ?>" >
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu"></ul>
 					</div>
   				</div>
                 <div class="form-group">
     				<label><?php echo Yii::t('Base', 'Group'); ?></label>
-    				<div class="btn-group btn-group-fullwidth">
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">Dropdown 3<span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a tabindex="-1" role="menuitem">Action</a></li>
-							<li><a tabindex="-1" role="menuitem">Another action</a></li>
-							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
-						</ul>
+    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('group/getlist'); ?>" >
+        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu"></ul>
 					</div>
   				</div>
-                <div class="btn-group">
-<input class="btn btn-default">
-<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-<span class="caret"></span>
-</button>
-<ul class="dropdown-menu" role="menu">
-	<li><a tabindex="-1" role="menuitem">Action</a></li>
-							<li><a tabindex="-1" role="menuitem">Another action</a></li>
-							<li><a tabindex="-1" role="menuitem">Something else here</a></li>
-</div>
         	</div>
         	<div class="modal-footer">
             	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
@@ -220,23 +186,53 @@ $("body").delegate("[data-toggle='modal']", 'click', function(event) {
 });
 
 $("body").delegate(".modal", "shown.bs.modal", function() {
+	$(this).find(".dropdown-list[data-link]").filter("[data-type='preload']").trigger('loadlist.bs.dropdown');
+	
 	if($(this).attr('data-link'))
-	{
-		$.ajax({
-			type: "post",
-   			url: $(this).attr('data-link'),
-			data: "id=" + $(this).attr('data-id'),
-			dataType: "json",
-			error: function() {
-				//alert("error");
-				//alert($(this).html());
-			},
-			success: function(data){
-				//alert("success");
-				//alert(data.result);
-			}
-		});
+	{		
+		if($(this).attr('data-id'))
+		{
+			$.ajax({
+				type: "post",
+   				url: $(this).attr('data-link'),
+				data: "id=" + $(this).attr('data-id'),
+				dataType: "json",
+				error: function() {
+					console.log("load data error");
+					//alert($(this).html());
+				},
+				success: function(data){
+					console.log("load data success");
+					//alert(data.result);
+					if(data.result == "ok")
+					{
+						modal_obj = $(".modal[data-link*='" + data.url + "']");
+					
+						for(idx = 0; idx < data.list.length; idx++)
+						{						
+							modal_obj.find("[data-name='" + data.list[idx].data_name + "']").val(data.list[idx].data_value);
+						}
+					}
+					else
+					{
+						console.log("load data fail");
+					}
+					
+				}
+			});
+		}
+		else
+		{
+			$(this).find('.dropdown-string').html('<?php echo Yii::t('Base', 'Please Select A Value'); ?>');	
+		}		
 	}
+});
+
+$("body").delegate(".modal", "hidden.bs.modal", function() {
+	$(this).attr('data-id', '');
+	$(this).find('input').val('');	
+	$(this).find('.dropdown-string').html('');	
+	$(this).find('.dropdown-list').attr('data-results', '');	
 });
 ///////////     end of modal setting     ///////////
 
@@ -331,23 +327,35 @@ $("body").delegate(".dropdown-list li[data-type='filter']", 'keyup', function(ev
 });
 
 $("body").delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
-	console.log("ready");
 	$.ajax({
 		type: "get",
    		url: $(this).attr('data-link'),
 		dataType: "json",
 		error: function() {
-			console.log("error");
+			console.log("error loadlist");
 		},
 		success: function(data){
-			console.log("success");
+			if(data.result == "ok")
+			{				
+				list_obj = $(".dropdown-list[data-link*='" + data.url + "']").find(".dropdown-menu");
+				list_obj.empty();
+				
+				for(idx = 0; idx < data.list.length; idx++)
+				{
+					list_obj.append('<li data-results="' + data.list[idx].value + '"><a>' + data.list[idx].string + '</a></li>');
+				}
+			}
+			else
+			{
+				console.log("loadlist fail");
+			}
 		}
 	});	
 });
 
 
-$(".dropdown-list").trigger('loadlist.bs.dropdown');
 
+//$(".dropdown-list[data-link]").trigger('loadlist.bs.dropdown');
 ///////////     end of dropdown list setting     ///////////
 
 

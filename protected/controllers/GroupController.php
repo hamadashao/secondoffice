@@ -22,7 +22,7 @@ class GroupController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getgroupui'),
+				'actions'=>array('getgroupui','getlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -38,5 +38,27 @@ class GroupController extends Controller
 	public function actionGetGroupUI() 
 	{
 		$this->render('group_ui');
+	}
+	
+	public function actionGetList() 
+	{		
+		$models = Group::model()->findAllByAttributes(array('valid'=>1));
+		
+		$list = '';
+		
+		foreach($models as $model)
+		{
+			if($list)
+			{
+				$list = $list.',{"value":"'.$model->uid.'","string":"'.$model->name.'"}';
+			}
+			else
+			{
+				$list = '{"value":"'.$model->uid.'","string":"'.$model->name.'"}';
+			}
+		}
+		
+		echo '{"result":"ok","url":"'.$_GET['r'].'","list":['.$list.']}';
+		Yii::app()->end();		
 	}
 }

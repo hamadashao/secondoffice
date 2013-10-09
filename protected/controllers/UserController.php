@@ -237,6 +237,7 @@ class UserController extends Controller
 	{
 		if(isset($_POST['id']))
 		{
+		/*
 			if(!$_POST['id'])
 			{
 				echo '{"result":"fail"}';		
@@ -247,6 +248,18 @@ class UserController extends Controller
 				echo '{"result":"'.$_POST['id'].'"}';		
 				Yii::app()->end();
 			}
+			*/
+			$model = User::model()->findByPk($_POST['id']);
+			if($model)
+			{
+				echo '{"result":"ok","url":"'.$_GET['r'].'","list":[{"data_name":"name","data_value":"'.$model->name.'"},{"data_name":"user_name","data_value":"'.$model->user_name.'"}]}';
+			}
+			else
+			{
+				echo '{"result":"fail"}';
+			}			
 		}
+		
+		Yii::app()->end();
 	}
 }
