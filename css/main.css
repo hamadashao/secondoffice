@@ -86,3 +86,11 @@ a:hover {
 .dropdownlist-more:hover {
 	color:#2a6496;
 }
+
+#SmartNotification span {
+font-size: 14px;
+padding:10px 20px 10px 20px;
+background-color: #D9EDF7;
+border-radius: 4px 4px 4px 4px;
+border-color: #BCE8F1;
+}

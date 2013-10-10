@@ -216,6 +216,10 @@ $("body").delegate(".modal", "shown.bs.modal", function() {
 					else
 					{
 						console.log("load data fail");
+						$.SmartNotification.show("test plugin");
+						$.SmartNotification.hide();
+						$.SmartNotification.temp = "test 2";
+						$.SmartNotification.show("test plugin 2"); 
 					}
 					
 				}

@@ -13,6 +13,7 @@
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/md5.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/miscellaneous.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.smartnotification.js"></script>
 </head>
 <body>
 	<?php $this->beginContent('//layouts/main'); ?>
