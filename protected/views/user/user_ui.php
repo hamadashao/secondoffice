@@ -198,12 +198,9 @@ $("body").delegate(".modal", "shown.bs.modal", function() {
 				data: "id=" + $(this).attr('data-id'),
 				dataType: "json",
 				error: function() {
-					console.log("load data error");
-					//alert($(this).html());
+					$.SmartNotification.Show("load data error");
 				},
 				success: function(data){
-					console.log("load data success");
-					//alert(data.result);
 					if(data.result == "ok")
 					{
 						modal_obj = $(".modal[data-link*='" + data.url + "']");
@@ -215,11 +212,7 @@ $("body").delegate(".modal", "shown.bs.modal", function() {
 					}
 					else
 					{
-						console.log("load data fail");
-						$.SmartNotification.show("test plugin");
-						$.SmartNotification.hide();
-						$.SmartNotification.temp = "test 2";
-						$.SmartNotification.show("test plugin 2"); 
+						$.SmartNotification.Show("load data fail");
 					}
 					
 				}
@@ -300,7 +293,7 @@ $("body").delegate(".dropdown-list", 'refresh.bs.dropdown', function(){
 	}
 	else
 	{
-		console.log("================= realtime part =================");	
+		$.SmartNotification.Show("================= realtime part =================");	
 	}
 });
 
@@ -336,7 +329,7 @@ $("body").delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
    		url: $(this).attr('data-link'),
 		dataType: "json",
 		error: function() {
-			console.log("error loadlist");
+			$.SmartNotification.Show("error loadlist");
 		},
 		success: function(data){
 			if(data.result == "ok")
@@ -351,7 +344,7 @@ $("body").delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
 			}
 			else
 			{
-				console.log("loadlist fail");
+				$.SmartNotification.Show("loadlist fail");
 			}
 		}
 	});	

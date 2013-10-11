@@ -90,7 +90,19 @@ a:hover {
 #SmartNotification span {
 font-size: 14px;
 padding:10px 20px 10px 20px;
-background-color: #D9EDF7;
 border-radius: 4px 4px 4px 4px;
-border-color: #BCE8F1;
+border: solid 1px;
+font-weight:bold;
+}
+
+.smartnotification-info span {
+background-color: #D9EDF7;
+border-color: #428BCA;
+color: #3A87AD;
+}
+
+.smartnotification-error span {
+background-color: #F2DEDE;
+border-color: #EED3D7;
+color: #B94A48;
 }

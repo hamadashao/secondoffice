@@ -4,7 +4,7 @@ body {
 background-color: #eee;
 }
 
-.div-singin {
+.div-signin {
 max-width: 330px;
 padding: 15px;
 margin: 0 auto;
@@ -15,67 +15,26 @@ margin-top:100px;
 margin-bottom: 10px;
 }
 
-.spinner-signingin {
-display: inline-block;
-opacity: 0;
-width: 0;
-transition: opacity 1s, width 1s;  
-}
-
-.spinner-signin {
-opacity: 1;
-height:14px;
-}
-
-.glyphicon-refresh {
-margin-right:10px;
-height:13pt;
-width:13pt;
-font-size:11pt;
-}
-
-.roll {
-animation:mymove 0.7s linear infinite;
--webkit-animation:mymove 0.7s linear infinite;
-}
-
-@keyframes mymove
-{
-from {transform: rotate(0deg);}
-to {transform: rotate(180deg);}
-}
-
-@-webkit-keyframes mymove /*Safari and Chrome*/
-{
-from {-webkit-transform: rotate(0deg);}
-to {-webkit-transform: rotate(180deg);}
-}
-
 .has-spinner.active {
   cursor:default;
 }
 
-.has-spinner.active .spinner-signingin {
-  opacity: 1;
-  width: auto; 
+#SmartNotification span {
+font-size: 14px;
+padding:10px 20px 10px 20px;
+border-radius: 4px 4px 4px 4px;
+border: solid 1px;
+font-weight:bold;
 }
 
-.has-spinner.btn-large.active .spinner-signingin {
-  width: 19px;
+.smartnotification-info span {
+background-color: #D9EDF7;
+border-color: #428BCA;
+color: #3A87AD;
 }
 
-.has-spinner.active .spinner-signin {
-  opacity: 0;
-  display:none;
+.smartnotification-error span {
+background-color: #F2DEDE;
+border-color: #EED3D7;
+color: #B94A48;
 }
-
-.result-text {
-  text-align:center;
-  width:100%;
-  height:16px;
-  line-height:16px;
-  margin-bottom:5px;
-  display:none;
-}
-
-
