@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+.div-signin {
+max-width: 330px;
+padding: 15px;
+margin: 0 auto;
+margin-top:100px;
+}
+
+.spacing-b-m {
+margin-bottom: 10px;
+}
+
+.has-spinner.active {
+cursor:default;
+}

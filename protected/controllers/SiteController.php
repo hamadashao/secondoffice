@@ -2,7 +2,7 @@
 
 class SiteController extends Controller
 {
-	public $layout='//layouts/column_head';
+	public $layout='//layouts/column_main';
 	
 	public function actionError()
 	{
@@ -19,18 +19,36 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->isGuest)
 		{
+			$this->layout='//layouts/column_signin';
 			$this->render('index');
 		}
 		else
-		{
-			$this->layout='//layouts/column_head_signin';
+		{			
 			$this->render('main');
 		}
 	}
 	
 	public function actionGetMainUI()
 	{
-		$this->layout='//layouts/column_content';
+		$this->layout='//layouts/column_ajax';
 		$this->render('main');
+	}
+	
+	public function actionGetSystemJS()
+	{
+		$this->layout='//layouts/column_ajax';
+		$this->render('javascript');
+	}
+	
+	public function actionGetLogoutDialog()
+	{
+		$this->layout='//layouts/column_ajax';
+		$this->render('logout');
+	}
+	
+	public function actionGetChangePasswordDialog()
+	{
+		$this->layout='//layouts/column_ajax';
+		$this->render('changepassword');
 	}
 }

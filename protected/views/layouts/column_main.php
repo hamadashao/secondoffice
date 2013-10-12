@@ -8,12 +8,14 @@
 	<meta content="" name="author">
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-    <link id="system-css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" rel="stylesheet" media="screen">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.global.css" rel="stylesheet" media="screen">
+    <link id="system-css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.main.css" rel="stylesheet" media="screen">
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-2.0.3.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/md5.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/miscellaneous.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.smartnotification.js"></script>
+    <script src="<?php echo Yii::app()->createUrl('site/getsystemjs'); ?>"></script>
 </head>
 <body>
 	<?php $this->beginContent('//layouts/main'); ?>

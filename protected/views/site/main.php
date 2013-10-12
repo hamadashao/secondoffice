@@ -1,36 +1,34 @@
 <div class="navbar navbar-fixed-top">
 	<div class="container">
-		<span class="visuallyhidden">Twitter</span>
+		<span style="color:#FFFFFF;">Twitter</span>
     	<div class="pull-left">
-        	<div class="pull-left nav-item topmenu-item" data-target="main" data-link="/"><img src="./images/home.png" /></div>
-            <div class="dropdown pull-left nav-item app-nav" style="display:none;">
-            	<span href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/applications.png" /></span>
+        	<div class="pull-left nav-item topmenu-item" data-target="main" data-link="<?php echo Yii::app()->createUrl('module/getlist'); ?>" ><span class="glyphicon glyphicon-home"></span></div>
+            <div class="dropdown pull-left nav-item app-nav">
+            	<span href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></span>
                 <ul class="dropdown-menu app-nav-list">
                 </ul>
             </div>            
         </div>
         <div class="pull-right">
         	<div class="dropdown pull-right nav-item">            	
-                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/personal.png" /><?php echo Yii::app()->user->name; ?></span>
+                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user spacing-right-5"></span><?php echo Yii::app()->user->name; ?></span>
        			<ul class="dropdown-menu">
                 	<li>User Group: Admin</li>
                 	<li class="divider"></li>
                     <li><a class="topmenu-item" data-target="user" data-link="<?php echo Yii::app()->createUrl('user/getusermanagementui'); ?>"><?php echo Yii::t('Base', 'User Management'); ?></a></li>
                     <li><a class="topmenu-item" data-target="module" data-link="<?php echo Yii::app()->createUrl('module/getmodulemanagementui'); ?>"><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
-					<li><a class="topmenu-item" data-toggle="modal" data-target="#ChangePasswordModal"><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
+					<li><a class="topmenu-item" data-toggle="modal" href="<?php echo Yii::app()->createUrl('site/getchangepassworddialog'); ?>" data-target="#Modal"><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
                     <li class="divider"></li>               
-                    <li><a class="topmenu-item" data-toggle="modal" data-target="#LogoutModal"><?php echo Yii::t('Base', 'Logout'); ?></a></li>
+                    <li><a class="topmenu-item" data-toggle="modal" href="<?php echo Yii::app()->createUrl('site/getlogoutdialog'); ?>" data-target="#Modal"><?php echo Yii::t('Base', 'Logout'); ?></a></li>
 				</ul>               
             </div>
-            <div class="pull-right nav-item"><img src="./images/message.png" /><span>0</span></div>
+            <div class="pull-right nav-item"><span class="glyphicon glyphicon-envelope spacing-right-5"></span><span>0</span></div>
         </div>		
     </div>
 </div>
 
-<div class="container container-main">  
-	<div class="panel-container panel-main">dgfd</div>	
-    
-</div>
+<div class="container container-main"></div>
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
 
 <div class="modal fade" id="LogoutModal" tabindex="-1" role="dialog" aria-labelledby="LogoutModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -45,9 +43,9 @@
             	<button type="button" class="btn btn-primary" id="logout-comfirm"><?php echo Yii::t('Base', 'Comfirm'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
         	</div>
-      	</div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      	</div>
+    </div>
+</div>
 
 <div class="modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="ChangePasswordModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -64,32 +62,13 @@
             	<button type="button" class="btn btn-primary" id="changepassword-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
         	</div>
-      	</div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      	</div>
+    </div>
+</div>
 
 
 
 <script>
-$.ajax({
-   	type: "get",
-   	url: "<?php echo Yii::app()->createUrl('module/getlist'); ?>",
-	dataType: "json",
-	error: function() {			
-		alert("error");
-	},
-	success: function(data){			
-		if(data.result == "ok")
-		{					
-			//alert("ok");
-		}
-		else
-		{
-			//alert("fail");
-		}
-	}
-});
-
 $("input[type='password']").keydown(function(event) {
    if (event.keyCode == "13") $('#changepassword-comfirm').click();
 });		
@@ -167,7 +146,7 @@ $('.topmenu-item').each(function(index, domEle){
    				url: event.data.msg,
 				dataType: "html",
 				error: function() {
-					alert("error");
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 				},
 				success: function(data){
 					$('.panel-container').hide();
@@ -177,4 +156,6 @@ $('.topmenu-item').each(function(index, domEle){
 		});
 	}
 }); 
+
+$('.topmenu-item').filter('[data-target="main"]').trigger('click');
 </script>

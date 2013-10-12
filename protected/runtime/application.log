@@ -3010,3 +3010,14 @@ Stack trace:
 REQUEST_URI=/application/secondoffice/index.php?r=site/login
 HTTP_REFERER=http://127.0.0.1/application/secondoffice/
 ---
+2013/10/12 17:52:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message '系统无法找到请求的 "getlogoutdialog" 动作.' in E:\ram\website\application\secondoffice\protected\framework\web\CController.php:484
+Stack trace:
+#0 E:\ram\website\application\secondoffice\protected\framework\web\CController.php(271): CController->missingAction('getlogoutdialog')
+#1 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(276): CController->run('getlogoutdialog')
+#2 E:\ram\website\application\secondoffice\protected\framework\web\CWebApplication.php(135): CWebApplication->runController('site/getlogoutd...')
+#3 E:\ram\website\application\secondoffice\protected\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\ram\website\application\secondoffice\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/application/secondoffice/index.php?r=site/getlogoutdialog
+HTTP_REFERER=http://127.0.0.1/application/secondoffice/
+---

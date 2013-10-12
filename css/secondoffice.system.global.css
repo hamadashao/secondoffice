@@ -4,19 +4,32 @@ body {
 background-color: #eee;
 }
 
-.div-signin {
-max-width: 330px;
-padding: 15px;
-margin: 0 auto;
-margin-top:100px;
+body, .btn, .form-control {
+font-size:12px;
 }
 
-.spacing-b-m {
-margin-bottom: 10px;
+a {
+cursor:pointer;
 }
 
-.has-spinner.active {
-  cursor:default;
+a:hover {
+text-decoration:none;
+}
+
+.container {
+text-align:center;
+}
+
+.spacing-right-5 {
+margin-right:5px;
+}
+
+.spacing-bottom-5 {
+margin-bottom:5px;
+}
+
+.spacing-bottom-20 {
+margin-bottom:20px;
 }
 
 #SmartNotification span {
