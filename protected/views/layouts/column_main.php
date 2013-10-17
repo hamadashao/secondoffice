@@ -15,11 +15,13 @@
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/md5.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/miscellaneous.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.smartnotification.js"></script>
-    <script src="<?php echo Yii::app()->createUrl('site/getsystemjs'); ?>"></script>
 </head>
 <body>
 	<?php $this->beginContent('//layouts/main'); ?>
 		<?php echo $content; ?>
-	<?php $this->endContent(); ?>    
+	<?php $this->endContent(); ?>
+    <?php $this->beginContent('//site/javascript'); ?>
+		<?php echo $content; ?>
+	<?php $this->endContent(); ?>
 </body>
 </html>

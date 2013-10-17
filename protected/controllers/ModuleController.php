@@ -22,7 +22,7 @@ class ModuleController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getlist','getmodulemanagementui'),
+				'actions'=>array('getlist','getmodulemanagementpanel'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -37,8 +37,8 @@ class ModuleController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionGetModuleManagementUI()
+	public function actionGetModuleManagementPanel()
 	{
-		$this->render('management_ui');
+		$this->render('modulemanagement');
 	}
 }

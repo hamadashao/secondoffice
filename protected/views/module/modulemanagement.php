@@ -1,4 +1,4 @@
-<div class="panel panel-default panel-container panel-module" style="margin-top:40px;">
+<div id="panel-modulemanagement" class="panel panel-default panel-container" style="margin-top:40px;">
     	<div class="panel-heading">Module</div>
   		<div class="panel-body">
         	<div class="col-sm-2">

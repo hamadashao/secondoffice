@@ -31,7 +31,7 @@ class DepartmentController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getdepartmentui','getlist'),
+				'actions'=>array('create','update','getdepartmentpanel','getlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -174,9 +174,9 @@ class DepartmentController extends Controller
 		}
 	}
 	
-	public function actionGetDepartmentUI() 
+	public function actionGetDepartmentPanel() 
 	{
-		$this->render('department_ui');
+		$this->render('department');
 	}
 	
 	public function actionGetList() 

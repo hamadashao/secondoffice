@@ -1,7 +1,7 @@
-<div id="user-ui" class="col-sm-10 usermanagement-ui ui-item">
+<div id="panel-user">
 	<div class="navbar-right">
-		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#EditModal"><?php echo Yii::t('Base', 'Add User'); ?></button>
-       	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#DeleteModal"><?php echo Yii::t('Base', 'Delete User'); ?></button>
+		<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit"><?php echo Yii::t('Base', 'Add User'); ?></button>
+       	<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete"><?php echo Yii::t('Base', 'Delete User'); ?></button>
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 		<div class="btn-group dropdown-list">
 			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string">10</span> <?php echo Yii::t('Base', 'Results / Page'); ?><span class="caret"></span></button>
@@ -16,7 +16,7 @@
    	<div class="navbar-right" style="margin-right:20px;">
    		<input type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'Search'); ?>">
    	</div>
-   	<table class="table table-list">
+   	<table class="table table-list navbar-right">
 		<thead class="tablehead-list">
    			<tr>
       			<th><input type="checkbox" class="global-checkbox"></th>
@@ -31,7 +31,7 @@
 		<tbody>
 			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal" data-id="524400ac0b72a5.33689761" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="524400ac0b72a5.33689761" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -40,7 +40,7 @@
    			</tr>
    			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal"  data-id="ISBN123456" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="ISBN123456" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -49,7 +49,7 @@
    			</tr>
    			<tr>
       			<td><input type="checkbox"></td>
-				<td><a><span data-toggle="modal"  data-id="ISBN565766" data-target="#EditModal" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-target="#DeleteModal" class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="ISBN565766" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
 				<td>Ram</td>
 				<td>Fengyihao</td>
       			<td>Network Manager</td>
@@ -58,7 +58,7 @@
    			</tr>
 		</tbody>
 	</table>
-   	<ul class="pagination pagination-sm">
+   	<ul class="pagination pagination-sm navbar-right">
        <li><a>&laquo;</a></li>
        <li><a>1</a></li>
        <li><a>2</a></li>
@@ -66,74 +66,11 @@
 	</ul>   
 </div>
 
-<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-        	<div class="modal-header">
-          		<h4 class="modal-title"><?php echo Yii::t('Base', 'Comfirm'); ?></h4>
-        	</div>
-        	<div class="modal-body">
-          		<?php echo Yii::t('Base', 'Are you sure want to delete selected item/items?'); ?>
-        	</div>
-        	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Comfirm'); ?></button>
-          		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
-        	</div>
-      	</div>
-    </div>
-</div>
-
-<div class="modal fade" id="EditModal" data-link="<?php echo Yii::app()->createUrl('user/getuserdata'); ?>" tabindex="-1" role="dialog" aria-hidden="true" style="text-align:left;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-        	<div class="modal-header">
-          		<h4 class="modal-title"><?php echo Yii::t('Base', 'User Edit'); ?></h4>
-        	</div>
-        	<div class="modal-body">
-  				<div class="form-group">
-    				<label><?php echo Yii::t('Base', 'User Name'); ?></label>
-    				<input data-name="user_name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'User Name'); ?>">
-  				</div>
-  				<div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Password'); ?></label>
-    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
-  				</div>
-                <div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Name'); ?></label>
-    				<input data-name="name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
-  				</div>
-  				<div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Department'); ?></label>
-    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('department/getlist'); ?>" >
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu"></ul>
-					</div>
-  				</div>
-                <div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Position'); ?></label>
-    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('position/getlist'); ?>" >
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu"></ul>
-					</div>
-  				</div>
-                <div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Group'); ?></label>
-    				<div class="btn-group btn-group-fullwidth dropdown-list" data-maxnum=5 data-type="preload" data-filter="" data-link="<?php echo Yii::app()->createUrl('group/getlist'); ?>" >
-        				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="dropdown-string"></span><span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu"></ul>
-					</div>
-  				</div>
-        	</div>
-        	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
-          		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>
-        	</div>
-      	</div>
-    </div>
-</div>
 
 <script>
 ///////////     sort setting     ///////////
+
+/*
 $("body").delegate(".ui-item table th[data-sort]", 'click', function(event) {
 	$(this).closest("tr").find("th span").removeAttr("class");
 	
@@ -148,6 +85,7 @@ $("body").delegate(".ui-item table th[data-sort]", 'click', function(event) {
 		$(this).find("span").addClass("reversal-caret");
 	}
 });
+*/
 ///////////     end of sort setting     ///////////
 
 ///////////     pagenum setting     ///////////
@@ -160,6 +98,7 @@ $("body").delegate(".resultnum-list li[data-results]", 'click', function(event) 
 ///////////     end of pagenum setting     ///////////
 
 ///////////     checkbox setting     ///////////
+/*
 $("body").delegate(".table-list tbody input[type='checkbox']", 'click', function(event) {
 	if($(this).closest(".table-list").find(".global-checkbox").prop("checked")) $(this).closest(".table-list").find(".global-checkbox").prop('checked', false);
 });
@@ -178,11 +117,14 @@ $("body").delegate( ".global-checkbox", 'click', function(event) {
 		})
 	}
 });
+*/
 ///////////     end of checkbox setting     ///////////
 
 ///////////     modal setting     ///////////
+/*
 $("body").delegate("[data-toggle='modal']", 'click', function(event) {
 	$($(this).data('target')).attr('data-id', $(this).attr('data-id'));
+	$("#Modal").load($(this).attr("data-url"));
 });
 
 $("body").delegate(".modal", "shown.bs.modal", function() {
@@ -227,14 +169,14 @@ $("body").delegate(".modal", "shown.bs.modal", function() {
 
 $("body").delegate(".modal", "hidden.bs.modal", function() {
 	$(this).attr('data-id', '');
-	$(this).find('input').val('');	
-	$(this).find('.dropdown-string').html('');	
-	$(this).find('.dropdown-list').attr('data-results', '');	
+	$(this).empty();
 });
+*/
 ///////////     end of modal setting     ///////////
 
 
 ///////////     dropdown list setting     ///////////
+/*
 $("body").delegate(".dropdown-menu li", 'click.bs.dropdown.data-api', function(){
 	if(($(this).attr('data-type') == 'filter') || ($(this).attr('data-type') == 'more')) return false;
 });
@@ -350,7 +292,7 @@ $("body").delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
 	});	
 });
 
-
+*/
 
 //$(".dropdown-list[data-link]").trigger('loadlist.bs.dropdown');
 ///////////     end of dropdown list setting     ///////////

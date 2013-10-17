@@ -28,10 +28,16 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionGetMainUI()
+	public function actionGetMainPanel()
 	{
 		$this->layout='//layouts/column_ajax';
 		$this->render('main');
+	}
+	
+	public function actionGetHomePanel()
+	{
+		$this->layout='//layouts/column_ajax';
+		$this->render('home');
 	}
 	
 	public function actionGetSystemJS()

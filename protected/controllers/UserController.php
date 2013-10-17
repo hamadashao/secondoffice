@@ -22,7 +22,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getusermanagementui','getuserui','getuserdata'),
+				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getuserdata'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -223,36 +223,42 @@ class UserController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionGetUserManagementUI() 
+	public function actionGetUserManagementPanel() 
 	{
-		$this->render('management_ui');
+		$this->render('usermanagement');
 	}
 	
-	public function actionGetUserUI() 
+	public function actionGetUserPanel() 
 	{
-		$this->render('user_ui');
+		$this->render('user');
+	}
+	
+	public function actionGetUserEditDialog()
+	{
+		$this->render('useredit');
+	}
+	
+	public function actionGetUserDeleteDialog()
+	{
+		$this->render('userdelete');
 	}
 	
 	public function actionGetUserData()
 	{
 		if(isset($_POST['id']))
 		{
-		/*
-			if(!$_POST['id'])
-			{
-				echo '{"result":"fail"}';		
-				Yii::app()->end();
-			}
-			else
-			{
-				echo '{"result":"'.$_POST['id'].'"}';		
-				Yii::app()->end();
-			}
-			*/
 			$model = User::model()->findByPk($_POST['id']);
 			if($model)
 			{
-				echo '{"result":"ok","url":"'.$_GET['r'].'","list":[{"data_name":"name","data_value":"'.$model->name.'"},{"data_name":"user_name","data_value":"'.$model->user_name.'"}]}';
+				echo '{"result":"ok","list":[
+				{"data_name":"name","data_value":"'.$model->name.'"},
+				{"data_name":"user_name","data_value":"'.$model->user_name.'"},
+				{"data_name":"department_id","data_value":"'.$model->department[0]->uid.'"},
+				{"data_name":"department_name","data_value":"'.$model->department[0]->name.'"},
+				{"data_name":"position_id","data_value":"'.$model->position[0]->uid.'"},
+				{"data_name":"position_name","data_value":"'.$model->position[0]->name.'"},
+				{"data_name":"group_id","data_value":"'.$model->group[0]->uid.'"},
+				{"data_name":"group_name","data_value":"'.$model->group[0]->name.'"}]}';
 			}
 			else
 			{

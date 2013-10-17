@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div id="modal-changepassword" class="modal-dialog modal-container">
 	<div class="modal-content">
 		<div class="modal-header">
         	<h4 class="modal-title"><?php echo Yii::t('Base', 'Change Password'); ?></h4>

@@ -2,7 +2,7 @@
 	<div class="container">
 		<span style="color:#FFFFFF;">Twitter</span>
     	<div class="pull-left">
-        	<div class="pull-left nav-item topmenu-item" data-target="main" data-link="<?php echo Yii::app()->createUrl('module/getlist'); ?>" ><span class="glyphicon glyphicon-home"></span></div>
+        	<div class="pull-left nav-item" data-toggle="panel" data-target=".container-main" data-panel="#panel-home" data-link="<?php echo Yii::app()->createUrl('site/gethomepanel'); ?>" ><span class="glyphicon glyphicon-home"></span></div>
             <div class="dropdown pull-left nav-item app-nav">
             	<span href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></span>
                 <ul class="dropdown-menu app-nav-list">
@@ -15,11 +15,11 @@
        			<ul class="dropdown-menu">
                 	<li>User Group: Admin</li>
                 	<li class="divider"></li>
-                    <li><a class="topmenu-item" data-target="user" data-link="<?php echo Yii::app()->createUrl('user/getusermanagementui'); ?>"><?php echo Yii::t('Base', 'User Management'); ?></a></li>
-                    <li><a class="topmenu-item" data-target="module" data-link="<?php echo Yii::app()->createUrl('module/getmodulemanagementui'); ?>"><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
-					<li><a class="topmenu-item" data-toggle="modal" href="<?php echo Yii::app()->createUrl('site/getchangepassworddialog'); ?>" data-target="#Modal"><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
+                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('user/getusermanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-usermanagement"><a><?php echo Yii::t('Base', 'User Management'); ?></a></li>
+                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('module/getmodulemanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-modulemanagement"><a><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
+					<li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('site/getchangepassworddialog'); ?>" data-target="#modal-main" data-modal="#modal-changepassword"><a><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
                     <li class="divider"></li>               
-                    <li><a class="topmenu-item" data-toggle="modal" href="<?php echo Yii::app()->createUrl('site/getlogoutdialog'); ?>" data-target="#Modal"><?php echo Yii::t('Base', 'Logout'); ?></a></li>
+                    <li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('site/getlogoutdialog'); ?>" data-target="#modal-main" data-modal="#modal-logout"><a><?php echo Yii::t('Base', 'Logout'); ?></a></li>
 				</ul>               
             </div>
             <div class="pull-right nav-item"><span class="glyphicon glyphicon-envelope spacing-right-5"></span><span>0</span></div>
@@ -27,48 +27,12 @@
     </div>
 </div>
 
-<div class="container container-main"></div>
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
-
-<div class="modal fade" id="LogoutModal" tabindex="-1" role="dialog" aria-labelledby="LogoutModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-        	<div class="modal-header">
-          		<h4 class="modal-title"><?php echo Yii::t('Base', 'Comfirm'); ?></h4>
-        	</div>
-        	<div class="modal-body">
-          		<?php echo Yii::t('Base', 'Are you sure want to logout?'); ?>
-        	</div>
-        	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" id="logout-comfirm"><?php echo Yii::t('Base', 'Comfirm'); ?></button>
-          		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
-        	</div>
-      	</div>
-    </div>
+<div id="container-main" class="container"></div>
+<div id="modal-main" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 </div>
-
-<div class="modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="ChangePasswordModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-        	<div class="modal-header">
-          		<h4 class="modal-title"><?php echo Yii::t('Base', 'Change Password'); ?></h4>
-        	</div>
-        	<div class="modal-body">
-          		<input type="password" class="form-control old-password spacing-b-m" placeholder="<?php echo Yii::t('Base', 'Old Password'); ?>">
-                <input type="password" class="form-control new-password spacing-b-m" placeholder="<?php echo Yii::t('Base', 'New Password'); ?>">
-                <input type="password" class="form-control retype-password spacing-b-m" placeholder="<?php echo Yii::t('Base', 'Retype New Password'); ?>">
-        	</div>
-        	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" id="changepassword-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
-          		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
-        	</div>
-      	</div>
-    </div>
-</div>
-
-
 
 <script>
+/*
 $("input[type='password']").keydown(function(event) {
    if (event.keyCode == "13") $('#changepassword-comfirm').click();
 });		
@@ -131,7 +95,7 @@ $('#logout-comfirm').bind('click', function() {
 
 
 $('.topmenu-item').each(function(index, domEle){
-	if($(domEle).attr('data-link'))
+	if($(domEle).attr('data-link') && ($(domEle).attr('data-toggle') == 'panel'))
 	{		
 		$(this).bind('click', {msg: $(domEle).attr('data-link')}, function(event) {
 			if($('.panel-' + $(domEle).attr('data-target')).html())
@@ -157,5 +121,10 @@ $('.topmenu-item').each(function(index, domEle){
 	}
 }); 
 
-$('.topmenu-item').filter('[data-target="main"]').trigger('click');
+
+
+*/
+$(document).ready(function(){
+	$('.navbar').find('[data-panel="#panel-home"]').trigger('click');
+});
 </script>

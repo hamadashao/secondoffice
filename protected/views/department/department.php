@@ -1,4 +1,4 @@
-<div id="department-ui" class="col-sm-10 usermanagement-ui ui-item">
+<div id="panel-department">
 	<div class="navbar-right">
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Add Department'); ?></button>
        	<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Delete Department'); ?></button>

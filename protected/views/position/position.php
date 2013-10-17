@@ -1,4 +1,4 @@
-<div id="position-ui" class="col-sm-10 usermanagement-ui ui-item">
+<div id="panel-position">
 	<div class="navbar-right">
 		<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Add User'); ?></button>
        	<button type="button" class="btn btn-default"><?php echo Yii::t('Base', 'Delete User'); ?></button>

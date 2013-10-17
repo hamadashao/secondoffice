@@ -57,8 +57,12 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'department' => array(self::MANY_MANY, 'Department', 'tbl_user_department_position(user_uid, department_uid)'),
+			'position' => array(self::MANY_MANY, 'Position', 'tbl_user_department_position(user_uid, position_uid)'),
+			'group' => array(self::MANY_MANY, 'Group', 'tbl_user_group(user_uid, group_uid)'),
 		);
 	}
+
 
 	/**
 	 * @return array customized attribute labels (name=>label)

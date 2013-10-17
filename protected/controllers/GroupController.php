@@ -22,7 +22,7 @@ class GroupController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getgroupui','getlist'),
+				'actions'=>array('getgrouppanel','getlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -35,9 +35,9 @@ class GroupController extends Controller
 		);
 	}	
 	
-	public function actionGetGroupUI() 
+	public function actionGetGroupPanel() 
 	{
-		$this->render('group_ui');
+		$this->render('group');
 	}
 	
 	public function actionGetList() 

@@ -22,7 +22,7 @@ class PositionController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getpositionui','getlist'),
+				'actions'=>array('getpositionpanel','getlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -35,9 +35,9 @@ class PositionController extends Controller
 		);
 	}	
 	
-	public function actionGetPositionUI() 
+	public function actionGetPositionPanel() 
 	{
-		$this->render('position_ui');
+		$this->render('position');
 	}
 	
 	public function actionGetList() 
