@@ -266,10 +266,6 @@ $(document).ready(function(){
 				}
 			}
 		}
-		else
-		{
-			$.SmartNotification.Show("================= realtime part =================");	
-		}
 	});
 
 	$(document).delegate(".dropdown-list", 'shown.bs.dropdown', function(){
@@ -285,12 +281,9 @@ $(document).ready(function(){
 		$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
 	});
 
-	$(document).delegate(".dropdown-list li[data-type='filter']", 'keyup', function(event) {	
-		if (event.keyCode == "13")
-		{
-			$(this).closest(".dropdown-list").attr('data-filter', $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
-			$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
-		}
+	$(document).delegate(".dropdown-list li[data-type='filter']", 'input', function(event) {
+		$(this).closest(".dropdown-list").attr('data-filter', $(this).closest(".dropdown-list").find("li[data-type='filter'] input").val());
+		$(this).closest(".dropdown-list").trigger('refresh.bs.dropdown');
 	});	
     
     $(document).delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
@@ -299,7 +292,7 @@ $(document).ready(function(){
    			url: $(this).attr('data-link'),
 			dataType: "json",
 			error: function() {
-				$.SmartNotification.Show("error loadlist");
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			},
 			success: function(data){
 				if(data.result == "ok")
@@ -314,7 +307,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					$.SmartNotification.Show("loadlist fail");
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Load list data fail, please contact administrator'); ?>", "error");
 				}
 			}
 		});	
@@ -325,16 +318,24 @@ $(document).ready(function(){
 	$(document).delegate(".table-list th[data-sort]", 'click', function(event) {
 		$(this).closest("tr").find("th span").removeAttr("class");
 	
-		if($(this).closest("table").attr("data-sort") == $(this).attr('data-sort'))
+		if($(this).closest(".table-list").attr("data-sort") == $(this).attr('data-sort'))
 		{
-			$(this).closest("table").attr('data-sort', $(this).attr('data-sort') + ".desc");					
+			$(this).closest(".table-list").attr('data-sort', $(this).attr('data-sort') + ".desc");					
 			$(this).find("span").addClass("caret");
 		}
 		else
 		{
-			$(this).closest("table").attr('data-sort', $(this).attr('data-sort'));					
+			$(this).closest(".table-list").attr('data-sort', $(this).attr('data-sort'));					
 			$(this).find("span").addClass("reversal-caret");
 		}
+	});
+	
+	$(document).delegate(".table-list .tableitem-keyword", "input", function(event) {
+		$(this).closest(".table-list").attr('data-filter', $(this).val());	
+	});
+	
+	$(document).delegate(".table-list .tableitem-number li[data-results]", "click", function(event) {
+		$(this).closest(".table-list").attr('data-number', $(this).attr('data-results'));	
 	});
     
     $(document).delegate(".table-list tbody input[type='checkbox']", 'click', function(event) {
@@ -357,32 +358,42 @@ $(document).ready(function(){
 	});
 	
 	$(document).delegate(".table-list", 'refresh.bs.tablelist', function(event) {
+		sort_type = "";
+		filter = "";
+		page_num = "10";
+		
+		if($(this).attr('data-sort')) sort_type = $(this).attr('data-sort');
+		if($(this).attr('data-filter')) filter = $(this).attr('data-filter');
+		if($(this).attr('data-number')) page_num = $(this).attr('data-number');
+		
+	
 		$.ajax({
 			type: "post",
    			url: $(this).attr('data-link'),
+			data: "sort=" + sort_type + "&filter=" + filter + "&page_num=" + page_num,
 			dataType: "json",
 			error: function() {
-				$.SmartNotification.Show("error loadlist");
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			},
 			success: function(data){
 				if(data.result == "ok")
-				{				
-					list_obj = $(".dropdown-list[data-link*='" + data.url + "']").find(".dropdown-menu");
-					list_obj.empty();
-				
-					for(idx = 0; idx < data.list.length; idx++)
-					{
-						list_obj.append('<li data-results="' + data.list[idx].value + '"><a>' + data.list[idx].string + '</a></li>');
-					}
+				{
+					console.log("test");
 				}
 				else
 				{
-					$.SmartNotification.Show("loadlist fail");
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Load list fail, please contact administrator'); ?>", "error");
 				}
 			}
 		});
 	});
 /*------------------------------- end of table list ----------------------------------*/
+
+/*-------------------------------      trigger     -----------------------------------*/
+	$(document).delegate("[data-toggle='trigger']", 'click', function(event) {
+		$($(this).attr("data-target")).trigger($(this).attr("data-event"));
+	});
+/*-------------------------------  end of trigger  -----------------------------------*/
 
 });
 /**************************** end of component enchance *******************************/

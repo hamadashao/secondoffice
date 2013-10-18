@@ -77,3 +77,7 @@ font-size:12px;
 .dropdownlist-more:hover {
 color:#2a6496;
 }
+
+th {
+text-align:center;
+}

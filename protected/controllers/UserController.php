@@ -22,7 +22,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getuserdata'),
+				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getuserdata','getuserlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -265,6 +265,14 @@ class UserController extends Controller
 				echo '{"result":"fail"}';
 			}			
 		}
+		
+		Yii::app()->end();
+	}
+	
+	public function actionGetUserList()
+	{
+		
+		echo '{"result":"ok"}';
 		
 		Yii::app()->end();
 	}
