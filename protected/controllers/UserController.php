@@ -271,8 +271,85 @@ class UserController extends Controller
 	
 	public function actionGetUserList()
 	{
+		$filter = "";
+		$page = 1;
+		$page_num = 10;
+		$sort = "";
 		
-		echo '{"result":"ok"}';
+		if(isset($_POST['filter'])) 	$filter = $_POST['filter'];
+		if(isset($_POST['page'])) 		$page = intval($_POST['page']);
+		if(isset($_POST['page_num'])) 	$page_num = intval($_POST['page_num']);
+		if(isset($_POST['sort'])) 		$sort = $_POST['sort'];
+		
+		
+		$criteria = new CDbCriteria;
+		$criteria->with  = array('department','position','group');
+		$criteria->together = true;
+		
+		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('t.user_name', $filter, true, 'OR');
+		$criteria->addSearchCondition('department.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('position.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('group.name', $filter, true, 'OR');
+		
+		$criteria->addcondition("t.valid = 1");
+		
+		$users_num = User::model()->count($criteria);
+		
+		if($page_num > 0) $criteria->limit	= $page_num;
+		$criteria->offset 	= $page_num * ($page - 1);
+		$criteria->order 	= $sort;		
+		
+		$users = User::model()->findAll($criteria);
+		
+		$user_list = "";
+		
+		foreach($users as $user)		
+		{
+			$department_name = "";
+			$position_name = "";
+			$group_name = "";
+			
+			if($user->department) $department_name = $user->department[0]->name;
+			if($user->position) $position_name = $user->position[0]->name;
+			if($user->group) $group_name = $user->group[0]->name;
+		
+		
+			if($user_list)
+			{
+				$user_list = $user_list.',{
+				"id":"'.$user->uid.'",
+				"modal-edit":"#modal-useredit",
+				"modal-delete":"#modal-userdelete",
+				"link-edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
+				"link-delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
+				"target":"#modal-main",
+				"name":"'.$user->name.'",
+				"user_name":"'.$user->user_name.'",
+				"department":"'.$department_name.'",
+				"position":"'.$position_name.'",
+				"group":"'.$group_name.'"
+				}';
+			}
+			else
+			{
+				$user_list = '{
+				"id":"'.$user->uid.'",
+				"modal_edit":"#modal-useredit",
+				"modal_delete":"#modal-userdelete",
+				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
+				"target":"#modal-main",
+				"name":"'.$user->name.'",
+				"user_name":"'.$user->user_name.'",
+				"department":"'.$department_name.'",
+				"position":"'.$position_name.'",
+				"group":"'.$group_name.'"
+				}';
+			}
+		}
+		
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$users_num.'","list":['.$user_list.']}';
 		
 		Yii::app()->end();
 	}

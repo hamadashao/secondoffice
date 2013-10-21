@@ -22,49 +22,15 @@
    				<tr>
       				<th><input type="checkbox" class="global-checkbox"></th>
       				<th></th>
-  	  				<th data-sort="user"><a><?php echo Yii::t('Base', 'User'); ?><span></span></a></th>
-      				<th data-sort="name"><a><?php echo Yii::t('Base', 'Name'); ?><span></span></a></th>
-      				<th data-sort="department"><a><?php echo Yii::t('Base', 'Department'); ?><span></span></a></th>
-      				<th data-sort="position"><a><?php echo Yii::t('Base', 'Position'); ?><span></span></a></th>
-      				<th data-sort="group"><a><?php echo Yii::t('Base', 'Group'); ?><span></span></a></th>
+  	  				<th data-sort="t.name"><a><?php echo Yii::t('Base', 'User'); ?><span></span></a></th>
+      				<th data-sort="t.user_name"><a><?php echo Yii::t('Base', 'Name'); ?><span></span></a></th>
+      				<th data-sort="department.name"><a><?php echo Yii::t('Base', 'Department'); ?><span></span></a></th>
+      				<th data-sort="position.name"><a><?php echo Yii::t('Base', 'Position'); ?><span></span></a></th>
+      				<th data-sort="group.name"><a><?php echo Yii::t('Base', 'Group'); ?><span></span></a></th>
 				</tr>
        		</thead>
-			<tbody>
-				<tr>
-      				<td><input type="checkbox"></td>
-					<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="524400ac0b72a5.33689761" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
-					<td>Ram</td>
-					<td>Fengyihao</td>
-      				<td>Network Manager</td>
-      				<td>IT Dep</td>
-      				<td>Administrator</td>
-   				</tr>
-   				<tr>
-      				<td><input type="checkbox"></td>
-					<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="ISBN123456" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
-					<td>Ram</td>
-					<td>Fengyihao</td>
-      				<td>Network Manager</td>
-      				<td>IT Dep</td>
-      				<td>Administrator</td>
-   				</tr>
-   				<tr>
-      				<td><input type="checkbox"></td>
-					<td><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getusereditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit" data-id="ISBN565766" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getuserdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" class="glyphicon glyphicon-remove"></span></a></td>
-					<td>Ram</td>
-					<td>Fengyihao</td>
-      				<td>Network Manager</td>
-      				<td>IT Dep</td>
-      				<td>Administrator</td>
-   				</tr>
-			</tbody>
+			<tbody></tbody>
 		</table>
-   		<ul class="pagination pagination-sm navbar-right">
-       		<li><a>&laquo;</a></li>
-       		<li><a>1</a></li>
-       		<li><a>2</a></li>
-   			<li><a>&raquo;</a></li>
-		</ul> 
     </div>  
 </div>
 

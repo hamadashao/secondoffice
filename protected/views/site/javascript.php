@@ -320,7 +320,7 @@ $(document).ready(function(){
 	
 		if($(this).closest(".table-list").attr("data-sort") == $(this).attr('data-sort'))
 		{
-			$(this).closest(".table-list").attr('data-sort', $(this).attr('data-sort') + ".desc");					
+			$(this).closest(".table-list").attr('data-sort', $(this).attr('data-sort') + " desc");					
 			$(this).find("span").addClass("caret");
 		}
 		else
@@ -364,8 +364,9 @@ $(document).ready(function(){
 		
 		if($(this).attr('data-sort')) sort_type = $(this).attr('data-sort');
 		if($(this).attr('data-filter')) filter = $(this).attr('data-filter');
-		if($(this).attr('data-number')) page_num = $(this).attr('data-number');
+		if($(this).attr('data-number')) page_num = $(this).attr('data-number');	
 		
+		table_obj = $(this);	
 	
 		$.ajax({
 			type: "post",
@@ -378,7 +379,47 @@ $(document).ready(function(){
 			success: function(data){
 				if(data.result == "ok")
 				{
-					console.log("test");
+					//console.log("test");
+					table_obj.find("tbody").empty();
+					
+					for(idx = 0; idx < data.list.length; idx++)
+					{
+						table_obj.find("tbody").append('<tr>' + 
+      						'<td><input type="checkbox"></td>' + 
+							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" class="glyphicon glyphicon-remove"></span></a></td>' +
+							'<td>' + data.list[idx].name + '</td>' +
+							'<td>' + data.list[idx].user_name + '</td>' +
+      						'<td>' + data.list[idx].department + '</td>' +
+      						'<td>' + data.list[idx].position + '</td>' +
+      						'<td>' + data.list[idx].group + '</td>' +
+					   		'</tr>');
+					}
+					
+					table_obj.find(".pagination").remove();	
+					
+					if((data.item_num > data.item_pagenum) && (data.item_pagenum > 0))
+					{
+						page_num = Math.ceil(data.item_num / data.item_pagenum);						
+											
+						table_obj.append('<ul class="pagination pagination-sm navbar-right"></ul>');
+						
+						for(idx = 1; idx <= page_num; idx++)
+						{
+							page_class = "";
+							if(idx == data.item_page) page_class = "active";
+							
+							table_obj.find(".pagination").append("<li class=" + page_class + "><a>" + idx + "</a></li>");							
+						}
+						
+						firstpage_class = "";
+						lastpage_class = "";
+												
+						if(data.item_page == 1) firstpage_class = "disabled";
+						if(data.item_page == page_num) lastpage_class = "disabled";
+						
+						table_obj.find(".pagination").prepend("<li class=" + firstpage_class + "><a>&laquo;</a></li>");
+						table_obj.find(".pagination").append("<li class=" + lastpage_class + "><a>&raquo;</a></li>");						
+					}
 				}
 				else
 				{

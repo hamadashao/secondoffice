@@ -60,6 +60,11 @@ class User extends CActiveRecord
 			'department' => array(self::MANY_MANY, 'Department', 'tbl_user_department_position(user_uid, department_uid)'),
 			'position' => array(self::MANY_MANY, 'Position', 'tbl_user_department_position(user_uid, position_uid)'),
 			'group' => array(self::MANY_MANY, 'Group', 'tbl_user_group(user_uid, group_uid)'),
+			//'user_department_position' => array(self::HAS_MANY, 'UserDepartmentPosition', 'user_uid'),
+			//'user_group' => array(self::HAS_MANY, 'UserGroup', 'user_uid'),
+			//'department' => array(self::HAS_MANY, 'Department', 'department_uid', 'through' => 'user_department_position'),
+      		//'position' => array(self::HAS_MANY, 'Position', 'position_uid', 'through' => 'user_department_position'),
+			//'group' => array(self::HAS_MANY, 'Group', 'group_uid', 'through' => 'user_group'),
 		);
 	}
 
