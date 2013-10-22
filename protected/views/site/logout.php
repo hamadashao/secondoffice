@@ -13,7 +13,9 @@
       	</div>
     </div>
 <script>
+
 $('#logout-comfirm').bind('click', function() {
+/*
 	$.ajax({
    		type: "get",
    		url: "<?php echo Yii::app()->createUrl('user/logout'); ?>",
@@ -33,5 +35,8 @@ $('#logout-comfirm').bind('click', function() {
 			}
 		}
 	});
+*/
+$('body').trigger('logout.secondoffice.system');
 });
+
 </script>

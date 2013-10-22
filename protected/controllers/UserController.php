@@ -248,17 +248,42 @@ class UserController extends Controller
 		if(isset($_POST['id']))
 		{
 			$model = User::model()->findByPk($_POST['id']);
+			
 			if($model)
 			{
+				$department_name = "";
+				$position_name = "";
+				$group_name = "";
+				$department_uid = "";
+				$position_uid = "";
+				$group_uid = "";
+			
+				if($model->department) 
+				{
+					$department_name = $model->department[0]->name;
+					$department_uid = $model->department[0]->uid;
+				}
+				
+				if($model->position) 
+				{
+					$position_name = $model->position[0]->name;
+					$position_uid = $model->position[0]->uid;
+				}
+				if($model->group) 
+				{
+					$group_name = $model->group[0]->name;
+					$group_uid = $model->group[0]->uid;
+				}
+			
 				echo '{"result":"ok","list":[
 				{"data_name":"name","data_value":"'.$model->name.'"},
 				{"data_name":"user_name","data_value":"'.$model->user_name.'"},
-				{"data_name":"department_id","data_value":"'.$model->department[0]->uid.'"},
-				{"data_name":"department_name","data_value":"'.$model->department[0]->name.'"},
-				{"data_name":"position_id","data_value":"'.$model->position[0]->uid.'"},
-				{"data_name":"position_name","data_value":"'.$model->position[0]->name.'"},
-				{"data_name":"group_id","data_value":"'.$model->group[0]->uid.'"},
-				{"data_name":"group_name","data_value":"'.$model->group[0]->name.'"}]}';
+				{"data_name":"department_id","data_value":"'.$department_uid.'"},
+				{"data_name":"department_name","data_value":"'.$department_name.'"},
+				{"data_name":"position_id","data_value":"'.$position_uid.'"},
+				{"data_name":"position_name","data_value":"'.$position_name.'"},
+				{"data_name":"group_id","data_value":"'.$group_uid.'"},
+				{"data_name":"group_name","data_value":"'.$group_name.'"}]}';
 			}
 			else
 			{
@@ -319,10 +344,10 @@ class UserController extends Controller
 			{
 				$user_list = $user_list.',{
 				"id":"'.$user->uid.'",
-				"modal-edit":"#modal-useredit",
-				"modal-delete":"#modal-userdelete",
-				"link-edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
-				"link-delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
+				"modal_edit":"#modal-useredit",
+				"modal_delete":"#modal-userdelete",
+				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
 				"target":"#modal-main",
 				"name":"'.$user->name.'",
 				"user_name":"'.$user->user_name.'",

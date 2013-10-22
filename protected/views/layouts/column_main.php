@@ -23,5 +23,10 @@
     <?php $this->beginContent('//site/javascript'); ?>
 		<?php echo $content; ?>
 	<?php $this->endContent(); ?>
+    <script>
+	$(document).ready(function(){
+		$('.navbar').find('[data-panel="#panel-home"]').trigger('click');
+	});
+	</script>
 </body>
 </html>

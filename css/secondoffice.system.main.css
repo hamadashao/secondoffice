@@ -81,3 +81,11 @@ color:#2a6496;
 th {
 text-align:center;
 }
+
+.table-list-5 th {
+width:16%;
+}
+
+.table-list-5 .table_tools {
+width:7%;
+}

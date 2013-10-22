@@ -10,53 +10,12 @@
 			</ul>
 		</div> 
         <div id="usermanagement-panel-item" class="col-sm-10"></div>      
-    </div>     
+    </div>
+    <script>
+	$(document).ready(function(){
+		$('#panel-usermanagement').find('[data-panel="#panel-user"]').trigger('click');
+	});
+	</script>  
 </div>
 
-<script>
-/*
-function getusermanagementUI(ui_url) {
-	$.ajax({
-		type: "get",
-   		url: ui_url,
-		dataType: "html",
-		error: function() {
-			alert("error");
-		},
-		success: function(data){
-			$('.usermanagement-ui').hide();
-			$('.usermanagementmenu-item').removeClass('active');
-		
-			$('.usermanagementui-list').append(data);
-			$('.usermanagementmenu-item[data-target="' + $(data).attr("id") + '"]').addClass('active');
-		}
-	});
-}
 
-$('.usermanagementmenu-item').each(function(index, domEle){
-	if($(domEle).attr('data-link'))
-	{		
-		$(this).bind('click', {msg: $(domEle).attr('data-link')}, function(event) {
-			if($('#' + $(domEle).attr('data-target')).html())
-			{
-				$('.usermanagement-ui').hide();
-				$('.usermanagementmenu-item').removeClass('active');
-				
-				$('#' + $(domEle).attr('data-target')).show();
-				$(domEle).addClass('active');
-			}
-			else
-			{
-				getusermanagementUI(event.data.msg);
-			}
-		});
-	}
-}); 
-*/
-
-//getusermanagementUI("<?php echo Yii::app()->createUrl('user/getuserui'); ?>");
-
-$(document).ready(function(){
-	$('#panel-usermanagement').find('[data-panel="#panel-user"]').trigger('click');
-});
-</script>

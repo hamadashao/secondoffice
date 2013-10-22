@@ -16,7 +16,7 @@ SecondOffice.System = {
 				$("#system-css").remove();
 				$.loadCss('<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.main.css');
 				$('body').empty();
-				$('body').html(data);
+				$('body').html(data);				
 			}
 		});
 	},
@@ -71,10 +71,15 @@ SecondOffice.System = {
 	}
 }; 
 
-/******************************* component enchance ***********************************/
+
 $(document).ready(function(){
+/******************************* component enchance ***********************************/
+	$(document).delegate("body", "logout.secondoffice.system", function(event) {
+		console.log("logout event");
+	});
+	
 /*------------------------------       panel        ----------------------------------*/
-	$(document).delegate("[data-toggle='panel']", 'click', function(event) {     
+	$(document).delegate("[data-toggle='panel']", 'click', function(event) {
     	target_node = $(this).attr('data-target');
         pangel_node = $(this).attr('data-panel');
         
@@ -328,14 +333,26 @@ $(document).ready(function(){
 			$(this).closest(".table-list").attr('data-sort', $(this).attr('data-sort'));					
 			$(this).find("span").addClass("reversal-caret");
 		}
+		
+		$(this).closest(".table-list").trigger("refresh.bs.tablelist");
 	});
 	
 	$(document).delegate(".table-list .tableitem-keyword", "input", function(event) {
-		$(this).closest(".table-list").attr('data-filter', $(this).val());	
+		$(this).closest(".table-list").attr("data-page", "1");
+		$(this).closest(".table-list").attr('data-filter', $(this).val());		
+	});
+	
+	$(document).delegate(".table-list .tableitem-keyword", "keyup", function(event) {
+		if (event.keyCode == "13")
+		{			
+			$(this).closest(".table-list").trigger("refresh.bs.tablelist");			
+		}
 	});
 	
 	$(document).delegate(".table-list .tableitem-number li[data-results]", "click", function(event) {
 		$(this).closest(".table-list").attr('data-number', $(this).attr('data-results'));	
+		$(this).closest(".table-list").attr("data-page", "1");
+		$(this).closest(".table-list").trigger("refresh.bs.tablelist");
 	});
     
     $(document).delegate(".table-list tbody input[type='checkbox']", 'click', function(event) {
@@ -358,20 +375,22 @@ $(document).ready(function(){
 	});
 	
 	$(document).delegate(".table-list", 'refresh.bs.tablelist', function(event) {
-		sort_type = "";
-		filter = "";
-		page_num = "10";
+		sort_type 	= "";
+		filter 		= "";
+		page_num 	= "10";
+		page 		= "1";
 		
 		if($(this).attr('data-sort')) sort_type = $(this).attr('data-sort');
 		if($(this).attr('data-filter')) filter = $(this).attr('data-filter');
-		if($(this).attr('data-number')) page_num = $(this).attr('data-number');	
+		if($(this).attr('data-number')) page_num = $(this).attr('data-number');
+		if($(this).attr('data-page')) page = $(this).attr('data-page');
 		
 		table_obj = $(this);	
 	
 		$.ajax({
 			type: "post",
    			url: $(this).attr('data-link'),
-			data: "sort=" + sort_type + "&filter=" + filter + "&page_num=" + page_num,
+			data: "sort=" + sort_type + "&filter=" + filter + "&page_num=" + page_num + "&page=" + page,
 			dataType: "json",
 			error: function() {
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
@@ -379,7 +398,6 @@ $(document).ready(function(){
 			success: function(data){
 				if(data.result == "ok")
 				{
-					//console.log("test");
 					table_obj.find("tbody").empty();
 					
 					for(idx = 0; idx < data.list.length; idx++)
@@ -397,7 +415,7 @@ $(document).ready(function(){
 					
 					table_obj.find(".pagination").remove();	
 					
-					if((data.item_num > data.item_pagenum) && (data.item_pagenum > 0))
+					if((parseInt(data.item_num) > parseInt(data.item_pagenum)) && (parseInt(data.item_pagenum) > 0))
 					{
 						page_num = Math.ceil(data.item_num / data.item_pagenum);						
 											
@@ -405,20 +423,29 @@ $(document).ready(function(){
 						
 						for(idx = 1; idx <= page_num; idx++)
 						{
-							page_class = "";
-							if(idx == data.item_page) page_class = "active";
+							class_string = "";
+							event_string = "";
 							
-							table_obj.find(".pagination").append("<li class=" + page_class + "><a>" + idx + "</a></li>");							
+							if(idx == data.item_page)
+							{
+								class_string = " class='active' ";								
+							}
+							else
+							{
+								event_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='" + idx + "' ";
+							}
+							
+							table_obj.find(".pagination").append("<li" + event_string + class_string + "><a>" + idx + "</a></li>");							
 						}
 						
-						firstpage_class = "";
-						lastpage_class = "";
+						firstpage_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='1' ";
+						lastpage_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='" + page_num + "' ";
 												
-						if(data.item_page == 1) firstpage_class = "disabled";
-						if(data.item_page == page_num) lastpage_class = "disabled";
+						if(data.item_page == 1) firstpage_string = " class='disabled' ";
+						if(data.item_page == page_num) lastpage_string = " class='disabled' ";
 						
-						table_obj.find(".pagination").prepend("<li class=" + firstpage_class + "><a>&laquo;</a></li>");
-						table_obj.find(".pagination").append("<li class=" + lastpage_class + "><a>&raquo;</a></li>");						
+						table_obj.find(".pagination").prepend("<li" + firstpage_string + "><a>&laquo;</a></li>");
+						table_obj.find(".pagination").append("<li" + lastpage_string + "><a>&raquo;</a></li>");						
 					}
 				}
 				else
@@ -428,14 +455,25 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$(document).delegate(".table-list .pagination li", 'changepage.bs.tablelist', function(event) {
+		$(this).closest(".table-list").attr("data-page", $(this).attr("data-result"));
+		$(this).closest(".table-list").trigger("refresh.bs.tablelist");
+	});
 /*------------------------------- end of table list ----------------------------------*/
 
 /*-------------------------------      trigger     -----------------------------------*/
 	$(document).delegate("[data-toggle='trigger']", 'click', function(event) {
-		$($(this).attr("data-target")).trigger($(this).attr("data-event"));
+		if($(this).attr("data-target"))
+		{
+			$($(this).attr("data-target")).trigger($(this).attr("data-event"));
+		}
+		else
+		{
+			$(this).trigger($(this).attr("data-event"));
+		}		
 	});
 /*-------------------------------  end of trigger  -----------------------------------*/
-
-});
 /**************************** end of component enchance *******************************/
+});
 </script>
