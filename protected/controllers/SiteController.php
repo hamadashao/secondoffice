@@ -45,16 +45,4 @@ class SiteController extends Controller
 		$this->layout='//layouts/column_ajax';
 		$this->render('javascript');
 	}
-	
-	public function actionGetLogoutDialog()
-	{
-		$this->layout='//layouts/column_ajax';
-		$this->render('logout');
-	}
-	
-	public function actionGetChangePasswordDialog()
-	{
-		$this->layout='//layouts/column_ajax';
-		$this->render('changepassword');
-	}
 }

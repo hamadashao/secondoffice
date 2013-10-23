@@ -1,14 +1,39 @@
 <script>
-SecondOffice = {}; 
- 
-SecondOffice.System = {
-	InitMainUI:function() {
+$(document).ready(function(){
+
+	$(document).delegate("body", "blockinput.secondoffice.system", function(event, target, flag) {
+		if(flag)
+		{
+			if(!($(target).find('.btn').hasClass('active'))) $('.btn').addClass('active');
+						
+			$(target).find('.form-control').addClass('disable');
+			$(target).find('.form-control').attr("disabled", "disabled");
+		}
+		else
+		{
+			if($(target).find('.btn').hasClass('active')) $('.btn').removeClass('active');
+			
+			$(target).find('.form-control').removeClass('disable');
+			$(target).find('.form-control').removeAttr("disabled");
+		}
+	});
+
+	$(document).delegate("body", "delete.user.secondoffice.system", function(event) {
+		if($("#panel-user tbody").find("input[type='checkbox']:checked").length == 0)
+		{
+			$.SmartNotification.Show("<?php echo Yii::t('Base', 'No item has been selected!'); ?>", "error");
+			return;
+		}
+		
+		$("#user-delete-btn").trigger("click");
+	});
+	
+	$(document).delegate("body", "init.secondoffice.system", function(event) {
 		$.ajax({
    			type: "get",
    			url: "<?php echo Yii::app()->createUrl('site/getmainpanel'); ?>",
 			dataType: "html",
 			error: function() {
-				SecondOffice.System.HideSigninForm(false);
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, initialize main UI fail!'); ?>", "error");
 			
 			},
@@ -17,34 +42,23 @@ SecondOffice.System = {
 				$.loadCss('<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.main.css');
 				$('body').empty();
 				$('body').html(data);				
+				$(".navbar").find("[data-panel='#panel-home']").trigger("click");
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Signin successfully!'); ?>");
 			}
 		});
-	},
-	HideSigninForm:function(flag) {
-		if(flag)
-		{			
-			if(!($('.div-signin').find('.btn').hasClass('active'))) $('.btn').addClass('active');
-						
-			$('.div-signin').find('.form-control').	addClass('disable');
-			$('.div-signin').find('.form-control').	attr("disabled", "disabled");
-		}
-		else
-		{
-			if($('.div-signin').find('.btn').hasClass('active')) $('.btn').removeClass('active');
-			
-			$('.div-signin').find('.form-control').	removeClass('disable');
-			$('.div-signin').find('.form-control').	removeAttr("disabled");
-		}
-	},
-	SignIn:function() {
+	});
+
+	$(document).delegate("body", "signin.secondoffice.system", function(event) {
+		if($('.div-signin').find('.btn').hasClass('active')) return;
+	
 		if( ($('.div-signin').find(".user-name").val() == "") || ($('.div-signin').find(".user-password").val() == "") )
 		{
 			$.SmartNotification.Show("<?php echo Yii::t('Base', 'User name or/and password is empty'); ?>", "error");	
 			return;
 		}
 	
-		$.SmartNotification.Show("<?php echo Yii::t('Base', 'Signing in'); ?>", "info", "true");			
-		SecondOffice.System.HideSigninForm(true);
+		$.SmartNotification.Show("<?php echo Yii::t('Base', 'Signing in'); ?>", "info", "true");	
+		$("body").trigger("blockinput.secondoffice.system", [".div-signin", true]);
 			
 		$.ajax({
    			type: "post",
@@ -52,11 +66,11 @@ SecondOffice.System = {
   			data: "name=" + $('.div-signin').find(".user-name").val() + "&password=" + hex_md5($('.div-signin').find(".user-password").val()),
 			dataType: "json",
 			error: function() {
-				SecondOffice.System.HideSigninForm(false);
+				$("body").trigger("blockinput.secondoffice.system", [".div-signin", false]);
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			},
    			success: function(data){
-				SecondOffice.System.HideSigninForm(false);
+				$("body").trigger("blockinput.secondoffice.system", [".div-signin", false]);
 					
 				if(data.result != "ok")
 				{
@@ -64,20 +78,115 @@ SecondOffice.System = {
 				}
 				else
 				{
-					SecondOffice.System.InitMainUI();
+					$("body").trigger("init.secondoffice.system");
 				}		
    			}
 		});
-	}
-}; 
+	});
 
-
-$(document).ready(function(){
-/******************************* component enchance ***********************************/
 	$(document).delegate("body", "logout.secondoffice.system", function(event) {
-		console.log("logout event");
+		if($('#modal-logout').find('.btn').hasClass('active')) return;
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-logout", true]);
+		
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('user/logout'); ?>",
+			dataType: "json",
+			error: function() {
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-logout", false]);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+			success: function(data){
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-logout", false]);
+				
+				if(data.result == "ok")
+				{					
+					window.location.href = "<?php echo Yii::app()->baseUrl; ?>";
+				}
+				else
+				{
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Logout fail, please contact administrator'); ?>", "error");
+				}
+			}
+		});
 	});
 	
+	$(document).delegate("body", "changeownpassword.secondoffice.system", function(event) {
+		if($('#modal-changepassword').find('.btn').hasClass('active')) return;
+		
+		if( (!$("#modal-changepassword").find(".old-password").val()) || (!$("#modal-changepassword").find(".new-password").val()) || (!$("#modal-changepassword").find(".retype-password").val()) )
+		{
+			$.SmartNotification.Show("<?php echo Yii::t('Base', 'Please fill all the blank'); ?>", "error");
+			return;
+		}
+		
+		if( $("#modal-changepassword").find(".new-password").val() != $("#modal-changepassword").find(".retype-password").val() )
+		{
+			$.SmartNotification.Show("<?php echo Yii::t('Base', 'Enter the new password twice are not the same'); ?>", "error");
+			return;
+		}		
+		
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-changepassword", true]);
+		
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('user/changeownpassword'); ?>",
+			data: "oldpass=" + hex_md5($("#modal-changepassword").find(".old-password").val()) + "&newpass=" + hex_md5($("#modal-changepassword").find(".new-password").val()),
+			dataType: "json",
+			error: function() {
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-changepassword", false]);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+			success: function(data){
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-changepassword", false]);
+				
+				if(data.result == "ok")
+				{					
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Your password has been changed'); ?>");
+					$('#modal-changepassword').closest(".modal").modal('hide');
+				}
+				else
+				{
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Old password is not correct'); ?>", "error");
+				}
+			}
+		});
+	});
+	
+	$(document).delegate("body", "save.user.secondoffice.system", function(event) {
+		if($('#modal-useredit').find('.btn').hasClass('active')) return;
+		
+		console.log("save.user.secondoffice.system");
+		
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", true]);
+		
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('user/saveuser'); ?>",
+			data: "oldpass=" + hex_md5($("#modal-changepassword").find(".old-password").val()) + "&newpass=" + hex_md5($("#modal-changepassword").find(".new-password").val()),
+			dataType: "json",
+			error: function() {
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", false]);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+			success: function(data){
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", false]);
+				
+				if(data.result == "ok")
+				{					
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Your password has been changed'); ?>");
+					$('#modal-useredit').closest(".modal").modal('hide');
+				}
+				else
+				{
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+				}
+			}
+		});
+	});
+
+/******************************* component enchance ***********************************/	
+
 /*------------------------------       panel        ----------------------------------*/
 	$(document).delegate("[data-toggle='panel']", 'click', function(event) {
     	target_node = $(this).attr('data-target');
@@ -121,10 +230,9 @@ $(document).ready(function(){
                
         if($(target_node + "-list").find(".modal-dialog[data-modal='" + modal_node + "']").length != 0)
 		{            
-            $(target_node + "-list").find(".modal-dialog[data-modal='" + modal_node + "']").clone().appendTo(target_node);
-            $(target_node).find(".modal-dialog[data-modal='" + modal_node + "']").attr("id", modal_node);
-            $(target_node).find(modal_node).removeAttr("data-modal");
-            
+            $(target_node + "-list").find(".modal-dialog[data-modal='" + modal_node + "']").clone().appendTo(target_node);			
+            $(target_node).find(".modal-dialog[data-modal='" + modal_node + "']").attr("id", modal_node.replace("#", ""));			
+            $(target_node).find(modal_node).removeAttr("data-modal");            
             $(target_node).attr('data-id', $(this).attr('data-id'));           
             
 			return;
@@ -169,8 +277,7 @@ $(document).ready(function(){
 						if(data.result == "ok")
 						{					
 							for(idx = 0; idx < data.list.length; idx++)
-							{						
-								//target_modal.find("[data-name='" + data.list[idx].data_name + "']").val(data.list[idx].data_value);
+							{
 								data_field = target_modal.find("[data-name='" + data.list[idx].data_name + "']");
 								if(data_field.filter("[class*='form-control']").length > 0)
 								{
@@ -342,13 +449,6 @@ $(document).ready(function(){
 		$(this).closest(".table-list").attr('data-filter', $(this).val());		
 	});
 	
-	$(document).delegate(".table-list .tableitem-keyword", "keyup", function(event) {
-		if (event.keyCode == "13")
-		{			
-			$(this).closest(".table-list").trigger("refresh.bs.tablelist");			
-		}
-	});
-	
 	$(document).delegate(".table-list .tableitem-number li[data-results]", "click", function(event) {
 		$(this).closest(".table-list").attr('data-number', $(this).attr('data-results'));	
 		$(this).closest(".table-list").attr("data-page", "1");
@@ -432,14 +532,14 @@ $(document).ready(function(){
 							}
 							else
 							{
-								event_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='" + idx + "' ";
+								event_string = " data-toggle='click.trigger' data-event='changepage.bs.tablelist' data-result='" + idx + "' ";
 							}
 							
 							table_obj.find(".pagination").append("<li" + event_string + class_string + "><a>" + idx + "</a></li>");							
 						}
 						
-						firstpage_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='1' ";
-						lastpage_string = " data-toggle='trigger' data-event='changepage.bs.tablelist' data-result='" + page_num + "' ";
+						firstpage_string = " data-toggle='click.trigger' data-event='changepage.bs.tablelist' data-result='1' ";
+						lastpage_string = " data-toggle='click.trigger' data-event='changepage.bs.tablelist' data-result='" + page_num + "' ";
 												
 						if(data.item_page == 1) firstpage_string = " class='disabled' ";
 						if(data.item_page == page_num) lastpage_string = " class='disabled' ";
@@ -463,7 +563,7 @@ $(document).ready(function(){
 /*------------------------------- end of table list ----------------------------------*/
 
 /*-------------------------------      trigger     -----------------------------------*/
-	$(document).delegate("[data-toggle='trigger']", 'click', function(event) {
+	$(document).delegate("[data-toggle='click.trigger']", 'click', function(event) {
 		if($(this).attr("data-target"))
 		{
 			$($(this).attr("data-target")).trigger($(this).attr("data-event"));
@@ -472,6 +572,20 @@ $(document).ready(function(){
 		{
 			$(this).trigger($(this).attr("data-event"));
 		}		
+	});
+	
+	$(document).delegate("[data-toggle='enter.trigger']", 'keyup', function(event) {
+		if (event.keyCode == "13")
+		{
+			if($(this).attr("data-target"))
+			{
+				$($(this).attr("data-target")).trigger($(this).attr("data-event"));
+			}
+			else
+			{
+				$(this).trigger($(this).attr("data-event"));
+			}
+		}				
 	});
 /*-------------------------------  end of trigger  -----------------------------------*/
 /**************************** end of component enchance *******************************/

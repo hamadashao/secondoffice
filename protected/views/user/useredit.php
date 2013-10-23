@@ -39,7 +39,7 @@
   				</div>
         	</div>
         	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" id="delete-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
+            	<button type="button" class="btn btn-primary" data-toggle="click.trigger" data-target="body" data-event="save.user.secondoffice.system"><?php echo Yii::t('Base', 'Save'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>
         	</div>
       	</div>

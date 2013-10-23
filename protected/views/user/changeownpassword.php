@@ -9,7 +9,7 @@
             <input type="password" class="form-control retype-password spacing-b-m" placeholder="<?php echo Yii::t('Base', 'Retype New Password'); ?>">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="changepassword-comfirm"><?php echo Yii::t('Base', 'Save'); ?></button>
+            <button type="button" class="btn btn-primary" data-toggle="click.trigger" data-target="body" data-event="changeownpassword.secondoffice.system"><?php echo Yii::t('Base', 'Save'); ?></button>
           	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>          		
         </div>
     </div>
