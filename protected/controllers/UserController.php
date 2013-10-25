@@ -14,6 +14,7 @@ class UserController extends Controller
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
+	 
 	public function accessRules()
 	{
 		return array(
@@ -22,7 +23,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getchangeownpassworddialog','getlogoutdialog','getuserdata','getuserlist','changeownpassword'),
+				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getchangeownpassworddialog','getlogoutdialog','getuserdata','getuserlist','changeownpassword','saveuser','deleteuser'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -34,105 +35,6 @@ class UserController extends Controller
 			),
 		);
 	}
-
-	/*
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
-	
-	public function actionCreate()
-	{
-		$model=new User;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->uid));
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
-	
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->uid));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
-	
-	public function actionDelete($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-	
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-	
-	public function actionAdmin()
-	{
-		$model=new User('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-	
-	public function loadModel($id)
-	{
-		$model=User::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-	
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-	*/
 	
 	public function actionSignin()
 	{
@@ -167,30 +69,7 @@ class UserController extends Controller
 		
 		echo '{"result":"ok"}';		
 		Yii::app()->end();
-	}
-	
-	public function actionChangePassword()
-	{
-		if(!(isset($_POST['old_password'])) || !(isset($_POST['new_password'])) )
-		{
-			echo '{"result":"fail"}';
-			Yii::app()->end();
-		}
-
-		$user = User::model()->findByPk(Yii::app()->user->id);
-		
-		if($user->password != md5($_POST['old_password'].$user->password_salt))
-		{
-			echo '{"result":"fail"}';
-			Yii::app()->end();
-		}
-		
-		$user->password = md5($_POST['new_password'].$user->password_salt);
-		$user->save();
-		
-		echo '{"result":"ok"}';		
-		Yii::app()->end();
-	}
+	}	
 	
 	public function actionGetUserManagementPanel() 
 	{
@@ -362,8 +241,85 @@ class UserController extends Controller
 	
 	public function actionChangeOwnPassword()
 	{
-		echo '{"result":"ok"}';
+		if(!(isset($_POST['oldpass'])) || !(isset($_POST['newpass'])) )
+		{
+			echo '{"result":"fail"}';
+			Yii::app()->end();
+		}
+
+		$user = User::model()->findByPk(Yii::app()->user->id);
 		
+		if($user->password != md5($_POST['oldpass'].$user->password_salt))
+		{
+			echo '{"result":"fail"}';
+			Yii::app()->end();
+		}
+		
+		$user->password = md5($_POST['newpass'].$user->password_salt);
+		$user->save();
+		
+		echo '{"result":"ok"}';		
+		Yii::app()->end();
+	}
+	
+	public function actionSaveUser()
+	{
+		$transaction = Yii::app()->db->beginTransaction();
+			
+		try 
+		{
+			$user_uid = "";
+				
+			if(strlen($_POST['id']))
+			{
+				$user_uid = $_POST['id'];
+			}
+			else
+			{
+				$user_uid = uniqid('',true);
+			}
+				
+			$user = User::model()->findByPk($user_uid);				
+			if(!$user) $user = new User;
+			
+			$user->uid = $user_uid;	
+			$user->name = $_POST['name'];
+			$user->user_name = $_POST['username'];
+			if(strlen($_POST['password'])) $user->password = md5($_POST['password'].$user->password_salt);
+			if (!$user->save()) throw new Exception();
+				
+			$userdepartmentposition = UserDepartmentPosition::model()->findByAttributes(array('user_uid'=>$user_uid));
+			if(!$userdepartmentposition) $userdepartmentposition = new UserDepartmentPosition;
+				
+			$userdepartmentposition->user_uid = $user_uid;
+			$userdepartmentposition->department_uid = $_POST['department'];
+			$userdepartmentposition->position_uid = $_POST['position'];
+			if (!$userdepartmentposition->save()) throw new Exception();
+				
+			$usergroup = UserGroup::model()->findByAttributes(array('user_uid'=>$user_uid));
+			if(!$usergroup) $usergroup = new UserGroup;
+				
+			$usergroup->user_uid = $user_uid;
+			$usergroup->group_uid = $_POST['group'];
+			if (!$usergroup->save()) throw new Exception();
+				
+			$transaction->commit();
+		} 
+		catch (Exception $e) 
+		{
+     		$transaction->rollback();
+				
+			echo '{"result":"fail","message":"'.$e.'"}';			
+			Yii::app()->end();
+		}
+	
+		echo '{"result":"ok"}';			
+		Yii::app()->end();
+	}
+	
+	public function actionDeleteUser()
+	{
+		echo '{"result":"ok"}';		
 		Yii::app()->end();
 	}
 }

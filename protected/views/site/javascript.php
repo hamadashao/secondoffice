@@ -4,21 +4,23 @@ $(document).ready(function(){
 	$(document).delegate("body", "blockinput.secondoffice.system", function(event, target, flag) {
 		if(flag)
 		{
-			if(!($(target).find('.btn').hasClass('active'))) $('.btn').addClass('active');
+			if(!($(target).hasClass('active'))) $(target).addClass('active');
+			if(!($(target).find('.btn').hasClass('active'))) $(target).find('.btn').addClass('active');
 						
 			$(target).find('.form-control').addClass('disable');
 			$(target).find('.form-control').attr("disabled", "disabled");
 		}
 		else
 		{
-			if($(target).find('.btn').hasClass('active')) $('.btn').removeClass('active');
+			if($(target).hasClass('active')) $(target).removeClass('active');
+			if($(target).find('.btn').hasClass('active')) $(target).find('.btn').removeClass('active');
 			
 			$(target).find('.form-control').removeClass('disable');
 			$(target).find('.form-control').removeAttr("disabled");
 		}
 	});
 
-	$(document).delegate("body", "delete.user.secondoffice.system", function(event) {
+	$(document).delegate("body", "show.userdeletedialog.secondoffice.system", function(event) {
 		if($("#panel-user tbody").find("input[type='checkbox']:checked").length == 0)
 		{
 			$.SmartNotification.Show("<?php echo Yii::t('Base', 'No item has been selected!'); ?>", "error");
@@ -154,28 +156,90 @@ $(document).ready(function(){
 	});
 	
 	$(document).delegate("body", "save.user.secondoffice.system", function(event) {
-		if($('#modal-useredit').find('.btn').hasClass('active')) return;
+		modal = $('#modal-useredit');
 		
-		console.log("save.user.secondoffice.system");
+		if(modal.find('.btn').hasClass('active')) return;
 		
-		$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", true]);
+		if( (!modal.find("[data-name='user_name']").val()) || (!modal.find("[data-name='name']").val()) || (!modal.find("[data-name='department_id']").attr("data-results")) || (!modal.find("[data-name='position_id']").attr("data-results")) || (!modal.find("[data-name='group_id']").attr("data-results")) )
+		{
+			$.SmartNotification.Show("<?php echo Yii::t('Base', 'Please fill all the blank '); ?>", "error");
+			return;
+		}
+		
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-main", true]);
+		
+		password = "";	
+		id = "";	
+		if(modal.find("[data-name='password']").val()) password = hex_md5(modal.find("[data-name='password']").val());
+		if(modal.closest(".modal").attr("data-id")) id = modal.closest(".modal").attr("data-id");
 		
 		$.ajax({
    			type: "post",
    			url: "<?php echo Yii::app()->createUrl('user/saveuser'); ?>",
-			data: "oldpass=" + hex_md5($("#modal-changepassword").find(".old-password").val()) + "&newpass=" + hex_md5($("#modal-changepassword").find(".new-password").val()),
+			data: "id=" + id + "&username=" + modal.find("[data-name='user_name']").val() + "&password=" + password + "&name=" + modal.find("[data-name='name']").val() + "&department=" + modal.find("[data-name='department_id']").attr("data-results") + "&position=" + modal.find("[data-name='position_id']").attr("data-results") + "&group=" + modal.find("[data-name='group_id']").attr("data-results"),
 			dataType: "json",
 			error: function() {
-				$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", false]);
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			},
 			success: function(data){
-				$("body").trigger("blockinput.secondoffice.system", ["#modal-useredit", false]);
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
 				
 				if(data.result == "ok")
 				{					
-					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Your password has been changed'); ?>");
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'User data has been saved'); ?>");
 					$('#modal-useredit').closest(".modal").modal('hide');
+					$("#panel-user").find(".table-list").trigger('refresh.bs.tablelist');
+				}
+				else
+				{
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+				}
+			}
+		});
+	});
+	
+	$(document).delegate("body", "delete.user.secondoffice.system", function(event) {
+		if($("#modal-userdelete").find('.btn').hasClass('active')) return;		
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-main", true]);
+		
+		item_list = "";
+		
+		if($("#modal-userdelete").closest(".modal").attr("data-id"))
+		{
+			item_list = $("#modal-userdelete").closest(".modal").attr("data-id");
+		}
+		else
+		{
+			$("#panel-user tbody").find("input[type='checkbox']:checked").each(function (index, domEle) { 
+				if(item_list)
+				{
+					item_list = item_list + "," + $(domEle).closest("tr").find("span[data-id]").attr("data-id");
+				}
+				else
+				{
+					item_list = $(domEle).closest("tr").find("span[data-id]").attr("data-id");
+				}
+			});
+		}
+		
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('user/deleteuser'); ?>",
+			data: "id=" + item_list,
+			dataType: "json",
+			error: function() {
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+			success: function(data){
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
+				
+				if(data.result == "ok")
+				{					
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'User has been deleted'); ?>");
+					$('#modal-userdelete').closest(".modal").modal('hide');
+					$("#panel-user").find(".table-list").trigger('refresh.bs.tablelist');
 				}
 				else
 				{
@@ -309,6 +373,10 @@ $(document).ready(function(){
 			}		
 		}
 	});
+	
+	$(document).delegate(".modal", "hide.bs.modal", function(event) {
+		if($(this).hasClass('active')) return event.preventDefault();
+	});
     
     $(document).delegate(".modal", "hidden.bs.modal", function() {
 		$(this).attr('data-id', '');
@@ -379,6 +447,10 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	$(document).delegate(".dropdown-list", 'show.bs.dropdown', function(event){
+		if($(this).find("[data-toggle='dropdown']").hasClass('active')) return event.preventDefault();
+	});
 
 	$(document).delegate(".dropdown-list", 'shown.bs.dropdown', function(){
 		$(this).attr('data-more', 'false');
@@ -399,22 +471,24 @@ $(document).ready(function(){
 	});	
     
     $(document).delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
+		var list_obj = $(this);
+		
 		$.ajax({
 			type: "get",
-   			url: $(this).attr('data-link'),
+   			url: list_obj.attr('data-link'),
 			dataType: "json",
 			error: function() {
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			},
 			success: function(data){
 				if(data.result == "ok")
-				{				
-					list_obj = $(".dropdown-list[data-link*='" + data.url + "']").find(".dropdown-menu");
-					list_obj.empty();
+				{			
+					list_items = $(list_obj).find(".dropdown-menu");
+					list_items.empty();
 				
 					for(idx = 0; idx < data.list.length; idx++)
 					{
-						list_obj.append('<li data-results="' + data.list[idx].value + '"><a>' + data.list[idx].string + '</a></li>');
+						list_items.append('<li data-results="' + data.list[idx].value + '"><a>' + data.list[idx].string + '</a></li>');
 					}
 				}
 				else
@@ -504,7 +578,7 @@ $(document).ready(function(){
 					{
 						table_obj.find("tbody").append('<tr>' + 
       						'<td><input type="checkbox"></td>' + 
-							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" class="glyphicon glyphicon-remove"></span></a></td>' +
+							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-remove"></span></a></td>' +
 							'<td>' + data.list[idx].name + '</td>' +
 							'<td>' + data.list[idx].user_name + '</td>' +
       						'<td>' + data.list[idx].department + '</td>' +

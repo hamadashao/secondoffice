@@ -197,7 +197,7 @@ class DepartmentController extends Controller
 			}
 		}
 		
-		echo '{"result":"ok","url":"'.$_GET['r'].'","list":['.$list.']}';		
+		echo '{"result":"ok","list":['.$list.']}';		
 		Yii::app()->end();
 	}
 }

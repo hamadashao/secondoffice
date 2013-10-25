@@ -10,7 +10,7 @@
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Password'); ?></label>
-    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
+    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password (leave it blank if no change)'); ?>">
   				</div>
                 <div class="form-group">
     				<label><?php echo Yii::t('Base', 'Name'); ?></label>

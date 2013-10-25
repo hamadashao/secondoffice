@@ -42,7 +42,7 @@ class User extends CActiveRecord
 			array('uid, name, user_name, password, password_salt', 'required'),
 			array('valid', 'numerical', 'integerOnly'=>true),
 			array('uid, name, user_name, password', 'length', 'max'=>32),
-			array('password_salt', 'length', 'max'=>8),
+			array('password_salt', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('uid, name, user_name, password, password_salt, valid', 'safe', 'on'=>'search'),
@@ -106,12 +106,17 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+	/*
 	protected function beforeValidate() 
 	{		
 		if(!$this->password_salt) $this->password_salt = uniqid('',true);
 		
 		return true;
+	}
+	*/
+	public function init()
+	{
+		if(!$this->password_salt) $this->password_salt = uniqid('',true);
 	}
 	
 	public function validatePassword($password)
