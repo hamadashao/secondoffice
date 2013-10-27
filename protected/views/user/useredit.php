@@ -10,11 +10,11 @@
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Password'); ?></label>
-    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password (leave it blank if no change)'); ?>">
+    				<input data-name="password" type="password" class="form-control" placeholder="<?php echo Yii::t('Base', 'Password'); ?>">
   				</div>
                 <div class="form-group">
-    				<label><?php echo Yii::t('Base', 'Name'); ?></label>
-    				<input data-name="name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
+    				<label><?php echo Yii::t('Base', 'Real Name'); ?></label>
+    				<input data-name="real_name" type="text" class="form-control" placeholder="<?php echo Yii::t('Base', 'Name'); ?>">
   				</div>
   				<div class="form-group">
     				<label><?php echo Yii::t('Base', 'Department'); ?></label>

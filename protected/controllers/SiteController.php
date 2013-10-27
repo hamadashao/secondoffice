@@ -19,13 +19,27 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->isGuest)
 		{
-			$this->layout='//layouts/column_signin';
-			$this->render('index');
+			if(isset($_POST['ajax']))
+			{
+				$this->layout='//layouts/column_ajax';
+				$this->render('index');
+			}
+			else
+			{
+				$this->layout='//layouts/column_signin';
+				$this->render('index');
+			}			
 		}
 		else
 		{			
 			$this->render('main');
 		}
+	}
+	
+	public function actionAjaxSignin()
+	{
+		echo "<script>$('body').trigger('ajaxsignin.secondoffice.system');</script>";
+		Yii::app()->end();
 	}
 	
 	public function actionGetMainPanel()
@@ -44,5 +58,12 @@ class SiteController extends Controller
 	{
 		$this->layout='//layouts/column_ajax';
 		$this->render('javascript');
+	}
+	
+	public function actionInitAuth()
+	{
+		$auth->createTask('sysytem.user.management', Yii::t('Base', 'User Management'));
+		$auth->createTask('sysytem.module.management', Yii::t('Base', 'Module Management'));
+		$auth->createTask('sysytem.config', Yii::t('Base', 'System Config'));
 	}
 }

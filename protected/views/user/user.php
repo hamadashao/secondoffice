@@ -22,9 +22,9 @@
 			<thead>
    				<tr>
       				<th class="table_tools"><input type="checkbox" class="global-checkbox"></th>
-      				<th class="table_tools"></th>
-  	  				<th data-sort="t.name"><a><?php echo Yii::t('Base', 'User'); ?><span></span></a></th>
-      				<th data-sort="t.user_name"><a><?php echo Yii::t('Base', 'Name'); ?><span></span></a></th>
+      				<th class="table_tools"></th>  	  				
+      				<th data-sort="t.user_name"><a><?php echo Yii::t('Base', 'UserName'); ?><span></span></a></th>
+                    <th data-sort="t.real_name"><a><?php echo Yii::t('Base', 'RealName'); ?><span></span></a></th>
       				<th data-sort="department.name"><a><?php echo Yii::t('Base', 'Department'); ?><span></span></a></th>
       				<th data-sort="position.name"><a><?php echo Yii::t('Base', 'Position'); ?><span></span></a></th>
       				<th data-sort="group.name"><a><?php echo Yii::t('Base', 'Group'); ?><span></span></a></th>

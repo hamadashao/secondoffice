@@ -39,13 +39,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('uid, name, user_name, password, password_salt', 'required'),
+			array('uid, real_name, user_name, password, password_salt', 'required'),
 			array('valid', 'numerical', 'integerOnly'=>true),
-			array('uid, name, user_name, password', 'length', 'max'=>32),
-			array('password_salt', 'length', 'max'=>32),
+			array('uid, real_name, user_name, password, password_salt, password_salt', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('uid, name, user_name, password, password_salt, valid', 'safe', 'on'=>'search'),
+			array('uid, real_name, user_name, password, password_salt, valid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,7 +75,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'uid' => 'Uid',
-			'name' => 'Name',
+			'real_name' => 'Real Name',
 			'user_name' => 'User Name',
 			'password' => 'Password',
 			'password_salt' => 'Password Salt',
@@ -96,7 +95,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('uid',$this->uid,true);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('real_name',$this->real_name,true);
 		$criteria->compare('user_name',$this->user_name,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('password_salt',$this->password_salt,true);

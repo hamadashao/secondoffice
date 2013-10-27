@@ -124,7 +124,7 @@ class UserController extends Controller
 				}
 			
 				echo '{"result":"ok","list":[
-				{"data_name":"name","data_value":"'.$model->name.'"},
+				{"data_name":"real_name","data_value":"'.$model->real_name.'"},
 				{"data_name":"user_name","data_value":"'.$model->user_name.'"},
 				{"data_name":"department_id","data_value":"'.$department_uid.'"},
 				{"data_name":"department_name","data_value":"'.$department_name.'"},
@@ -147,19 +147,19 @@ class UserController extends Controller
 		$filter = "";
 		$page = 1;
 		$page_num = 10;
-		$sort = "";
+		$sort = "t.uid desc";
 		
-		if(isset($_POST['filter'])) 	$filter = $_POST['filter'];
-		if(isset($_POST['page'])) 		$page = intval($_POST['page']);
-		if(isset($_POST['page_num'])) 	$page_num = intval($_POST['page_num']);
-		if(isset($_POST['sort'])) 		$sort = $_POST['sort'];
+		if($_POST['filter']) 	$filter = $_POST['filter'];
+		if($_POST['page']) 		$page = intval($_POST['page']);
+		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
+		if($_POST['sort']) 		$sort = $_POST['sort'];
 		
 		
 		$criteria = new CDbCriteria;
 		$criteria->with  = array('department','position','group');
 		$criteria->together = true;
 		
-		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('t.real_name', $filter, true, 'OR');
 		$criteria->addSearchCondition('t.user_name', $filter, true, 'OR');
 		$criteria->addSearchCondition('department.name', $filter, true, 'OR');
 		$criteria->addSearchCondition('position.name', $filter, true, 'OR');
@@ -197,11 +197,7 @@ class UserController extends Controller
 				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
 				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
 				"target":"#modal-main",
-				"name":"'.$user->name.'",
-				"user_name":"'.$user->user_name.'",
-				"department":"'.$department_name.'",
-				"position":"'.$position_name.'",
-				"group":"'.$group_name.'"
+				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
 			}
 			else
@@ -213,11 +209,7 @@ class UserController extends Controller
 				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
 				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
 				"target":"#modal-main",
-				"name":"'.$user->name.'",
-				"user_name":"'.$user->user_name.'",
-				"department":"'.$department_name.'",
-				"position":"'.$position_name.'",
-				"group":"'.$group_name.'"
+				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
 			}
 		}
@@ -268,40 +260,38 @@ class UserController extends Controller
 			
 		try 
 		{
-			$user_uid = "";
-				
-			if(strlen($_POST['id']))
-			{
-				$user_uid = $_POST['id'];
-			}
-			else
-			{
-				$user_uid = uniqid('',true);
-			}
-				
-			$user = User::model()->findByPk($user_uid);				
+			$criteria = new CDbCriteria;
+			
+			$criteria->addcondition("t.uid != '".$_POST['id']."'");
+			$criteria->addcondition("(t.real_name = '".$_POST['realname']."' OR t.user_name = '".$_POST['username']."')");
+			$criteria->addcondition("t.valid = 1");
+			
+			$user_num = User::model()->count($criteria);
+			if($user_num > 0) throw new Exception(Yii::t('Base', 'User name or real name duplicate'));
+		
+			$user = User::model()->findByPk($_POST['id']);				
 			if(!$user) $user = new User;
 			
-			$user->uid = $user_uid;	
-			$user->name = $_POST['name'];
+			$user->uid = uniqid('',true);	
+			$user->real_name = $_POST['realname'];
 			$user->user_name = $_POST['username'];
 			if(strlen($_POST['password'])) $user->password = md5($_POST['password'].$user->password_salt);
-			if (!$user->save()) throw new Exception();
+			if (!$user->save()) throw new Exception(Yii::t('Base', 'Save user data fail, please contact administrator'));
 				
-			$userdepartmentposition = UserDepartmentPosition::model()->findByAttributes(array('user_uid'=>$user_uid));
+			$userdepartmentposition = UserDepartmentPosition::model()->findByAttributes(array('user_uid'=>$user->uid));
 			if(!$userdepartmentposition) $userdepartmentposition = new UserDepartmentPosition;
 				
-			$userdepartmentposition->user_uid = $user_uid;
+			$userdepartmentposition->user_uid = $user->uid;
 			$userdepartmentposition->department_uid = $_POST['department'];
 			$userdepartmentposition->position_uid = $_POST['position'];
-			if (!$userdepartmentposition->save()) throw new Exception();
+			if (!$userdepartmentposition->save()) throw new Exception(Yii::t('Base', 'Save user department position relation fail, please contact administrator'));
 				
-			$usergroup = UserGroup::model()->findByAttributes(array('user_uid'=>$user_uid));
+			$usergroup = UserGroup::model()->findByAttributes(array('user_uid'=>$user->uid));
 			if(!$usergroup) $usergroup = new UserGroup;
 				
-			$usergroup->user_uid = $user_uid;
+			$usergroup->user_uid = $user->uid;
 			$usergroup->group_uid = $_POST['group'];
-			if (!$usergroup->save()) throw new Exception();
+			if (!$usergroup->save()) throw new Exception(Yii::t('Base', 'Save user group relation fail, please contact administrator'));
 				
 			$transaction->commit();
 		} 
@@ -309,7 +299,7 @@ class UserController extends Controller
 		{
      		$transaction->rollback();
 				
-			echo '{"result":"fail","message":"'.$e.'"}';			
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
 			Yii::app()->end();
 		}
 	
@@ -318,8 +308,21 @@ class UserController extends Controller
 	}
 	
 	public function actionDeleteUser()
-	{
-		echo '{"result":"ok"}';		
+	{	
+		try 
+		{	
+			$item = explode(',', $_POST['id']);
+			
+			$execute_num = User::model()->updateByPk( $item, array("valid"=>0));	
+			if ( count($item) != $execute_num ) throw new Exception(Yii::t('Base', 'Delete user fail, please contact administrator'));			
+		}
+		catch (Exception $e) 
+		{
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
 		Yii::app()->end();
 	}
 }

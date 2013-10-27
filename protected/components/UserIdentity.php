@@ -8,7 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
-	private $_name;
+	private $_real_name;
 	private $_user_name;
 	
 	public function authenticate()
@@ -22,7 +22,7 @@ class UserIdentity extends CUserIdentity
 		else
 		{
 			$this->_id = $user->uid;
-			$this->_name = $user->name;
+			$this->_real_name = $user->real_name;
 			$this->_user_name = $user->user_name;
 			$this->errorCode = self::ERROR_NONE;
 		}

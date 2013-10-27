@@ -40,7 +40,7 @@ $(document).ready(function(){
 			
 			},
 			success: function(data){
-				$("#system-css").remove();
+				$("link[href*='secondoffice.system.signin.css']").remove();
 				$.loadCss('<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.main.css');
 				$('body').empty();
 				$('body').html(data);				
@@ -82,6 +82,25 @@ $(document).ready(function(){
 				{
 					$("body").trigger("init.secondoffice.system");
 				}		
+   			}
+		});
+	});
+	
+	$(document).delegate("body", "ajaxsignin.secondoffice.system", function(event) {
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('site/index'); ?>",
+			data: "ajax=true",
+			dataType: "html",
+			error: function() {
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+   			success: function(data){					
+				$("link[href*='secondoffice.system.main.css']").remove();
+				$.loadCss('<?php echo Yii::app()->request->baseUrl; ?>/css/secondoffice.system.signin.css');
+				$('body').empty();
+				$('body').html(data);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Signin timeout, please signin again'); ?>");	
    			}
 		});
 	});
@@ -160,7 +179,7 @@ $(document).ready(function(){
 		
 		if(modal.find('.btn').hasClass('active')) return;
 		
-		if( (!modal.find("[data-name='user_name']").val()) || (!modal.find("[data-name='name']").val()) || (!modal.find("[data-name='department_id']").attr("data-results")) || (!modal.find("[data-name='position_id']").attr("data-results")) || (!modal.find("[data-name='group_id']").attr("data-results")) )
+		if( (!modal.find("[data-name='user_name']").val()) || (!modal.find("[data-name='real_name']").val()) || (!modal.find("[data-name='department_id']").attr("data-results")) || (!modal.find("[data-name='position_id']").attr("data-results")) || (!modal.find("[data-name='group_id']").attr("data-results")) )
 		{
 			$.SmartNotification.Show("<?php echo Yii::t('Base', 'Please fill all the blank '); ?>", "error");
 			return;
@@ -176,7 +195,7 @@ $(document).ready(function(){
 		$.ajax({
    			type: "post",
    			url: "<?php echo Yii::app()->createUrl('user/saveuser'); ?>",
-			data: "id=" + id + "&username=" + modal.find("[data-name='user_name']").val() + "&password=" + password + "&name=" + modal.find("[data-name='name']").val() + "&department=" + modal.find("[data-name='department_id']").attr("data-results") + "&position=" + modal.find("[data-name='position_id']").attr("data-results") + "&group=" + modal.find("[data-name='group_id']").attr("data-results"),
+			data: "id=" + id + "&username=" + modal.find("[data-name='user_name']").val() + "&password=" + password + "&realname=" + modal.find("[data-name='real_name']").val() + "&department=" + modal.find("[data-name='department_id']").attr("data-results") + "&position=" + modal.find("[data-name='position_id']").attr("data-results") + "&group=" + modal.find("[data-name='group_id']").attr("data-results"),
 			dataType: "json",
 			error: function() {
 				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
@@ -193,7 +212,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+					$.SmartNotification.Show(data.message, "error");
 				}
 			}
 		});
@@ -243,7 +262,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+					$.SmartNotification.Show(data.message, "error");
 				}
 			}
 		});
@@ -576,14 +595,16 @@ $(document).ready(function(){
 					
 					for(idx = 0; idx < data.list.length; idx++)
 					{
+						data_list = "";						
+						for(data_idx = 0; data_idx < data.list[idx].data.length; data_idx++)
+						{
+							data_list = data_list + '<td>' + data.list[idx].data[data_idx] + '</td>';
+						}
+						
 						table_obj.find("tbody").append('<tr>' + 
       						'<td><input type="checkbox"></td>' + 
-							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-remove"></span></a></td>' +
-							'<td>' + data.list[idx].name + '</td>' +
-							'<td>' + data.list[idx].user_name + '</td>' +
-      						'<td>' + data.list[idx].department + '</td>' +
-      						'<td>' + data.list[idx].position + '</td>' +
-      						'<td>' + data.list[idx].group + '</td>' +
+							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-remove"></span></a></td>' +							
+							data_list +
 					   		'</tr>');
 					}
 					

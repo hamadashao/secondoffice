@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Second Office - OA System',
+	'name'=>'Second Office',
 	'language'=>'zh_cn',
 
 	// preloading 'log' component
@@ -39,6 +39,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+			'loginUrl'=>array('site/ajaxsignin'),
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
