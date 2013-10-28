@@ -32,7 +32,7 @@ class SiteController extends Controller
 		}
 		else
 		{			
-			$this->render('main');
+			$this->render('main_panel');
 		}
 	}
 	
@@ -45,13 +45,13 @@ class SiteController extends Controller
 	public function actionGetMainPanel()
 	{
 		$this->layout='//layouts/column_ajax';
-		$this->render('main');
+		$this->render('main_panel');
 	}
 	
 	public function actionGetHomePanel()
 	{
 		$this->layout='//layouts/column_ajax';
-		$this->render('home');
+		$this->render('home_panel');
 	}
 	
 	public function actionGetSystemJS()

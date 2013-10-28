@@ -15,8 +15,8 @@
        			<ul class="dropdown-menu">
                 	<li>User Group: Admin</li>
                 	<li class="divider"></li>
-                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('user/getusermanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-usermanagement"><a><?php echo Yii::t('Base', 'User Management'); ?></a></li>
-                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('module/getmodulemanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-modulemanagement"><a><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
+                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('user/getmanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-usermanagement"><a><?php echo Yii::t('Base', 'User Management'); ?></a></li>
+                    <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('module/getmanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-modulemanagement"><a><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
 					<li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getchangeownpassworddialog'); ?>" data-target="#modal-main" data-modal="#modal-changepassword"><a><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
                     <li class="divider"></li>               
                     <li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getlogoutdialog'); ?>" data-target="#modal-main" data-modal="#modal-logout"><a><?php echo Yii::t('Base', 'Logout'); ?></a></li>

@@ -22,7 +22,7 @@ class PositionController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getpositionpanel','getlist'),
+				'actions'=>array('getpanel','getdropdownlist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -35,12 +35,12 @@ class PositionController extends Controller
 		);
 	}	
 	
-	public function actionGetPositionPanel() 
+	public function actionGetPanel() 
 	{
-		$this->render('position');
+		$this->render('position_panel');
 	}
 	
-	public function actionGetList() 
+	public function actionGetDropdownList() 
 	{		
 		$models = Position::model()->findAllByAttributes(array('valid'=>1));
 		

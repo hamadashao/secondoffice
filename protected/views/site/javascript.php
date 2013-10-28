@@ -30,6 +30,16 @@ $(document).ready(function(){
 		$("#user-delete-btn").trigger("click");
 	});
 	
+	$(document).delegate("body", "show.departmentdeletedialog.secondoffice.system", function(event) {
+		if($("#panel-department tbody").find("input[type='checkbox']:checked").length == 0)
+		{
+			$.SmartNotification.Show("<?php echo Yii::t('Base', 'No item has been selected!'); ?>", "error");
+			return;
+		}
+		
+		$("#department-delete-btn").trigger("click");
+	});
+	
 	$(document).delegate("body", "init.secondoffice.system", function(event) {
 		$.ajax({
    			type: "get",
@@ -244,7 +254,7 @@ $(document).ready(function(){
 		
 		$.ajax({
    			type: "post",
-   			url: "<?php echo Yii::app()->createUrl('user/deleteuser'); ?>",
+   			url: "<?php echo Yii::app()->createUrl('user/deleteitem'); ?>",
 			data: "id=" + item_list,
 			dataType: "json",
 			error: function() {
@@ -259,6 +269,56 @@ $(document).ready(function(){
 					$.SmartNotification.Show("<?php echo Yii::t('Base', 'User has been deleted'); ?>");
 					$('#modal-userdelete').closest(".modal").modal('hide');
 					$("#panel-user").find(".table-list").trigger('refresh.bs.tablelist');
+				}
+				else
+				{
+					$.SmartNotification.Show(data.message, "error");
+				}
+			}
+		});
+	});
+	
+	$(document).delegate("body", "delete.department.secondoffice.system", function(event) {
+		if($("#modal-departmentdelete").find('.btn').hasClass('active')) return;		
+		$("body").trigger("blockinput.secondoffice.system", ["#modal-main", true]);
+		
+		item_list = "";
+		
+		if($("#modal-departmentdelete").closest(".modal").attr("data-id"))
+		{
+			item_list = $("#modal-departmentdelete").closest(".modal").attr("data-id");
+		}
+		else
+		{
+			$("#panel-department tbody").find("input[type='checkbox']:checked").each(function (index, domEle) { 
+				if(item_list)
+				{
+					item_list = item_list + "," + $(domEle).closest("tr").find("span[data-id]").attr("data-id");
+				}
+				else
+				{
+					item_list = $(domEle).closest("tr").find("span[data-id]").attr("data-id");
+				}
+			});
+		}
+		
+		$.ajax({
+   			type: "post",
+   			url: "<?php echo Yii::app()->createUrl('user/deleteitem'); ?>",
+			data: "id=" + item_list,
+			dataType: "json",
+			error: function() {
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			},
+			success: function(data){
+				$("body").trigger("blockinput.secondoffice.system", ["#modal-main", false]);
+				
+				if(data.result == "ok")
+				{					
+					$.SmartNotification.Show("<?php echo Yii::t('Base', 'User has been deleted'); ?>");
+					$('#modal-departmentdelete').closest(".modal").modal('hide');
+					$("#panel-department").find(".table-list").trigger('refresh.bs.tablelist');
 				}
 				else
 				{
@@ -339,10 +399,13 @@ $(document).ready(function(){
 		});
 	});
     
-    $(document).delegate(".modal", "shown.bs.modal", function() {    
+    $(document).delegate(".modal", "shown.bs.modal", function() {
+		var target_modal = $(this).find(".modal-dialog");
+	
+		$(this).find(".dropdown-list[data-link]").filter("[data-filter='true']").attr("filter-data", $(this).attr('data-id'));
+	
 		$(this).find(".dropdown-list[data-link]").filter("[data-type='preload']").trigger('loadlist.bs.dropdown');
         
-        target_modal = $(this).find(".modal-dialog");
         
 		if(target_modal.attr('data-link'))
 		{		
@@ -491,10 +554,13 @@ $(document).ready(function(){
     
     $(document).delegate(".dropdown-list", 'loadlist.bs.dropdown', function(event) {
 		var list_obj = $(this);
+		var filter_data = "";
+		if(list_obj.attr("filter-data")) filter_data = list_obj.attr("filter-data");		
 		
 		$.ajax({
-			type: "get",
+			type: "post",
    			url: list_obj.attr('data-link'),
+			data: "filter=" + filter_data,
 			dataType: "json",
 			error: function() {
 				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");

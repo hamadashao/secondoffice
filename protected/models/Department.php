@@ -7,6 +7,7 @@
  * @property string $uid
  * @property string $parentuid
  * @property string $name
+ * @property string $manageruid
  * @property integer $valid
  */
 class Department extends CActiveRecord
@@ -37,12 +38,12 @@ class Department extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('uid, name', 'required'),
+			array('uid, name, manageruid', 'required'),
 			array('valid', 'numerical', 'integerOnly'=>true),
-			array('uid, parentuid, name', 'length', 'max'=>32),
+			array('uid, parentuid, name, manageruid', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('uid, parentuid, name, valid', 'safe', 'on'=>'search'),
+			array('uid, parentuid, name, manageruid, valid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +55,8 @@ class Department extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'parent' => array(self::BELONGS_TO, 'Department', 'parentuid'),
+			'user' => array(self::BELONGS_TO, 'User', 'manageruid'),
 		);
 	}
 
@@ -64,8 +67,9 @@ class Department extends CActiveRecord
 	{
 		return array(
 			'uid' => 'Uid',
-			'parentuid' => '001',
-			'name' => '002',
+			'parentuid' => 'Parentuid',
+			'name' => 'Name',
+			'manageruid' => 'Manageruid',
 			'valid' => 'Valid',
 		);
 	}
@@ -84,19 +88,11 @@ class Department extends CActiveRecord
 		$criteria->compare('uid',$this->uid,true);
 		$criteria->compare('parentuid',$this->parentuid,true);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('manageruid',$this->manageruid,true);
 		$criteria->compare('valid',$this->valid);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	public function behaviors()
-	{
-    	return array(
-        // Classname => path to Class
-        	'ActiveRecordLogableBehavior'=>
-            'application.models.ActiveRecordLogableBehavior',
-    	);
 	}
 }

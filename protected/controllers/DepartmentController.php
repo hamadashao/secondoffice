@@ -2,6 +2,7 @@
 
 class DepartmentController extends Controller
 {
+
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -31,7 +32,7 @@ class DepartmentController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getdepartmentpanel','getlist'),
+				'actions'=>array('create','update','getpanel','geteditdialog','getlist','getdropdownlist','getitemdata','getdeletedialog','deleteitem'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -174,14 +175,29 @@ class DepartmentController extends Controller
 		}
 	}
 	
-	public function actionGetDepartmentPanel() 
+	public function actionGetPanel() 
 	{
-		$this->render('department');
+		$this->render('department_panel');
 	}
 	
-	public function actionGetList() 
-	{		
-		$models = Department::model()->findAllByAttributes(array('valid'=>1));
+	public function actionGetEditDialog()
+	{
+		$this->render('edit_dialog');
+	}
+	
+	public function actionGetDeleteDialog()
+	{
+		$this->render('delete_dialog');
+	}
+	
+	public function actionGetDropdownList()
+	{
+		$criteria = new CDbCriteria;
+		
+		$criteria->addcondition("t.valid = 1");
+		$criteria->addcondition("t.uid != '".$_POST['filter']."'");
+		
+		$models = Department::model()->findAll($criteria);
 		
 		$list = '';
 		
@@ -197,7 +213,140 @@ class DepartmentController extends Controller
 			}
 		}
 		
-		echo '{"result":"ok","list":['.$list.']}';		
+		echo '{"result":"ok","list":['.$list.']}';
+		Yii::app()->end();	
+	}
+	
+	public function actionGetList() 
+	{		
+		$filter = "";
+		$page = 1;
+		$page_num = 10;
+		$sort = "t.uid desc";
+		
+		if($_POST['filter']) 	$filter = $_POST['filter'];
+		if($_POST['page']) 		$page = intval($_POST['page']);
+		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
+		if($_POST['sort']) 		$sort = $_POST['sort'];
+		
+		
+		$criteria = new CDbCriteria;
+		$criteria->with  = array('parent','user');
+		$criteria->together = true;
+		
+		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('parent.name', $filter, true, 'OR');
+		$criteria->addSearchCondition('user.real_name', $filter, true, 'OR');
+		
+		$criteria->addcondition("t.valid = 1");
+		
+		$departments_num = Department::model()->count($criteria);
+		
+		if($page_num > 0) $criteria->limit	= $page_num;
+		$criteria->offset 	= $page_num * ($page - 1);
+		$criteria->order 	= $sort;		
+		
+		$departments = Department::model()->findAll($criteria);
+		
+		$department_list = "";
+		
+		foreach($departments as $department)		
+		{
+			$parent_name = "";
+			$manager_name = "";
+			
+			if($department->parent) $parent_name = $department->parent->name;
+			if($department->user) $manager_name = $department->user->real_name;
+		
+		
+			if($department_list)
+			{
+				$department_list = $department_list.',{
+				"id":"'.$department->uid.'",
+				"modal_edit":"#modal-departmentedit",
+				"modal_delete":"#modal-departmentdelete",
+				"link_edit":"'.Yii::app()->createUrl('department/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('department/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$department->name.'","'.$parent_name.'","'.$manager_name.'"]
+				}';
+			}
+			else
+			{
+				$department_list = '{
+				"id":"'.$department->uid.'",
+				"modal_edit":"#modal-departmentedit",
+				"modal_delete":"#modal-departmentdelete",
+				"link_edit":"'.Yii::app()->createUrl('department/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('department/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$department->name.'","'.$parent_name.'","'.$manager_name.'"]
+				}';
+			}
+		}
+		
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$departments_num.'","list":['.$department_list.']}';
+		
+		Yii::app()->end();
+	}
+	
+	public function actionGetItemData()
+	{
+		if(isset($_POST['id']))
+		{
+			$model = Department::model()->findByPk($_POST['id']);
+			
+			if($model)
+			{
+				$parent_name = "";
+				$manager_name = "";
+				$parent_uid = "";
+				$manager_uid = "";
+			
+				if($model->parent) 
+				{
+					$parent_name = $model->parent->name;
+					$parent_uid = $model->parent->uid;
+				}
+				
+				if($model->user) 
+				{
+					$manager_name = $model->user->real_name;
+					$manager_uid = $model->user->uid;
+				}
+				
+				echo '{"result":"ok","list":[
+				{"data_name":"department_name","data_value":"'.$model->name.'"},
+				{"data_name":"parent_id","data_value":"'.$parent_uid.'"},
+				{"data_name":"parent_name","data_value":"'.$parent_name.'"},
+				{"data_name":"manager_id","data_value":"'.$manager_uid.'"},
+				{"data_name":"manager_name","data_value":"'.$manager_name.'"}]}';
+			}
+			else
+			{
+				echo '{"result":"fail"}';
+			}			
+		}
+		
+		Yii::app()->end();
+	}
+	
+	public function actionDeleteItem()
+	{	
+		try 
+		{	
+			$item = explode(',', $_POST['id']);
+			
+			$execute_num = Department::model()->updateByPk( $item, array("valid"=>0));	
+			if ( count($item) != $execute_num ) throw new Exception(Yii::t('Base', 'Delete departmnet fail, please contact administrator'));			
+		}
+		catch (Exception $e) 
+		{
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
 		Yii::app()->end();
 	}
 }

@@ -23,12 +23,8 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getusermanagementpanel','getuserpanel','getusereditdialog','getuserdeletedialog','getchangeownpassworddialog','getlogoutdialog','getuserdata','getuserlist','changeownpassword','saveuser','deleteuser'),
+				'actions'=>array('logout','changepassword','getmanagementpanel','getpanel','geteditdialog','getdeletedialog','getchangeownpassworddialog','getlogoutdialog','getitemdata','getlist','getdropdownlist','changeownpassword','saveitem','deleteitem'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','create','update'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -71,27 +67,27 @@ class UserController extends Controller
 		Yii::app()->end();
 	}	
 	
-	public function actionGetUserManagementPanel() 
+	public function actionGetManagementPanel() 
 	{
-		$this->render('usermanagement');
+		$this->render('management_panel');
 	}
 	
-	public function actionGetUserPanel() 
+	public function actionGetPanel() 
 	{
-		$this->render('user');
+		$this->render('user_panel');
 	}
 	
-	public function actionGetUserEditDialog()
+	public function actionGetEditDialog()
 	{
-		$this->render('useredit');
+		$this->render('edit_dialog');
 	}
 	
-	public function actionGetUserDeleteDialog()
+	public function actionGetDeleteDialog()
 	{
-		$this->render('userdelete');
+		$this->render('delete_dialog');
 	}
 	
-	public function actionGetUserData()
+	public function actionGetItemData()
 	{
 		if(isset($_POST['id']))
 		{
@@ -142,7 +138,29 @@ class UserController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionGetUserList()
+	public function actionGetDropdownList()
+	{
+		$models = User::model()->findAllByAttributes(array('valid'=>1));
+		
+		$list = '';
+		
+		foreach($models as $model)
+		{
+			if($list)
+			{
+				$list = $list.',{"value":"'.$model->uid.'","string":"'.$model->real_name.'"}';
+			}
+			else
+			{
+				$list = '{"value":"'.$model->uid.'","string":"'.$model->real_name.'"}';
+			}
+		}
+		
+		echo '{"result":"ok","list":['.$list.']}';
+		Yii::app()->end();	
+	}
+	
+	public function actionGetList()
 	{
 		$filter = "";
 		$page = 1;
@@ -194,8 +212,8 @@ class UserController extends Controller
 				"id":"'.$user->uid.'",
 				"modal_edit":"#modal-useredit",
 				"modal_delete":"#modal-userdelete",
-				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
+				"link_edit":"'.Yii::app()->createUrl('user/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('user/getdeletedialog').'",
 				"target":"#modal-main",
 				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
@@ -206,8 +224,8 @@ class UserController extends Controller
 				"id":"'.$user->uid.'",
 				"modal_edit":"#modal-useredit",
 				"modal_delete":"#modal-userdelete",
-				"link_edit":"'.Yii::app()->createUrl('user/getusereditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('user/getuserdeletedialog').'",
+				"link_edit":"'.Yii::app()->createUrl('user/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('user/getdeletedialog').'",
 				"target":"#modal-main",
 				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
@@ -222,13 +240,13 @@ class UserController extends Controller
 	public function actionGetChangeOwnPasswordDialog()
 	{
 		$this->layout='//layouts/column_ajax';
-		$this->render('changeownpassword');
+		$this->render('changeownpassword_dialog');
 	}
 	
 	public function actionGetLogoutDialog()
 	{
 		$this->layout='//layouts/column_ajax';
-		$this->render('logout');
+		$this->render('logout_dialog');
 	}
 	
 	public function actionChangeOwnPassword()
@@ -254,7 +272,7 @@ class UserController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionSaveUser()
+	public function actionSaveItem()
 	{
 		$transaction = Yii::app()->db->beginTransaction();
 			
@@ -307,7 +325,7 @@ class UserController extends Controller
 		Yii::app()->end();
 	}
 	
-	public function actionDeleteUser()
+	public function actionDeleteItem()
 	{	
 		try 
 		{	
