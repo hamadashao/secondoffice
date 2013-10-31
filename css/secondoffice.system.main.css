@@ -78,14 +78,52 @@ font-size:12px;
 color:#2a6496;
 }
 
-th {
+th{
 text-align:center;
 }
 
-.table-list-5 th {
-width:16%;
+td > a{
+vertical-align:middle;
 }
 
-.table-list-5 .table_tools {
-width:7%;
+.table-list-5 th {
+width:18%;
+}
+
+.table-list-3 th{
+width:30%;
+}
+
+.table-list-1 th{
+width:90%;
+}
+
+.table-list-5 .table_tools, .table-list-3 .table_tools, .table-list-1 .table_tools{
+width:5%;
+}
+
+.table-checklist {
+margin-bottom: 0px;
+}
+
+.table-checklist tbody > tr > td, .table-checklist tbody > tr > th {
+border:none;
+padding:0px;
+}
+
+.table-checklist tbody > tr > th {
+}
+
+.table-checklist tbody > tr > td > input[type="checkbox"] {
+vertical-align: bottom;
+margin-bottom: 2px;
+margin-right: 5px;
+}
+
+.panel-bottom-10 {
+margin-bottom: 10px;
+}
+
+.accordion-toggle {
+cursor:pointer;
 }

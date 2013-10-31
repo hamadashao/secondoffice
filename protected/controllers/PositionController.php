@@ -22,7 +22,7 @@ class PositionController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getpanel','getdropdownlist'),
+				'actions'=>array('getpanel','getdropdownlist','getlist','geteditdialog','getdeletedialog','getitemdata','deleteitem','saveitem'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -38,6 +38,16 @@ class PositionController extends Controller
 	public function actionGetPanel() 
 	{
 		$this->render('position_panel');
+	}
+	
+	public function actionGetEditDialog()
+	{
+		$this->render('edit_dialog');
+	}
+	
+	public function actionGetDeleteDialog()
+	{
+		$this->render('delete_dialog');
 	}
 	
 	public function actionGetDropdownList() 
@@ -60,5 +70,148 @@ class PositionController extends Controller
 		
 		echo '{"result":"ok","list":['.$list.']}';
 		Yii::app()->end();		
+	}
+	
+	public function actionGetList() 
+	{		
+		$filter = "";
+		$page = 1;
+		$page_num = 10;
+		$sort = "t.uid desc";
+		
+		if($_POST['filter']) 	$filter = $_POST['filter'];
+		if($_POST['page']) 		$page = intval($_POST['page']);
+		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
+		if($_POST['sort']) 		$sort = $_POST['sort'];
+		
+		
+		$criteria = new CDbCriteria;
+		
+		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
+		
+		$criteria->addcondition("t.valid = 1");
+		
+		$position_num = Position::model()->count($criteria);
+		
+		if($page_num > 0) $criteria->limit	= $page_num;
+		$criteria->offset 	= $page_num * ($page - 1);
+		$criteria->order 	= $sort;		
+		
+		$positions = Position::model()->findAll($criteria);
+		
+		$position_list = "";
+		
+		foreach($positions as $position)		
+		{		
+			if($position_list)
+			{
+				$position_list = $position_list.',{
+				"id":"'.$position->uid.'",
+				"modal_edit":"#modal-positionedit",
+				"modal_delete":"#modal-positiondelete",
+				"link_edit":"'.Yii::app()->createUrl('position/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('position/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$position->name.'"]
+				}';
+			}
+			else
+			{
+				$position_list = '{
+				"id":"'.$position->uid.'",
+				"modal_edit":"#modal-positionedit",
+				"modal_delete":"#modal-positiondelete",
+				"link_edit":"'.Yii::app()->createUrl('position/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('position/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$position->name.'"]
+				}';
+			}
+		}
+		
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$position_num.'","list":['.$position_list.']}';
+		
+		Yii::app()->end();
+	}
+	
+	public function actionGetItemData()
+	{
+		if(isset($_POST['id']))
+		{
+			$model = Position::model()->findByPk($_POST['id']);
+			
+			if($model)
+			{				
+				echo '{"result":"ok","list":[
+				{"data_name":"position_name","data_value":"'.$model->name.'"}]}';
+			}
+			else
+			{
+				echo '{"result":"fail"}';
+			}			
+		}
+		
+		Yii::app()->end();
+	}
+	
+	public function actionDeleteItem()
+	{	
+		try 
+		{	
+			$item = explode(',', $_POST['id']);
+			
+			$execute_num = Position::model()->updateByPk( $item, array("valid"=>0));	
+			if ( count($item) != $execute_num ) throw new Exception(Yii::t('Base', 'Delete departmnet fail, please contact administrator'));			
+		}
+		catch (Exception $e) 
+		{
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
+		Yii::app()->end();
+	}
+	
+	public function actionSaveItem()
+	{
+		try 
+		{
+			$position = Position::model()->findByPk($_POST['id']);				
+			if(!$position) 
+			{
+				$position = new Position;			
+				$position->uid = uniqid('',true);
+			}
+		
+			$position->name 		= $_POST['name'];
+			
+			if (!$position->save()) throw new Exception(Yii::t('Base', 'Save position fail, please contact administrator'));
+			
+			$auth_items = explode(',', $_POST['auth']);
+			$auth 		= Yii::app()->authManager;
+			
+			if(!$auth->getAuthItem($position->uid)) $auth->createRole($position->uid, $position->name);
+			
+			$child_items = $auth->getItemChildren($position->uid);
+			
+			foreach($child_items as $child_item)
+			{
+				$auth->removeItemChild($position->uid, $child_item->getName());
+			}
+						
+			foreach($auth_items as $auth_item)
+			{
+				if($auth_item) $auth->addItemChild($position->uid, $auth_item);				
+			}
+		}
+		catch(Exception $e)
+		{
+			echo '{"result":"fail","message":"'.str_replace('"','',$e->getMessage()).'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
+		Yii::app()->end();
 	}
 }

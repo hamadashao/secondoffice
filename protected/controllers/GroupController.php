@@ -22,12 +22,8 @@ class GroupController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getpanel','getdropdownlist'),
+				'actions'=>array('getpanel','getdropdownlist','getlist','geteditdialog','getdeletedialog','getitemdata','deleteitem','saveitem'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','create','update'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -38,6 +34,16 @@ class GroupController extends Controller
 	public function actionGetPanel() 
 	{
 		$this->render('group_panel');
+	}
+	
+	public function actionGetEditDialog()
+	{
+		$this->render('edit_dialog');
+	}
+	
+	public function actionGetDeleteDialog()
+	{
+		$this->render('delete_dialog');
 	}
 	
 	public function actionGetDropdownList() 
@@ -60,5 +66,148 @@ class GroupController extends Controller
 		
 		echo '{"result":"ok","list":['.$list.']}';
 		Yii::app()->end();		
+	}
+	
+	public function actionGetList() 
+	{		
+		$filter = "";
+		$page = 1;
+		$page_num = 10;
+		$sort = "t.uid desc";
+		
+		if($_POST['filter']) 	$filter = $_POST['filter'];
+		if($_POST['page']) 		$page = intval($_POST['page']);
+		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
+		if($_POST['sort']) 		$sort = $_POST['sort'];
+		
+		
+		$criteria = new CDbCriteria;
+		
+		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
+		
+		$criteria->addcondition("t.valid = 1");
+		
+		$group_num = Group::model()->count($criteria);
+		
+		if($page_num > 0) $criteria->limit	= $page_num;
+		$criteria->offset 	= $page_num * ($page - 1);
+		$criteria->order 	= $sort;		
+		
+		$groups = Group::model()->findAll($criteria);
+		
+		$group_list = "";
+		
+		foreach($groups as $group)		
+		{		
+			if($group_list)
+			{
+				$group_list = $group_list.',{
+				"id":"'.$group->uid.'",
+				"modal_edit":"#modal-groupedit",
+				"modal_delete":"#modal-groupdelete",
+				"link_edit":"'.Yii::app()->createUrl('group/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('group/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$group->name.'"]
+				}';
+			}
+			else
+			{
+				$group_list = '{
+				"id":"'.$group->uid.'",
+				"modal_edit":"#modal-groupedit",
+				"modal_delete":"#modal-groupdelete",
+				"link_edit":"'.Yii::app()->createUrl('group/geteditdialog').'",
+				"link_delete":"'.Yii::app()->createUrl('group/getdeletedialog').'",
+				"target":"#modal-main",
+				"data":["'.$group->name.'"]
+				}';
+			}
+		}
+		
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$group_num.'","list":['.$group_list.']}';
+		
+		Yii::app()->end();
+	}
+	
+	public function actionGetItemData()
+	{
+		if(isset($_POST['id']))
+		{
+			$model = Group::model()->findByPk($_POST['id']);
+			
+			if($model)
+			{				
+				echo '{"result":"ok","list":[
+				{"data_name":"group_name","data_value":"'.$model->name.'"}]}';
+			}
+			else
+			{
+				echo '{"result":"fail"}';
+			}			
+		}
+		
+		Yii::app()->end();
+	}
+	
+	public function actionDeleteItem()
+	{	
+		try 
+		{	
+			$item = explode(',', $_POST['id']);
+			
+			$execute_num = Group::model()->updateByPk( $item, array("valid"=>0));	
+			if ( count($item) != $execute_num ) throw new Exception(Yii::t('Base', 'Delete departmnet fail, please contact administrator'));			
+		}
+		catch (Exception $e) 
+		{
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
+		Yii::app()->end();
+	}
+	
+	public function actionSaveItem()
+	{
+		try 
+		{
+			$group = Group::model()->findByPk($_POST['id']);				
+			if(!$group) 
+			{
+				$group = new Group;			
+				$group->uid = uniqid('',true);
+			}
+		
+			$group->name 		= $_POST['name'];
+			
+			if (!$group->save()) throw new Exception(Yii::t('Base', 'Save group fail, please contact administrator'));
+			
+			$auth_items = explode(',', $_POST['auth']);
+			$auth 		= Yii::app()->authManager;
+			
+			if(!$auth->getAuthItem($group->uid)) $auth->createRole($group->uid, $group->name);
+			
+			$child_items = $auth->getItemChildren($group->uid);
+			
+			foreach($child_items as $child_item)
+			{
+				$auth->removeItemChild($group->uid, $child_item->getName());
+			}
+						
+			foreach($auth_items as $auth_item)
+			{
+				if($auth_item) $auth->addItemChild($group->uid, $auth_item);				
+			}
+		}
+		catch(Exception $e)
+		{
+			echo '{"result":"fail","message":"'.str_replace('"','',$e->getMessage()).'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
+		Yii::app()->end();
 	}
 }

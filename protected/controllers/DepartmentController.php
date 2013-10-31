@@ -32,7 +32,7 @@ class DepartmentController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getpanel','geteditdialog','getlist','getdropdownlist','getitemdata','getdeletedialog','deleteitem'),
+				'actions'=>array('create','update','getpanel','geteditdialog','getlist','getdropdownlist','getitemdata','getdeletedialog','deleteitem','saveitem'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -328,6 +328,50 @@ class DepartmentController extends Controller
 			}			
 		}
 		
+		Yii::app()->end();
+	}
+	
+	public function actionSaveItem()
+	{
+		try 
+		{
+			$department = Department::model()->findByPk($_POST['id']);				
+			if(!$department) 
+			{
+				$department = new Department;			
+				$department->uid = uniqid('',true);
+			}
+		
+			$department->name 		= $_POST['name'];
+			$department->parentuid 	= $_POST['parent'];
+			$department->manageruid = $_POST['manager'];
+			
+			if (!$department->save()) throw new Exception(Yii::t('Base', 'Save department fail, please contact administrator'));
+			
+			$auth_items = explode(',', $_POST['auth']);
+			$auth 		= Yii::app()->authManager;
+			
+			if(!$auth->getAuthItem($department->uid)) $auth->createRole($department->uid, $department->name);
+			
+			$child_items = $auth->getItemChildren($department->uid);
+			
+			foreach($child_items as $child_item)
+			{
+				$auth->removeItemChild($department->uid, $child_item->getName());
+			}
+						
+			foreach($auth_items as $auth_item)
+			{
+				if($auth_item) $auth->addItemChild($department->uid, $auth_item);				
+			}
+		}
+		catch(Exception $e)
+		{
+			echo '{"result":"fail","message":"'.str_replace('"','',$e->getMessage()).'"}';			
+			Yii::app()->end();
+		}
+		
+		echo '{"result":"ok"}';
 		Yii::app()->end();
 	}
 	

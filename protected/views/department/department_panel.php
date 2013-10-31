@@ -2,7 +2,7 @@
 	<div class="table-list" data-link="<?php echo Yii::app()->createUrl('department/getlist'); ?>">
 		<div class="navbar-right">
 			<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('department/geteditdialog'); ?>" data-target="#modal-main" data-modal="#modal-departmentedit"><?php echo Yii::t('Base', 'Add Department'); ?></button>
-       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="body" data-event="show.departmentdeletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete Department'); ?></button>
+       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-trigger="department" data-target="body" data-event="show.deletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete Department'); ?></button>
             <div id="department-delete-btn" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('department/getdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-departmentdelete" style="display:none;"></div>
 			<button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="#panel-department .table-list" data-event="refresh.bs.tablelist"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 			<div class="btn-group dropdown-list">
@@ -18,7 +18,7 @@
    		<div class="navbar-right" style="margin-right:20px;">
    			<input type="text" class="form-control tableitem-keyword" data-toggle="enter.trigger" data-target="#panel-department .table-list" data-event="refresh.bs.tablelist" placeholder="<?php echo Yii::t('Base', 'Search'); ?>">
    		</div>
-   		<table class="table navbar-right table-list-5">
+   		<table class="table navbar-right table-list-3">
 			<thead>
    				<tr>
       				<th class="table_tools"><input type="checkbox" class="global-checkbox"></th>

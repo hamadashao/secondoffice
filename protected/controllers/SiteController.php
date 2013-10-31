@@ -58,12 +58,5 @@ class SiteController extends Controller
 	{
 		$this->layout='//layouts/column_ajax';
 		$this->render('javascript');
-	}
-	
-	public function actionInitAuth()
-	{
-		$auth->createTask('sysytem.user.management', Yii::t('Base', 'User Management'));
-		$auth->createTask('sysytem.module.management', Yii::t('Base', 'Module Management'));
-		$auth->createTask('sysytem.config', Yii::t('Base', 'System Config'));
-	}
+	}	
 }

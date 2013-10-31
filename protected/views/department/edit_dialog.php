@@ -22,9 +22,13 @@
 						<ul class="dropdown-menu" role="menu"></ul>
 					</div>
   				</div>
+                <div class="form-group">
+                	<label><?php echo Yii::t('Base', 'Authorization'); ?></label>
+                    <div class="item-accordion" data-link="<?php echo Yii::app()->createUrl('auth/getroleauthaccordion'); ?>" data-name="accordion_list"></div>
+				</div>
         	</div>
         	<div class="modal-footer">
-            	<button type="button" class="btn btn-primary" data-toggle="click.trigger" data-target="body" data-event="save.user.secondoffice.system"><?php echo Yii::t('Base', 'Save'); ?></button>
+            	<button type="button" class="btn btn-primary" data-toggle="click.trigger" data-target="body" data-event="save.department.secondoffice.system"><?php echo Yii::t('Base', 'Save'); ?></button>
           		<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Yii::t('Base', 'Close'); ?></button>
         	</div>
       	</div>

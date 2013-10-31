@@ -2,7 +2,7 @@
 	<div class="table-list" data-link="<?php echo Yii::app()->createUrl('user/getlist'); ?>">
 		<div class="navbar-right">
 			<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/geteditdialog'); ?>" data-target="#modal-main" data-modal="#modal-useredit"><?php echo Yii::t('Base', 'Add User'); ?></button>
-       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="body" data-event="show.userdeletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete User'); ?></button>
+       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-trigger="user" data-target="body" data-event="show.deletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete User'); ?></button>
             <div id="user-delete-btn" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-userdelete" style="display:none;"></div>
 			<button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="#panel-user .table-list" data-event="refresh.bs.tablelist"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 			<div class="btn-group dropdown-list">

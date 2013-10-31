@@ -278,6 +278,11 @@ class UserController extends Controller
 			
 		try 
 		{
+			$old_department_uid = "";
+			$old_position_uid 	= "";
+			$old_group_uid 		= "";
+			
+			
 			$criteria = new CDbCriteria;
 			
 			$criteria->addcondition("t.uid != '".$_POST['id']."'");
@@ -288,9 +293,11 @@ class UserController extends Controller
 			if($user_num > 0) throw new Exception(Yii::t('Base', 'User name or real name duplicate'));
 		
 			$user = User::model()->findByPk($_POST['id']);				
-			if(!$user) $user = new User;
-			
-			$user->uid = uniqid('',true);	
+			if(!$user) 
+			{
+				$user = new User;			
+				$user->uid = uniqid('',true);
+			}	
 			$user->real_name = $_POST['realname'];
 			$user->user_name = $_POST['username'];
 			if(strlen($_POST['password'])) $user->password = md5($_POST['password'].$user->password_salt);
@@ -298,6 +305,9 @@ class UserController extends Controller
 				
 			$userdepartmentposition = UserDepartmentPosition::model()->findByAttributes(array('user_uid'=>$user->uid));
 			if(!$userdepartmentposition) $userdepartmentposition = new UserDepartmentPosition;
+			
+			$old_department_uid = $userdepartmentposition->department_uid;
+			$old_position_uid 	= $userdepartmentposition->position_uid;
 				
 			$userdepartmentposition->user_uid = $user->uid;
 			$userdepartmentposition->department_uid = $_POST['department'];
@@ -306,12 +316,26 @@ class UserController extends Controller
 				
 			$usergroup = UserGroup::model()->findByAttributes(array('user_uid'=>$user->uid));
 			if(!$usergroup) $usergroup = new UserGroup;
+			
+			$old_group_uid 	= $usergroup->group_uid;
 				
 			$usergroup->user_uid = $user->uid;
 			$usergroup->group_uid = $_POST['group'];
 			if (!$usergroup->save()) throw new Exception(Yii::t('Base', 'Save user group relation fail, please contact administrator'));
 				
-			$transaction->commit();
+			
+			
+			$auth = Yii::app()->authManager;
+			
+			if($auth->getAuthItem($old_department_uid)) $auth->revoke($old_department_uid, $user->uid);
+			if($auth->getAuthItem($old_position_uid)) $auth->revoke($old_position_uid, $user->uid);
+			if($auth->getAuthItem($old_group_uid)) $auth->revoke($old_group_uid, $user->uid);
+			
+			$auth->assign($userdepartmentposition->department_uid, $user->uid);
+			$auth->assign($userdepartmentposition->position_uid, $user->uid);
+			$auth->assign($usergroup->group_uid, $user->uid);		
+			
+			$transaction->commit();	
 		} 
 		catch (Exception $e) 
 		{
