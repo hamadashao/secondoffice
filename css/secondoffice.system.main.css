@@ -11,6 +11,11 @@ min-height: 24px;
 line-height: 24px;
 }
 
+#navbar_name {
+font-size:14px; 
+font-family: "Times New Roman", Times, serif;
+}
+
 body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {

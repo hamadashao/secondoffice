@@ -8,8 +8,6 @@
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
-	private $_real_name;
-	private $_user_name;
 	
 	public function authenticate()
 	{
@@ -21,9 +19,12 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 		{
+			$group_name = "";
+			if($user->group) $group_name = $user->group[0]->name;
+			
 			$this->_id = $user->uid;
-			$this->_real_name = $user->real_name;
-			$this->_user_name = $user->user_name;
+			$this->setState('real_name', $user->real_name);
+			$this->setState('group_name', $group_name);
 			$this->errorCode = self::ERROR_NONE;
 		}
 		return $this->errorCode==self::ERROR_NONE;

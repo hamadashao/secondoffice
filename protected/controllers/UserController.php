@@ -23,8 +23,13 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('logout','changepassword','getmanagementpanel','getpanel','geteditdialog','getdeletedialog','getchangeownpassworddialog','getlogoutdialog','getitemdata','getlist','getdropdownlist','changeownpassword','saveitem','deleteitem'),
+				'actions'=>array('logout','getchangeownpassworddialog','getlogoutdialog','getdropdownlist','changeownpassword'),
 				'users'=>array('@'),
+			),
+			
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('getmanagementpanel','getpanel','geteditdialog','getdeletedialog','getitemdata','getlist','saveitem','deleteitem'),
+				'expression'=>'Yii::app()->user->checkAccess("secondoffice-sysytem-user-management")',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -148,11 +153,11 @@ class UserController extends Controller
 		{
 			if($list)
 			{
-				$list = $list.',{"value":"'.$model->uid.'","string":"'.$model->real_name.'"}';
+				$list = $list.',{"value":"'.$model->uid.'","string":"'.$model->real_name.'('.$model->user_name.')"}';
 			}
 			else
 			{
-				$list = '{"value":"'.$model->uid.'","string":"'.$model->real_name.'"}';
+				$list = '{"value":"'.$model->uid.'","string":"'.$model->real_name.'('.$model->user_name.')"}';
 			}
 		}
 		
@@ -321,9 +326,7 @@ class UserController extends Controller
 				
 			$usergroup->user_uid = $user->uid;
 			$usergroup->group_uid = $_POST['group'];
-			if (!$usergroup->save()) throw new Exception(Yii::t('Base', 'Save user group relation fail, please contact administrator'));
-				
-			
+			if (!$usergroup->save()) throw new Exception(Yii::t('Base', 'Save user group relation fail, please contact administrator'));			
 			
 			$auth = Yii::app()->authManager;
 			

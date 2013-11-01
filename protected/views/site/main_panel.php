@@ -11,12 +11,26 @@
         </div>
         <div class="pull-right">
         	<div class="dropdown pull-right nav-item">            	
-                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user spacing-right-5"></span><?php echo Yii::app()->user->name; ?></span>
+                <span href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user spacing-right-5"></span><span id="navbar_name"><?php echo Yii::app()->user->getState('real_name'); ?></span></span>
        			<ul class="dropdown-menu">
-                	<li>User Group: Admin</li>
+                	<li><?php echo Yii::app()->user->getState('group_name'); ?></li>
                 	<li class="divider"></li>
+                    <?php
+					if(Yii::app()->user->checkAccess('secondoffice-sysytem-user-management'))
+					{
+					?>
                     <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('user/getmanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-usermanagement"><a><?php echo Yii::t('Base', 'User Management'); ?></a></li>
+                    <?php 
+					} 
+					?>
+                    <?php
+					if(Yii::app()->user->checkAccess('secondoffice-sysytem-module-management'))
+					{
+					?>
                     <li data-toggle="panel" data-link="<?php echo Yii::app()->createUrl('module/getmanagementpanel'); ?>" data-target="#container-main" data-panel="#panel-modulemanagement"><a><?php echo Yii::t('Base', 'Module Management'); ?></a></li>
+                     <?php 
+					} 
+					?>
 					<li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getchangeownpassworddialog'); ?>" data-target="#modal-main" data-modal="#modal-changepassword"><a><?php echo Yii::t('Base', 'Change Password'); ?></a></li>
                     <li class="divider"></li>               
                     <li data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('user/getlogoutdialog'); ?>" data-target="#modal-main" data-modal="#modal-logout"><a><?php echo Yii::t('Base', 'Logout'); ?></a></li>

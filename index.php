@@ -10,4 +10,23 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
+
+/*
+class ExtendableWebApp extends CWebApplication {
+        protected function init() {
+                // this example dynamically loads every module which can be found
+                // under `modules` directory
+                // this can be easily done to load modules
+                // based on MySQL db or any other as well
+                foreach (glob(dirname(__FILE__).'/protected/modules/*', GLOB_ONLYDIR) as $moduleDirectory) {
+                        $this->setModules(array(basename($moduleDirectory)));
+                }
+                return parent::init();
+        }
+}
+
+$app = new ExtendableWebApp($config);
+$app->run();
+
+*/
 Yii::createWebApplication($config)->run();

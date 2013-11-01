@@ -1,8 +1,8 @@
 <div id="panel-position">
 	<div class="table-list" data-link="<?php echo Yii::app()->createUrl('position/getlist'); ?>">
 		<div class="navbar-right">
-			<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('position/geteditdialog'); ?>" data-target="#modal-main" data-modal="#modal-positionedit"><?php echo Yii::t('Base', 'Add Position'); ?></button>
-       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-trigger="position" data-target="body" data-event="show.deletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete Position'); ?></button>
+			<button type="button" class="btn btn-default" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('position/geteditdialog'); ?>" data-target="#modal-main" data-modal="#modal-positionedit"><?php echo Yii::t('Base', 'Add'); ?></button>
+       		<button type="button" class="btn btn-default" data-toggle="click.trigger" data-trigger="position" data-target="body" data-event="show.deletedialog.secondoffice.system"><?php echo Yii::t('Base', 'Delete'); ?></button>
             <div id="position-delete-btn" data-toggle="modal" data-link="<?php echo Yii::app()->createUrl('position/getdeletedialog'); ?>" data-target="#modal-main" data-modal="#modal-positiondelete" style="display:none;"></div>
 			<button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="#panel-position .table-list" data-event="refresh.bs.tablelist"><?php echo Yii::t('Base', 'Refresh List'); ?></button>
 			<div class="btn-group dropdown-list">

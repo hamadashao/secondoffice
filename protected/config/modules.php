@@ -7,12 +7,10 @@ function searchForModules(){
 	//$arr = array();
 
 	/* add your modules dynamically here */
-	
+	/*
 	$arr = array(
 		// uncomment the following to enable the Gii tool
-		'test'=>array(
-		),
-		
+		'test',		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'admin',
@@ -20,7 +18,18 @@ function searchForModules(){
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 	);
-
+	*/
+	
+	$arr = array();
+	
+	foreach (glob(dirname(dirname(__FILE__)).'/modules/*', GLOB_ONLYDIR) as $moduleDirectory) 
+	{
+		array_push($arr, basename($moduleDirectory));
+    }
+	
+	
+	
+	
 	return $arr;
 }
 
