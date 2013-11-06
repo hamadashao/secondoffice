@@ -32,110 +32,37 @@ class ModuleController extends Controller
 		
 		if($_POST['filter']) 	$filter = $_POST['filter'];
 		if($_POST['page']) 		$page = intval($_POST['page']);
-		if($_POST['sort']) 		$sort = $_POST['sort'];		
-		
-		/*		
-		$criteria = new CDbCriteria;
-		
-		$criteria->addSearchCondition('t.name', $filter, true, 'OR');
-		$criteria->addSearchCondition('t.version', $filter, true, 'OR');
-		$criteria->addSearchCondition('t.author', $filter, true, 'OR');
-				
-		$modules_num = Module::model()->count($criteria);
-		
-		if($page_num > 0) $criteria->limit	= $page_num;
-		$criteria->offset 	= $page_num * ($page - 1);
-		$criteria->order 	= $sort;		
-		
-		$modules = Module::model()->findAll($criteria);
-		
-		$module_list = "";
-		
-		foreach($modules as $module)		
-		{
-			$active_flag = Yii::t('Base', 'Yes');
-			$install_flag = Yii::t('Base', 'Yes');
-			
-			if(!$module->active) $active_flag = Yii::t('Base', 'No');
-			if(!$module->install) $install_flag = Yii::t('Base', 'No');
-			
-			$tool_config = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('user/geteditdialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-useredit",
-					"class":"glyphicon glyphicon-cog"
-					 ';
-					 
-			$tool_install = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('user/getdeletedialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-userdelete",
-					"class":"glyphicon glyphicon-save"
-					 ';
-					 
-			$tool_enable = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('user/getdeletedialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-userdelete",
-					"class":"glyphicon glyphicon-ok-sign"
-					 ';
-					 
-			$tools = '{'.$tool_config.'},{'.$tool_install.'},{'.$tool_enable.'}';	
-				
-			if($module_list)
-			{
-				$module_list = $module_list.',{
-				"id":"'.$module->uid.'",
-				"data":["'.$module->name.'","'.$module->version.'","'.$module->author.'","'.$install_flag.'","'.$active_flag.'"]
-				}';
-			}
-			else
-			{
-				$module_list = '{
-				"id":"'.$module->uid.'",
-				"data":["'.$module->name.'","'.$module->version.'","'.$module->author.'","'.$install_flag.'","'.$active_flag.'"]
-				}';
-			}
-		}
-		*/
-		
-		
+		if($_POST['sort']) 		$sort = $_POST['sort'];			
 			
 		$module_list = "";	
 		$modules_num = 0;
 		
-		foreach (glob(dirname(dirname(__FILE__)).'/modules/*', GLOB_ONLYDIR) as $moduleDirectory) 
+		foreach (glob(dirname(dirname(__FILE__)).'/modules/*', GLOB_ONLYDIR) as $moduleDirectory)
 		{
 			$module = Yii::app()->getModule(basename($moduleDirectory));
 			
-			$tool_config = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl($module->getID().'/default/getconfigdialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-'.$module->getID().'config",
-					"class":"glyphicon glyphicon-cog"
-					 ';
+			$tool_config = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl($module->getID().'/default/getconfigdialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-".$module->getID()."config' ".
+					"class='glyphicon glyphicon-cog' ";
 					 
-			$tool_install = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl($module->getID().'/default/getinstalldialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-'.$module->getID().'install",
-					"class":"glyphicon glyphicon-save"
-					 ';
+			$tool_install = 
+					"data-toggle='click.trigger' ".
+					"data-trigger='".Yii::app()->createUrl($module->getID().'/default/changeinstallstatus')."' ".
+					"data-target='body' ".
+					"data-event='changemodulestatus.secondoffice.system' ".
+					"class='glyphicon glyphicon-save' ";
 					 
-			$tool_enable = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl($module->getID().'/default/getenabledialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-'.$module->getID().'enable",
-					"class":"glyphicon glyphicon-ok-sign"
-					 ';
+			$tool_enable = 
+					"data-toggle='click.trigger' ".
+					"data-trigger='".Yii::app()->createUrl($module->getID().'/default/changeactivestatus')."' ".
+					"data-target='body' ".
+					"data-event='changemodulestatus.secondoffice.system' ".
+					"class='glyphicon glyphicon-ok-sign' ";
 					 
-			$tools = '{'.$tool_config.'},{'.$tool_install.'},{'.$tool_enable.'}';
+			$tools = '["'.$tool_config.'","'.$tool_install.'","'.$tool_enable.'"]';
 			
 			$active_flag = Yii::t('Base', 'Yes');
 			$install_flag = Yii::t('Base', 'Yes');
@@ -147,7 +74,7 @@ class ModuleController extends Controller
 			{
 				$module_list = $module_list.',{
 				"id":"'.$module->getID().'",
-				"tools":['.$tools.'],
+				"tools":'.$tools.',
 				"data":["'.$module->getName().'","'.$module->getVersion().'","'.$module->getAuthor().'","'.$install_flag.'","'.$active_flag.'"]
 				}';
 			}
@@ -155,7 +82,7 @@ class ModuleController extends Controller
 			{
 				$module_list = '{
 				"id":"'.$module->getID().'",
-				"tools":['.$tools.'],
+				"tools":'.$tools.',
 				"data":["'.$module->getName().'","'.$module->getVersion().'","'.$module->getAuthor().'","'.$install_flag.'","'.$active_flag.'"]
 				}';
 			}

@@ -17,18 +17,6 @@ class ProfileModule extends CWebModule
 		));
 	}
 	
-	/*
-	public function beforeControllerAction($controller, $action)
-	{
-		if(parent::beforeControllerAction($controller, $action))
-		{		
-			return true;
-		}
-		else
-			return false;
-	}
-	*/
-	
 	public function getUID()
 	{
 		return Yii::t("Profile", $this->_uid);
@@ -57,5 +45,35 @@ class ProfileModule extends CWebModule
 	public function hasActive()
 	{
 		return Yii::app()->getGlobalState("module_profile_active", false);
+	}
+	
+	public function installModule()
+	{
+		$auth = Yii::app()->authManager;
+		
+		if(!$auth->getAuthItem("secondoffice-profile"))
+		{ 
+			$profile_task = $auth->createTask('secondoffice-profile', Yii::t('Base', 'Profile Auth'));
+		
+			if(!$auth->getAuthItem("secondoffice-profile-data-management")) $auth->createOperation('secondoffice-profile-data-management', Yii::t('Base', 'Data Management'));
+			if(!$auth->getAuthItem("secondoffice-profile-experience-management")) $auth->createOperation('secondoffice-profile-experience-management', Yii::t('Base', 'Experience Management'));
+		
+			$profile_task->addChild('secondoffice-profile-data-management');
+			$profile_task->addChild('secondoffice-profile-experience-management');
+		}
+		
+		return;
+	}
+	
+	public function uninstallModule()
+	{
+		$auth = Yii::app()->authManager;
+		
+		$auth->removeAuthItem('secondoffice-profile-data-management');
+		$auth->removeAuthItem('secondoffice-profile-experience-management');
+		
+		$auth->removeAuthItem('secondoffice-profile');
+		
+		return;
 	}
 }

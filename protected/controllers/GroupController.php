@@ -98,23 +98,21 @@ class GroupController extends Controller
 		
 		foreach($groups as $group)		
 		{
-			$tool_edit = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('group/geteditdialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-groupedit",
-					"class":"glyphicon glyphicon-pencil"
-					 ';
+			$tool_edit = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('group/geteditdialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-groupedit' ".
+					"class='glyphicon glyphicon-pencil' ";
 					 
-			$tool_delete = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('group/getdeletedialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-groupdelete",
-					"class":"glyphicon glyphicon-remove"
-					 ';
+			$tool_delete = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('group/getdeletedialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-groupdelete' ".
+					"class='glyphicon glyphicon-remove' ";
 					 
-			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';	
+			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';
 					
 			if($group_list)
 			{
@@ -132,7 +130,7 @@ class GroupController extends Controller
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$group_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$group_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$group_num.'","checkbox":"yes","tools":'.$tools.',"list":['.$group_list.']}';
 		
 		Yii::app()->end();
 	}

@@ -257,23 +257,21 @@ class DepartmentController extends Controller
 			if($department->parent) $parent_name = $department->parent->name;
 			if($department->user) $manager_name = $department->user->real_name;
 			
-			$tool_edit = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('department/geteditdialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-departmentedit",
-					"class":"glyphicon glyphicon-pencil"
-					 ';
+			$tool_edit = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('department/geteditdialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-departmentedit' ".
+					"class='glyphicon glyphicon-pencil' ";
 					 
-			$tool_delete = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('department/getdeletedialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-departmentdelete",
-					"class":"glyphicon glyphicon-remove"
-					 ';
+			$tool_delete = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('department/getdeletedialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-departmentdelete' ".
+					"class='glyphicon glyphicon-remove' ";
 					 
-			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';	
+			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';	
 		
 		
 			if($department_list)
@@ -292,7 +290,7 @@ class DepartmentController extends Controller
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$departments_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$department_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$departments_num.'","checkbox":"yes","tools":'.$tools.',"list":['.$department_list.']}';
 		
 		Yii::app()->end();
 	}

@@ -20,6 +20,29 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(document).delegate("body", "changemodulestatus.secondoffice.system", function(event, data) {
+		$.ajax({
+   			type: "post",
+   			url: data,
+			dataType: "json",
+			error: function() {
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
+			
+			},
+			success: function(data){
+				if(data.result != "ok")
+				{
+					$.SmartNotification.Show(data.message, "error");
+				}
+				else
+				{
+					$.SmartNotification.Show(data.message);					
+					$("#panel-module").find(".table-list").trigger("refresh.bs.tablelist");
+				}
+			}
+		});
+	});
+	
 	$(document).delegate("body", "show.deletedialog.secondoffice.system", function(event, target) {
 		if($("#panel-" + target + " tbody").find("input[type='checkbox']:checked").length == 0)
 		{
@@ -36,7 +59,7 @@ $(document).ready(function(){
    			url: "<?php echo Yii::app()->createUrl('site/getmainpanel'); ?>",
 			dataType: "html",
 			error: function() {
-				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, initialize main UI fail!'); ?>", "error");
+				$.SmartNotification.Show("<?php echo Yii::t('Base', 'Server error, please contact administrator'); ?>", "error");
 			
 			},
 			success: function(data){
@@ -759,14 +782,14 @@ $(document).ready(function(){
 						{
 							for(tools_idx = 0; tools_idx < data.tools.length; tools_idx++)
 							{
-								tools_list = tools_list + '<a><span data-toggle="' + data.tools[tools_idx].toggle + '" data-link="' + data.tools[tools_idx].link + '" data-target="' + data.tools[tools_idx].target + '" data-modal="' + data.tools[tools_idx].modal + '" data-id="' + data.list[idx].id + '" class="' + data.tools[tools_idx].class + '"></span></a>';
+								tools_list = tools_list + '<a><span ' + data.tools[tools_idx] + ' data-id="' + data.list[idx].id + '" ></span></a>';
 							}
 						}
 						else
 						{
 							for(tools_idx = 0; tools_idx < data.list[idx].tools.length; tools_idx++)
 							{
-								tools_list = tools_list + '<a><span data-toggle="' + data.list[idx].tools[tools_idx].toggle + '" data-link="' + data.list[idx].tools[tools_idx].link + '" data-target="' + data.list[idx].tools[tools_idx].target + '" data-modal="' + data.list[idx].tools[tools_idx].modal + '" data-id="' + data.list[idx].id + '" class="' + data.list[idx].tools[tools_idx].class + '"></span></a>';
+								tools_list = tools_list + '<a><span ' + data.list[idx].tools[tools_idx] + ' data-id="' + data.list[idx].id + '" ></span></a>';
 							}
 							
 						}
@@ -878,7 +901,7 @@ $(document).ready(function(){
 
 /*-------------------------------     accordion    -----------------------------------*/
 	$(document).delegate(".item-accordion", 'loadlist.bs.accordion', function(event) {
-		var list_obj = $(this);	
+		var list_obj = $(this);
 		
 		$.ajax({
 			type: "post",

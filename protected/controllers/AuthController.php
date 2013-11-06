@@ -32,15 +32,6 @@ class AuthController extends Controller
 		$system_task->addChild('secondoffice-sysytem-user-management');
 		$system_task->addChild('secondoffice-sysytem-module-management');
 		$system_task->addChild('secondoffice-sysytem-config');
-		
-		
-		$profile_task = $auth->createTask('secondoffice-profile', Yii::t('Base', 'Profile Auth'));
-		
-		$auth->createOperation('secondoffice-profile-data-management', Yii::t('Base', 'Data Management'));
-		$auth->createOperation('secondoffice-profile-experience-management', Yii::t('Base', 'Experience Management'));
-		
-		$profile_task->addChild('secondoffice-profile-data-management');
-		$profile_task->addChild('secondoffice-profile-experience-management');
 	}
 	
 	/*	

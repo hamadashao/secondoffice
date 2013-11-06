@@ -209,23 +209,21 @@ class UserController extends Controller
 			if($user->position) $position_name = $user->position[0]->name;
 			if($user->group) $group_name = $user->group[0]->name;
 			
-			$tool_edit = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('user/geteditdialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-useredit",
-					"class":"glyphicon glyphicon-pencil"
-					 ';
+			$tool_edit = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('user/geteditdialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-useredit' ".
+					"class='glyphicon glyphicon-pencil' ";
 					 
-			$tool_delete = '
-					"toggle":"modal",
-					"link":"'.Yii::app()->createUrl('user/getdeletedialog').'",
-					"target":"#modal-main",
-					"modal":"#modal-userdelete",
-					"class":"glyphicon glyphicon-remove"
-					 ';
+			$tool_delete = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('user/getdeletedialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-userdelete' ".
+					"class='glyphicon glyphicon-remove' ";
 					 
-			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';			
+			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';		
 		
 			if($user_list)
 			{
@@ -243,7 +241,7 @@ class UserController extends Controller
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$users_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$user_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$users_num.'","checkbox":"yes","tools":'.$tools.',"list":['.$user_list.']}';
 		
 		Yii::app()->end();
 	}
@@ -369,7 +367,7 @@ class UserController extends Controller
 		}
 		catch (Exception $e) 
 		{
-			echo '{"result":"fail","message":"'.$e->getMessage().'"}';			
+			echo '{"result":"fail","message":"'.$e->getMessage().'"}';
 			Yii::app()->end();
 		}
 		
