@@ -745,15 +745,39 @@ $(document).ready(function(){
 					
 					for(idx = 0; idx < data.list.length; idx++)
 					{
-						data_list = "";						
+						data_list = "";	
+											
 						for(data_idx = 0; data_idx < data.list[idx].data.length; data_idx++)
 						{
 							data_list = data_list + '<td>' + data.list[idx].data[data_idx] + '</td>';
 						}
 						
+											
+						tools_list = "";				
+						
+						if(data.tools.length > 0)
+						{
+							for(tools_idx = 0; tools_idx < data.tools.length; tools_idx++)
+							{
+								tools_list = tools_list + '<a><span data-toggle="' + data.tools[tools_idx].toggle + '" data-link="' + data.tools[tools_idx].link + '" data-target="' + data.tools[tools_idx].target + '" data-modal="' + data.tools[tools_idx].modal + '" data-id="' + data.list[idx].id + '" class="' + data.tools[tools_idx].class + '"></span></a>';
+							}
+						}
+						else
+						{
+							for(tools_idx = 0; tools_idx < data.list[idx].tools.length; tools_idx++)
+							{
+								tools_list = tools_list + '<a><span data-toggle="' + data.list[idx].tools[tools_idx].toggle + '" data-link="' + data.list[idx].tools[tools_idx].link + '" data-target="' + data.list[idx].tools[tools_idx].target + '" data-modal="' + data.list[idx].tools[tools_idx].modal + '" data-id="' + data.list[idx].id + '" class="' + data.list[idx].tools[tools_idx].class + '"></span></a>';
+							}
+							
+						}
+						
+						
+						check_box = "";
+						if(data.checkbox == "yes") check_box = '<td><input type="checkbox"></td>';
+						
 						table_obj.find("tbody").append('<tr>' + 
-      						'<td><input type="checkbox"></td>' + 
-							'<td><a><span data-toggle="modal" data-link="' + data.list[idx].link_edit + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_edit + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-pencil"></span></a><a><span data-toggle="modal" data-link="' + data.list[idx].link_delete + '" data-target="' + data.list[idx].target + '" data-modal="' + data.list[idx].modal_delete + '" data-id="' + data.list[idx].id + '" class="glyphicon glyphicon-remove"></span></a></td>' +							
+      						check_box + 
+							'<td>' + tools_list + '</td>' +							
 							data_list +
 					   		'</tr>');
 					}

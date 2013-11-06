@@ -1,4 +1,4 @@
-<div id="panel-module">
+<div id="panel-workflow">
 	<div class="table-list" data-link="<?php echo Yii::app()->createUrl('module/getlist'); ?>">
 		<div class="navbar-right">            
             <button type="button" class="btn btn-default" data-toggle="click.trigger" data-target="#panel-module .table-list" data-event="refresh.bs.tablelist"><?php echo Yii::t('Base', 'Refresh List'); ?></button>

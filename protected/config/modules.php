@@ -2,33 +2,13 @@
 
 return searchForModules();
 
-function searchForModules(){
-
-	//$arr = array();
-
-	/* add your modules dynamically here */
-	/*
-	$arr = array(
-		// uncomment the following to enable the Gii tool
-		'test',		
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'admin',
-		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
-	);
-	*/
-	
+function searchForModules(){	
 	$arr = array();
 	
 	foreach (glob(dirname(dirname(__FILE__)).'/modules/*', GLOB_ONLYDIR) as $moduleDirectory) 
 	{
 		array_push($arr, basename($moduleDirectory));
     }
-	
-	
-	
 	
 	return $arr;
 }

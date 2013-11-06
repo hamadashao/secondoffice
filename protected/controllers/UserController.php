@@ -169,12 +169,11 @@ class UserController extends Controller
 	{
 		$filter = "";
 		$page = 1;
-		$page_num = 10;
+		$page_num = $page_num = intval($_POST['page_num']);
 		$sort = "t.uid desc";
 		
 		if($_POST['filter']) 	$filter = $_POST['filter'];
 		if($_POST['page']) 		$page = intval($_POST['page']);
-		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
 		if($_POST['sort']) 		$sort = $_POST['sort'];
 		
 		
@@ -209,17 +208,29 @@ class UserController extends Controller
 			if($user->department) $department_name = $user->department[0]->name;
 			if($user->position) $position_name = $user->position[0]->name;
 			if($user->group) $group_name = $user->group[0]->name;
-		
+			
+			$tool_edit = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('user/geteditdialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-useredit",
+					"class":"glyphicon glyphicon-pencil"
+					 ';
+					 
+			$tool_delete = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('user/getdeletedialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-userdelete",
+					"class":"glyphicon glyphicon-remove"
+					 ';
+					 
+			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';			
 		
 			if($user_list)
 			{
 				$user_list = $user_list.',{
 				"id":"'.$user->uid.'",
-				"modal_edit":"#modal-useredit",
-				"modal_delete":"#modal-userdelete",
-				"link_edit":"'.Yii::app()->createUrl('user/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('user/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
 			}
@@ -227,17 +238,12 @@ class UserController extends Controller
 			{
 				$user_list = '{
 				"id":"'.$user->uid.'",
-				"modal_edit":"#modal-useredit",
-				"modal_delete":"#modal-userdelete",
-				"link_edit":"'.Yii::app()->createUrl('user/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('user/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$user->user_name.'","'.$user->real_name.'","'.$department_name.'","'.$position_name.'","'.$group_name.'"]
 				}';
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$users_num.'","list":['.$user_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$users_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$user_list.']}';
 		
 		Yii::app()->end();
 	}

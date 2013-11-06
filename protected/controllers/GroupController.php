@@ -72,12 +72,11 @@ class GroupController extends Controller
 	{		
 		$filter = "";
 		$page = 1;
-		$page_num = 10;
+		$page_num = intval($_POST['page_num']);
 		$sort = "t.uid desc";
 		
 		if($_POST['filter']) 	$filter = $_POST['filter'];
 		if($_POST['page']) 		$page = intval($_POST['page']);
-		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
 		if($_POST['sort']) 		$sort = $_POST['sort'];
 		
 		
@@ -98,16 +97,29 @@ class GroupController extends Controller
 		$group_list = "";
 		
 		foreach($groups as $group)		
-		{		
+		{
+			$tool_edit = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('group/geteditdialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-groupedit",
+					"class":"glyphicon glyphicon-pencil"
+					 ';
+					 
+			$tool_delete = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('group/getdeletedialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-groupdelete",
+					"class":"glyphicon glyphicon-remove"
+					 ';
+					 
+			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';	
+					
 			if($group_list)
 			{
 				$group_list = $group_list.',{
 				"id":"'.$group->uid.'",
-				"modal_edit":"#modal-groupedit",
-				"modal_delete":"#modal-groupdelete",
-				"link_edit":"'.Yii::app()->createUrl('group/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('group/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$group->name.'"]
 				}';
 			}
@@ -115,17 +127,12 @@ class GroupController extends Controller
 			{
 				$group_list = '{
 				"id":"'.$group->uid.'",
-				"modal_edit":"#modal-groupedit",
-				"modal_delete":"#modal-groupdelete",
-				"link_edit":"'.Yii::app()->createUrl('group/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('group/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$group->name.'"]
 				}';
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$group_num.'","list":['.$group_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$group_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$group_list.']}';
 		
 		Yii::app()->end();
 	}

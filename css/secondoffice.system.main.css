@@ -1,5 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
+.glyphicon {
+margin-right:2px;
+}
+
 .navbar {
 background: #252525;
 background-repeat: repeat-x;
@@ -95,6 +99,10 @@ vertical-align:middle;
 width:18%;
 }
 
+.table-list-4 th{
+width:22.5%;
+}
+
 .table-list-3 th{
 width:30%;
 }
@@ -103,8 +111,12 @@ width:30%;
 width:90%;
 }
 
-.table-list-5 .table_tools, .table-list-3 .table_tools, .table-list-1 .table_tools{
+.table-list-5 .table_tools, .table-list-4 .table_tools, .table-list-3 .table_tools, .table-list-1 .table_tools{
 width:5%;
+}
+
+.table-list-5 .table_tool {
+width:10%;
 }
 
 .table-checklist {

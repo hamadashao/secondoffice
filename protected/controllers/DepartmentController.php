@@ -221,12 +221,11 @@ class DepartmentController extends Controller
 	{		
 		$filter = "";
 		$page = 1;
-		$page_num = 10;
+		$page_num = intval($_POST['page_num']);
 		$sort = "t.uid desc";
 		
 		if($_POST['filter']) 	$filter = $_POST['filter'];
 		if($_POST['page']) 		$page = intval($_POST['page']);
-		if($_POST['page_num']) 	$page_num = intval($_POST['page_num']);
 		if($_POST['sort']) 		$sort = $_POST['sort'];
 		
 		
@@ -257,17 +256,30 @@ class DepartmentController extends Controller
 			
 			if($department->parent) $parent_name = $department->parent->name;
 			if($department->user) $manager_name = $department->user->real_name;
+			
+			$tool_edit = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('department/geteditdialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-departmentedit",
+					"class":"glyphicon glyphicon-pencil"
+					 ';
+					 
+			$tool_delete = '
+					"toggle":"modal",
+					"link":"'.Yii::app()->createUrl('department/getdeletedialog').'",
+					"target":"#modal-main",
+					"modal":"#modal-departmentdelete",
+					"class":"glyphicon glyphicon-remove"
+					 ';
+					 
+			$tools = '{'.$tool_edit.'},{'.$tool_delete.'}';	
 		
 		
 			if($department_list)
 			{
 				$department_list = $department_list.',{
 				"id":"'.$department->uid.'",
-				"modal_edit":"#modal-departmentedit",
-				"modal_delete":"#modal-departmentdelete",
-				"link_edit":"'.Yii::app()->createUrl('department/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('department/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$department->name.'","'.$parent_name.'","'.$manager_name.'"]
 				}';
 			}
@@ -275,17 +287,12 @@ class DepartmentController extends Controller
 			{
 				$department_list = '{
 				"id":"'.$department->uid.'",
-				"modal_edit":"#modal-departmentedit",
-				"modal_delete":"#modal-departmentdelete",
-				"link_edit":"'.Yii::app()->createUrl('department/geteditdialog').'",
-				"link_delete":"'.Yii::app()->createUrl('department/getdeletedialog').'",
-				"target":"#modal-main",
 				"data":["'.$department->name.'","'.$parent_name.'","'.$manager_name.'"]
 				}';
 			}
 		}
 		
-		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$departments_num.'","list":['.$department_list.']}';
+		echo '{"result":"ok","item_page":"'.$page.'","item_pagenum":"'.$page_num.'","item_num":"'.$departments_num.'","checkbox":"yes","tools":['.$tools.'],"list":['.$department_list.']}';
 		
 		Yii::app()->end();
 	}

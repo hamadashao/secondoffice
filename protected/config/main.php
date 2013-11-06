@@ -32,6 +32,7 @@ return array(
 	),
 	*/
 	
+	
 	'modules'=>require(dirname(__FILE__).'/modules.php'),
 
 	// application components
