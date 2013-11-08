@@ -34,35 +34,6 @@ class AuthController extends Controller
 		$system_task->addChild('secondoffice-sysytem-config');
 	}
 	
-	/*	
-	public function actionGetTaskList()
-	{
-		$tasks = Yii::app()->authManager->getTasks();
-		$task_list = "";
-						
-		foreach($tasks as $task)
-		{
-			if($task_list)
-			{
-				$task_list= $task_list.',{
-				"id":"'.str_replace(".", "_", $task->getName()).'",
-				"name":"'.$task->getDescription().'"
-				}';
-			}
-			else
-			{
-				$task_list= '{
-				"id":"'.str_replace(".", "_", $task->getName()).'",
-				"name":"'.$task->getDescription().'"
-				}';
-			}
-		}
-		
-		echo '{"result":"ok","list":['.$task_list.']}';
-		Yii::app()->end();
-	}
-	*/
-	
 	public function actionGetRoleAuthAccordion()
 	{
 		$output_data = "";

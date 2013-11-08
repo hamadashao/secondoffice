@@ -34,6 +34,12 @@ margin-left:5px;
 width:100%;
 }
 
+.panel-noborder {
+border:0px;
+box-shadow:0 0 0 0;
+background-color:#EEEEEE; 
+}
+
 .modal {
 overflow-y: auto;
 }
@@ -143,4 +149,41 @@ margin-bottom: 10px;
 
 .accordion-toggle {
 cursor:pointer;
+}
+
+.table-module {
+width:100%;
+}
+
+.table-module tbody  > tr > td {
+width:20%;
+}
+
+.table-module-item {
+width:100px; 
+height:100px;
+cursor:pointer;
+}
+
+.table-module-item-icon {
+margin-left:8px; 
+width:56px; 
+height:56px; 
+text-align:right;
+}
+
+.table-module-item-icon .badge {
+background-color:#FF0000;
+}
+
+.table-module-item-name {
+font-family: "Times New Roman",Times,serif;
+font-size: 12px;
+color: #333333;
+margin-top:5px;
+display:block;
+}
+
+.table-module-item:hover .table-module-item-name {
+color:#FF0000;
 }

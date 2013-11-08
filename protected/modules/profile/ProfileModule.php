@@ -6,6 +6,7 @@ class ProfileModule extends CWebModule
 	private $_name 		= "Profile Manager";
 	private $_version	= "1.0.0";
 	private $_author	= "Ram";
+	private $_icon  	= "profile.png";
 
 
 	public function init()
@@ -37,6 +38,11 @@ class ProfileModule extends CWebModule
 		return $this->_author;
 	}
 	
+	public function getIcon()
+	{
+		return $this->_icon;
+	}
+	
 	public function hasInstall()
 	{
 		return Yii::app()->getGlobalState("module_profile_install", false);
@@ -47,17 +53,24 @@ class ProfileModule extends CWebModule
 		return Yii::app()->getGlobalState("module_profile_active", false);
 	}
 	
+	public function checkModuleAccess()
+	{
+		return Yii::app()->user->checkAccess('secondoffice-profile-module-access');
+	}
+	
 	public function installModule()
 	{
 		$auth = Yii::app()->authManager;
 		
 		if(!$auth->getAuthItem("secondoffice-profile"))
 		{ 
-			$profile_task = $auth->createTask('secondoffice-profile', Yii::t('Base', 'Profile Auth'));
+			$profile_task = $auth->createTask('secondoffice-profile', Yii::t('Profile', 'Profile Auth'));
+			
+			if(!$auth->getAuthItem("secondoffice-profile-module-access")) $auth->createOperation('secondoffice-profile-module-access', Yii::t('Profile', 'Module Access'));
+			if(!$auth->getAuthItem("secondoffice-profile-data-management")) $auth->createOperation('secondoffice-profile-data-management', Yii::t('Profile', 'Data Management'));
+			if(!$auth->getAuthItem("secondoffice-profile-experience-management")) $auth->createOperation('secondoffice-profile-experience-management', Yii::t('Profile', 'Experience Management'));
 		
-			if(!$auth->getAuthItem("secondoffice-profile-data-management")) $auth->createOperation('secondoffice-profile-data-management', Yii::t('Base', 'Data Management'));
-			if(!$auth->getAuthItem("secondoffice-profile-experience-management")) $auth->createOperation('secondoffice-profile-experience-management', Yii::t('Base', 'Experience Management'));
-		
+			$profile_task->addChild('secondoffice-profile-module-access');
 			$profile_task->addChild('secondoffice-profile-data-management');
 			$profile_task->addChild('secondoffice-profile-experience-management');
 		}

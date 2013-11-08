@@ -1,6 +1,6 @@
 <div class="navbar navbar-fixed-top">
 	<div class="container">
-		<span style="color:#FFFFFF;">Twitter</span>
+		<span style="color:#FFFFFF;"><?php echo date(Yii::t('Base','Y-m-d H:i')); ?></span>
     	<div class="pull-left">
         	<div class="pull-left nav-item" data-toggle="panel" data-target="#container-main" data-panel="#panel-home" data-link="<?php echo Yii::app()->createUrl('site/gethomepanel'); ?>" ><span class="glyphicon glyphicon-home"></span></div>
             <div class="dropdown pull-left nav-item app-nav">

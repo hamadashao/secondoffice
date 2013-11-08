@@ -13,16 +13,8 @@ class DefaultController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('getpanel'),
+				'actions'=>array('getpanel','changeinstallstatus','changeactivestatus'),
 				'users'=>array('@'),
-			),	
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('changeinstallstatus','changeactivestatus'),
-				'expression'=>'true',
-			),		
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('install'),
-				'expression'=>'true',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -82,5 +74,10 @@ class DefaultController extends Controller
 		
 		echo '{"result":"ok","message":"'.Yii::t('Profile', 'Profile module active status has been change').'"}';	
 		Yii::app()->end();
+	}
+	
+	public function actionGetPanel() 
+	{
+		$this->render('profile_panel');
 	}
 }

@@ -37,7 +37,7 @@ class ModuleController extends Controller
 		$module_list = "";	
 		$modules_num = 0;
 		
-		foreach (glob(dirname(dirname(__FILE__)).'/modules/*', GLOB_ONLYDIR) as $moduleDirectory)
+		foreach (glob(Yii::app()->getModulePath().'/*', GLOB_ONLYDIR) as $moduleDirectory)
 		{
 			$module = Yii::app()->getModule(basename($moduleDirectory));
 			
