@@ -17,7 +17,7 @@
 			
 			echo '<td align="center">'.
 				 '<div class="table-module-item">'.
-				 '<div class="table-module-item-icon" style="background:url(images/'.$module->getIcon().') no-repeat bottom left;" data-toggle="panel" data-link="'.Yii::app()->createUrl($module->getID().'/default/getpanel').'" data-target="#container-main" data-panel="#panel-module-'.$module->getID().'" ><span class="badge"></span></div>'.
+				 '<div class="table-module-item-icon" style="background:url(images/'.$module->getIcon().') no-repeat bottom left;" data-toggle="panel" data-link="'.Yii::app()->createUrl($module->getID().'/default/getpanel').'" data-target="#container-main" data-panel="#panel-'.$module->getID().'" ><span class="badge"></span></div>'.
 				 '<span class="table-module-item-name">'.$module->getName().'</span>'.
 				 '</div>'.
 			     '</td>';

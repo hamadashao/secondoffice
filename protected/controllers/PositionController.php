@@ -99,6 +99,7 @@ class PositionController extends Controller
 		$positions = Position::model()->findAll($criteria);
 		
 		$position_list = "";
+		$tools = '""';
 		
 		foreach($positions as $position)		
 		{

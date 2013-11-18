@@ -248,6 +248,7 @@ class DepartmentController extends Controller
 		$departments = Department::model()->findAll($criteria);
 		
 		$department_list = "";
+		$tools = '""';
 		
 		foreach($departments as $department)		
 		{

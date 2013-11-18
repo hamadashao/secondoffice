@@ -95,6 +95,7 @@ class GroupController extends Controller
 		$groups = Group::model()->findAll($criteria);
 		
 		$group_list = "";
+		$tools = '""';
 		
 		foreach($groups as $group)		
 		{

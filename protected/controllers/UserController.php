@@ -169,7 +169,7 @@ class UserController extends Controller
 	{
 		$filter = "";
 		$page = 1;
-		$page_num = $page_num = intval($_POST['page_num']);
+		$page_num = intval($_POST['page_num']);
 		$sort = "t.uid desc";
 		
 		if($_POST['filter']) 	$filter = $_POST['filter'];
@@ -198,6 +198,7 @@ class UserController extends Controller
 		$users = User::model()->findAll($criteria);
 		
 		$user_list = "";
+		$tools = '""';
 		
 		foreach($users as $user)		
 		{
