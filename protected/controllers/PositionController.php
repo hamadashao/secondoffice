@@ -99,25 +99,26 @@ class PositionController extends Controller
 		$positions = Position::model()->findAll($criteria);
 		
 		$position_list = "";
-		$tools = '""';
 		
-		foreach($positions as $position)		
-		{
-			$tool_edit = 
+		$tool_edit = 
 					"data-toggle='modal' ".
 					"data-link='".Yii::app()->createUrl('position/geteditdialog')."' ".
 					"data-target='#modal-main' ".
 					"data-modal='#modal-positionedit' ".
 					"class='glyphicon glyphicon-pencil' ";
 					 
-			$tool_delete = 
+		$tool_delete = 
 					"data-toggle='modal' ".
 					"data-link='".Yii::app()->createUrl('position/getdeletedialog')."' ".
 					"data-target='#modal-main' ".
 					"data-modal='#modal-positiondelete' ".
 					"class='glyphicon glyphicon-remove' ";
 					 
-			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';
+		$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';
+		
+		foreach($positions as $position)		
+		{
+			
 					
 			if($position_list)
 			{

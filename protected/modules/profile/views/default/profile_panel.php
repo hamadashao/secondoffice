@@ -9,6 +9,11 @@
 		</div> 
         <div id="profile-panel-item" class="col-sm-10"></div>
     </div>
+    <script>
+	$(document).ready(function(){
+		$('#panel-profile').find('[data-panel="#panel-profile-staff"]').trigger('click');
+	});
+	</script>
 </div>
 
 

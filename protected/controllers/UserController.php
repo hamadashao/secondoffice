@@ -198,7 +198,22 @@ class UserController extends Controller
 		$users = User::model()->findAll($criteria);
 		
 		$user_list = "";
-		$tools = '""';
+		
+		$tool_edit = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('user/geteditdialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-useredit' ".
+					"class='glyphicon glyphicon-pencil' ";
+					 
+		$tool_delete = 
+					"data-toggle='modal' ".
+					"data-link='".Yii::app()->createUrl('user/getdeletedialog')."' ".
+					"data-target='#modal-main' ".
+					"data-modal='#modal-userdelete' ".
+					"class='glyphicon glyphicon-remove' ";
+					 
+		$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';	
 		
 		foreach($users as $user)		
 		{
@@ -210,21 +225,7 @@ class UserController extends Controller
 			if($user->position) $position_name = $user->position[0]->name;
 			if($user->group) $group_name = $user->group[0]->name;
 			
-			$tool_edit = 
-					"data-toggle='modal' ".
-					"data-link='".Yii::app()->createUrl('user/geteditdialog')."' ".
-					"data-target='#modal-main' ".
-					"data-modal='#modal-useredit' ".
-					"class='glyphicon glyphicon-pencil' ";
-					 
-			$tool_delete = 
-					"data-toggle='modal' ".
-					"data-link='".Yii::app()->createUrl('user/getdeletedialog')."' ".
-					"data-target='#modal-main' ".
-					"data-modal='#modal-userdelete' ".
-					"class='glyphicon glyphicon-remove' ";
-					 
-			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';		
+				
 		
 			if($user_list)
 			{

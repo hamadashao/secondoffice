@@ -95,25 +95,26 @@ class GroupController extends Controller
 		$groups = Group::model()->findAll($criteria);
 		
 		$group_list = "";
-		$tools = '""';
 		
-		foreach($groups as $group)		
-		{
-			$tool_edit = 
+		$tool_edit = 
 					"data-toggle='modal' ".
 					"data-link='".Yii::app()->createUrl('group/geteditdialog')."' ".
 					"data-target='#modal-main' ".
 					"data-modal='#modal-groupedit' ".
 					"class='glyphicon glyphicon-pencil' ";
 					 
-			$tool_delete = 
+		$tool_delete = 
 					"data-toggle='modal' ".
 					"data-link='".Yii::app()->createUrl('group/getdeletedialog')."' ".
 					"data-target='#modal-main' ".
 					"data-modal='#modal-groupdelete' ".
 					"class='glyphicon glyphicon-remove' ";
 					 
-			$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';
+		$tools = '["'.$tool_edit.'","'.$tool_delete.'"]';
+		
+		foreach($groups as $group)		
+		{
+			
 					
 			if($group_list)
 			{

@@ -727,7 +727,7 @@ $(document).ready(function(){
 		if(e.keyCode == 13)
 		{
 			$(this).closest(".table-list").attr("data-condition","");
-			$(this).attr("placeholder", '<?php echo Yii::t('Base', 'Search'); ?>');
+			//$(this).attr("placeholder", '<?php echo Yii::t('Base', 'Search'); ?>');
 			$(this).closest(".table-list").trigger("refresh.bs.tablelist");
 		} 
 	});
@@ -825,13 +825,13 @@ $(document).ready(function(){
 		
 		$(this).attr('data-condition', data_condition);
 		$(this).find(".tableitem-keyword").val("");
-		$(this).find(".tableitem-keyword").attr("placeholder", condition_num + ' <?php echo Yii::t('Base', 'Search Conditions'); ?>');
 		$(this).trigger("refresh.bs.tablelist");
 	});
 	
 	$(document).delegate(".table-list", 'search.option.refresh.bs.tablelist', function(event) {
 		var option_obj = $(this).find(".advanced-search-option table");
 		var option_items = $(this).closest(".table-list").attr("data-items").split(",");
+		var conditions = $(this).closest(".table-list").attr("data-condition").split(",");
 		var tableitem_list = $(this).closest(".table-list").find(".tableitem-item ul");
 		
 		option_obj.empty();
@@ -870,13 +870,41 @@ $(document).ready(function(){
                         		'</select>';
 			}
 			
-			option_obj.append(
+			
+			if(select_options)
+			{			
+				option_obj.append(
 				'<tr data-name="' + option_items[i] + '" >' + 
 				'<td><input type="checkbox"></td>' + 
 				'<td align="left"><span>' + item_name + '</span></td>' + 
 				'<td align="left">' + select_options + '</td>' +
 				'<td style="padding-right:0px;"><input type="text" class="advanced-search-keyword keyword1" /><span class="addition_keyword hidden"> to <input type="text" class="advanced-search-keyword keyword2" /></span></td>' +
 				'</tr>');
+			}
+		}
+		
+		for (idx = 0; idx < conditions.length; idx++ ){
+			var item_data = conditions[idx].split(":");			
+			var item_tr = option_obj.find('tr[data-name="' + item_data[0] + '"]');
+			
+			item_tr.find('input[type="checkbox"]').prop("checked", true);
+			item_tr.find('option[value="' + item_data[1] + '"]').prop("selected", true);			
+			item_tr.find('.keyword1').val(item_data[2]);
+			
+			if(item_data.length == 4)
+			{
+				item_tr.find(".addition_keyword").removeClass("hidden");
+				item_tr.find('.keyword2').val(item_data[3]);
+			}
+		}
+		
+		if($(this).closest(".table-list").attr("data-condition"))
+		{
+			$(this).find(".tableitem-keyword").attr("placeholder", conditions.length + ' <?php echo Yii::t('Base', 'Search Conditions'); ?>');
+		}
+		else
+		{
+			$(this).find(".tableitem-keyword").attr("placeholder", '<?php echo Yii::t('Base', 'Search'); ?>');
 		}
 	});
 	
@@ -934,31 +962,39 @@ $(document).ready(function(){
 						style = 'style="width:' + 90/items.length + '%"';
 						
 						for (i = 0; i < items.length; i++ ){						
-							item_name =  tableitem_list.find("li[data-results='" + items[i] + "'] a");								
-							sort_type = ""; 						
+							item_name =  tableitem_list.find("li[data-results='" + items[i] + "'] a");
 							
-							if(table_obj.attr('data-sort'))
+							if(tableitem_list.find("li[data-results='" + items[i] + "']").attr('data-nosort') != 'true')	
 							{
-								if(table_obj.attr('data-sort').indexOf(items[i]) != -1)
+								var sort_type = ""; 						
+							
+								if(table_obj.attr('data-sort'))
 								{
-									if(table_obj.attr('data-sort').indexOf("desc") != -1)
+									if(table_obj.attr('data-sort').indexOf(items[i]) != -1)
 									{
-										sort_type = 'class="caret"';
+										if(table_obj.attr('data-sort').indexOf("desc") != -1)
+										{
+											sort_type = 'class="caret"';
+										}
+										else
+										{
+											sort_type = 'class="reversal-caret"';
+										}
 									}
-									else
-									{
-										sort_type = 'class="reversal-caret"';
-									}
-								}
-							}							
+								}							
 											
-							table_head.append('<th ' + style + ' data-sort="' + items[i] + '"><a>' + item_name.text() + '<span ' + sort_type + '></span></a></th>');
+								table_head.append('<th ' + style + ' data-sort="' + items[i] + '"><a>' + item_name.text() + '<span ' + sort_type + '></span></a></th>');
+							}
+							else
+							{
+								table_head.append('<th ' + style + '><span class="nosort">' + item_name.text() + '</span></th>');
+							}
 						} 
 						
 						table_obj.trigger('search.option.refresh.bs.tablelist');
 					}		
 				
-					table_obj.find(".table-items-list tbody").empty();
+					table_obj.find(".table-items-list > tbody").empty();
 					
 					for(idx = 0; idx < data.list.length; idx++)
 					{
@@ -992,7 +1028,7 @@ $(document).ready(function(){
 						check_box = "";
 						if(data.checkbox == "yes") check_box = '<td><input type="checkbox"></td>';
 						
-						table_obj.find("tbody").append('<tr>' + 
+						table_obj.find(".table-items-list > tbody").append('<tr>' + 
       						check_box + 
 							'<td>' + tools_list + '</td>' +							
 							data_list +

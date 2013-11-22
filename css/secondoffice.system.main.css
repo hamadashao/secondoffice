@@ -162,7 +162,10 @@ border:none;
 padding:0px;
 }
 
-.table-checklist tbody > tr > th {
+.table_no_border tbody > tr > td {
+border:none;
+padding:0px 10px 10px 0px;
+text-align:left;
 }
 
 .table-checklist tbody > tr > td > input[type="checkbox"] {
@@ -182,6 +185,8 @@ margin-right:5px;
 vertical-align:text-bottom;
 margin-bottom:2px;
 }
+
+.table-items-list table >
 
 .panel-bottom-10 {
 margin-bottom: 10px;
@@ -272,6 +277,12 @@ border: 1px solid #CCCCCC;
 width:80px;
 }
 
-.testtemp {
-padding-right:0px;
+.nosort {
+color:#428BCA;
+cursor:default;
+}
+
+.profile_list_photo {
+width:120px;
+height:160px;
 }
